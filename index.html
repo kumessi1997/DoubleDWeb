@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>Double D Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Changed to Dark Orange/Brown Gradient */
+            background: linear-gradient(-45deg, #000000, #151515, #3a1d00, #050505);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* --- Animations --- */
+        /* 1. Loading Screen & Glitch */
+        #loader {
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #f7941d;
+            /* Orange */
+            box-shadow: 0 0 10px #f7941d;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Glitch Text */
+        .glitch-load {
+            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            position: relative;
+        }
+
+        .glitch-load::before,
+        .glitch-load::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-load::before {
+            left: 2px;
+            text-shadow: -2px 0 #3a1d00;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-load::after {
+            left: -2px;
+            text-shadow: -2px 0 #f7941d;
+            /* Orange Glitch */
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-skew {
+            0% {
+                transform: skew(0deg);
+            }
+
+            20% {
+                transform: skew(-2deg);
+            }
+
+            40% {
+                transform: skew(2deg);
+            }
+
+            60% {
+                transform: skew(0deg);
+            }
+
+            80% {
+                transform: skew(3deg);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(12px, 9999px, 32px, 0);
+            }
+
+            20% {
+                clip: rect(65px, 9999px, 86px, 0);
+            }
+
+            40% {
+                clip: rect(23px, 9999px, 6px, 0);
+            }
+
+            60% {
+                clip: rect(89px, 9999px, 12px, 0);
+            }
+
+            80% {
+                clip: rect(44px, 9999px, 78px, 0);
+            }
+
+            100% {
+                clip: rect(3px, 9999px, 42px, 0);
+            }
+        }
+
+        /* 2. Hero Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* 3. Card Flip */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .group:hover .group-hover\:rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* 4. Glassmorphism */
+        .glass-panel {
+            background: rgba(247, 148, 29, 0.05);
+            /* Orange Tint */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 5. Custom Flex Transition for Modules */
+        .flex-accordion {
+            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 6. Neon Pulse / Glow */
+        @keyframes neon-pulse-slow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(247, 148, 29, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(247, 148, 29, 0.6);
+            }
+        }
+
+        .neon-glow-btn {
+            animation: neon-pulse-slow 3s infinite ease-in-out;
+        }
+
+        /* 7. Floating Animation */
+        @keyframes float-subtle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-float-subtle {
+            animation: float-subtle 6s ease-in-out infinite;
+        }
+
+        /* 8. Diagonal Wipe Hover */
+        .diagonal-wipe {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diagonal-wipe::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: rgba(58, 29, 0, 0.9);
+            /* Dark Orange/Brown Wipe */
+            transform: skewX(-20deg) translateX(-150%);
+            transition: transform 0.4s ease;
+            z-index: 10;
+        }
+
+        .diagonal-wipe:hover::before {
+            transform: skewX(-20deg) translateX(-20%);
+        }
+
+        .wipe-content {
+            position: relative;
+            z-index: 20;
+            transition: color 0.3s;
+        }
+
+        /* Map Dots */
+        .map-dot {
+            width: 4px;
+            height: 4px;
+            background: #555;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s;
+        }
+
+        .map-dot:hover,
+        .map-dot.active {
+            background: #f7941d;
+            /* Orange Active */
+            box-shadow: 0 0 8px #f7941d;
+            transform: scale(1.5);
+        }
+
+        /* Color Utility overrides for Deep Orange Theme */
+        .text-accent-orange {
+            color: #f7941d;
+        }
+
+        .bg-accent-brown {
+            background-color: #3a1d00;
+        }
+
+        .border-accent-brown {
+            border-color: rgba(58, 29, 0, 0.5);
+        }
+
+        .selection\:bg-orange::selection {
+            background-color: rgba(247, 148, 29, 0.3);
+            color: white;
+        }
+    </style>
+    <script>
+        // Configure Tailwind to include our custom 3D transform utilities
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            DEFAULT: '#f7941d',
+                            50: '#fff8ed',
+                            100: '#ffefd6',
+                            200: '#ffdba8',
+                            300: '#ffc270',
+                            400: '#ff9f33',
+                            500: '#f7941d', // Base Orange
+                            600: '#db700d',
+                            700: '#b6500b',
+                            800: '#913e0e',
+                            900: '#75340f',
+                            950: '#3f1a04',
+                        }
+                    }
+                }
+            },
+            plugins: [
+                function ({ addUtilities }) {
+                    const rotateXUtilities = {};
+                    const rotateYUtilities = {};
+                    const rotateZUtilities = {};
+                    const rotateValues = [0, 5, 10, 15, 20, 30, 45, 75];
+                    // Generate rotate-x utilities
+                    rotateValues.forEach((value) => {
+                        rotateXUtilities[`.rotate-x-${value}`] = {
+                            '--tw-rotate-x': `${value}deg`,
+                            transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                        };
+                        if (value !== 0) {
+                            rotateXUtilities[`.-rotate-x-${value}`] = {
+                                '--tw-rotate-x': `-${value}deg`,
+                                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                            };
+                        }
+                    });
+                    // Generate rotate-y utilities
+                    rotateValues.forEach((value) => {
+                        rotateYUtilities[`.rotate-y-${value}`] = {
+                            '--tw-rotate-y': `${value}deg`,
+                            transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                        };
+                        if (value !== 0) {
+                            rotateYUtilities[`.-rotate-y-${value}`] = {
+                                '--tw-rotate-y': `-${value}deg`,
+                                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                            };
+                        }
+                    });
+                    // Generate rotate-z utilities
+                    rotateValues.forEach((value) => {
+                        rotateZUtilities[`.rotate-z-${value}`] = {
+                            '--tw-rotate-z': `${value}deg`,
+                            transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                        };
+                        if (value !== 0) {
+                            rotateZUtilities[`.-rotate-z-${value}`] = {
+                                '--tw-rotate-z': `-${value}deg`,
+                                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+                            };
+                        }
+                    });
+                    // Perspective utilities
+                    const perspectiveUtilities = {
+                        ".perspective-none": { perspective: "none" },
+                        ".perspective-dramatic": { perspective: "100px" },
+                        ".perspective-near": { perspective: "300px" },
+                        ".perspective-normal": { perspective: "500px" },
+                        ".perspective-midrange": { perspective: "800px" },
+                        ".perspective-distant": { perspective: "1200px" },
+                    };
+                    // Transform style utilities
+                    const transformStyleUtilities = {
+                        ".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+                        ".transform-style-flat": { "transform-style": "flat" },
+                    };
+                    addUtilities({
+                        ...rotateXUtilities,
+                        ...rotateYUtilities,
+                        ...rotateZUtilities,
+                        ...perspectiveUtilities,
+                        ...transformStyleUtilities,
+                    });
+                }
+            ]
+        };
+    </script>
+    <link id="all-fonts-link-font-geist" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-geist">
+        .font-geist {
+            font-family: 'Geist', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-roboto" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-roboto">
+        .font-roboto {
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-montserrat" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-montserrat">
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-poppins" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-poppins">
+        .font-poppins {
+            font-family: 'Poppins', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-playfair" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap">
+    <style id="all-fonts-style-font-playfair">
+        .font-playfair {
+            font-family: 'Playfair Display', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-instrument-serif" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-instrument-serif">
+        .font-instrument-serif {
+            font-family: 'Instrument Serif', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-merriweather" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap">
+    <style id="all-fonts-style-font-merriweather">
+        .font-merriweather {
+            font-family: 'Merriweather', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-bricolage" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-bricolage">
+        .font-bricolage {
+            font-family: 'Bricolage Grotesque', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-jakarta" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-jakarta">
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-manrope">
+        .font-manrope {
+            font-family: 'Manrope', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-space-grotesk" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-space-grotesk">
+        .font-space-grotesk {
+            font-family: 'Space Grotesk', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-work-sans" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-work-sans">
+        .font-work-sans {
+            font-family: 'Work Sans', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-pt-serif" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap">
+    <style id="all-fonts-style-font-pt-serif">
+        .font-pt-serif {
+            font-family: 'PT Serif', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-geist-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-geist-mono">
+        .font-geist-mono {
+            font-family: 'Geist Mono', monospace !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-space-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap">
+    <style id="all-fonts-style-font-space-mono">
+        .font-space-mono {
+            font-family: 'Space Mono', monospace !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-quicksand" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-quicksand">
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-nunito" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-nunito">
+        .font-nunito {
+            font-family: 'Nunito', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-newsreader" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap">
+    <style id="all-fonts-style-font-newsreader">
+        .font-newsreader {
+            font-family: 'Newsreader', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-google-sans-flex" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-google-sans-flex">
+        .font-google-sans-flex {
+            font-family: 'Google Sans Flex', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-oswald" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-oswald">
+        .font-oswald {
+            font-family: 'Oswald', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-dm-sans" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-dm-sans">
+        .font-dm-sans {
+            font-family: 'DM Sans', sans-serif !important;
+        }
+    </style>
+    <style>
+        /* 3D Transform utilities */
+        .perspective-none {
+            perspective: none !important;
+        }
+
+        .perspective-dramatic {
+            perspective: 100px !important;
+        }
+
+        .perspective-near {
+            perspective: 300px !important;
+        }
+
+        .perspective-normal {
+            perspective: 500px !important;
+        }
+
+        .perspective-midrange {
+            perspective: 800px !important;
+        }
+
+        .perspective-distant {
+            perspective: 1200px !important;
+        }
+
+        .transform-style-preserve-3d {
+            transform-style: preserve-3d !important;
+        }
+
+        .transform-style-flat {
+            transform-style: flat !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-orange-900/40 selection:text-orange-100">
+
+    <!-- Loading Screen -->
+    <div class="fixed z-[100] flex flex-col bg-black top-0 right-0 bottom-0 left-0 items-center justify-center"
+        style="display: none;" id="loader">
+        <div class="relative mb-8">
+            <h1 class="glitch-load uppercase text-4xl font-bold text-white tracking-tighter" data-text="STREAX STUDIOS">
+                Double D
+            </h1>
+        </div>
+        <div class="w-64 h-1 bg-neutral-900 rounded-full overflow-hidden relative">
+            <div class="scan-line absolute top-0 left-0" style=""></div>
+        </div>
+        <div class="mt-4 text-xs font-mono text-[#f7941d] animate-pulse">INITIALIZING PROTOCOLS...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">Our services</a>
+                <a href="showcase.html" class="hover:text-white transition-colors">showcase</a>
+
+
+                <a href="blog.html" class="hover:text-white transition-colors">blog</a>
+            </div>
+            <a href="#transmission"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+                <span class="cursor-pointer"
+                    onclick="window.location.href='contact-us.html';window.location.href='contact-us.html';window.location.href='contact-us.html'"
+                    role="button">CONTACT US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
+                    viewBox="0 0 24 24" data-icon="lucide:arrow-up-right" data-width="14"
+                    class="iconify iconify--lucide">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M7 7h10v10M7 17L17 7"></path>
+                </svg>
+            </a>
+            <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl hidden flex flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-white p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <a href="index.html"
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Home</a>
+            <a href="our-services.html"
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Our
+                Services</a>
+            <a href="showcase.html"
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Showcase</a>
+            <a href="blog.html"
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Blog</a>
+            <a href="contact-us.html"
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Contact
+                Us</a>
+        </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO (Video Embed) -->
+    <header id="nexus" class="relative h-[90vh] bg-black overflow-hidden flex flex-col">
+        <!-- Video Container -->
+        <div class="opacity-60 z-0 absolute top-0 right-0 bottom-0 left-0">
+            <!-- Valorant Harbor Gameplay Trailer -->
+            <iframe class="w-full h-full object-cover pointer-events-none scale-125"
+                src="https://www.youtube.com/embed/6b3sV72JBsI?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=6b3sV72JBsI&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1"
+                title="Hero Background" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen="">
+            </iframe>
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div
+            class="absolute inset-0 z-10 bg-gradient-to-t from-[#050505] via-transparent to-black/40 pointer-events-none">
+        </div>
+
+        <!-- Scrolling Marquee Headline -->
+        <div class="absolute bottom-10 left-0 w-full z-20 border-y border-white/10 bg-black/30 backdrop-blur-sm py-4">
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <span
+                        class="md:text-6xl uppercase inline-block neon-pulse-text text-4xl font-bold text-white tracking-tighter pr-4 pl-4">AT
+                        DOUBLE D, WE KNOW HOW TO MAKE YOUR STORIES IMPACTFUL</span>
+                    <span
+                        class="text-4xl md:text-6xl font-bold tracking-tighter text-transparent stroke-text uppercase px-4 inline-block"
+                        style="-webkit-text-stroke: 1px rgba(247, 148, 29, 0.5);">With animation, there is no
+                        boundary</span>
+                    <span
+                        class="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase px-4 inline-block">With
+                        animation, there is no
+                        boundary</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 2: INTRODUCTION & JOURNEY -->
+    <section class="overflow-hidden pt-24 pb-24 relative" id="about">
+        <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6 space-y-24">
+
+            <!-- Intro: Glassmorphism -->
+            <div class="relative">
+                <div
+                    class="glass-panel md:p-12 border-l-[#f7941d] z-10 text-center max-w-4xl rounded-2xl border-l-4 mr-auto ml-auto pt-8 pr-8 pb-8 pl-8 relative">
+                    <h2 class="text-xs font-mono text-[#f7941d] mb-6 uppercase tracking-widest">[ SYSTEM_OVERVIEW ]</h2>
+                    <p class="md:text-2xl leading-relaxed text-lg font-light text-neutral-200 tracking-tight"><span
+                            class="font-semibold text-white" style="">DOUBLE D</span> was founded in 2018 by a young
+                        team with a passion and desire to create multimedia communication products.</p>
+                </div>
+                <div class="relative w-full max-w-4xl mx-auto mb-16 z-20 font-mono perspective-normal">
+                    <!-- Terminal Window Container -->
+                    <div
+                        class="overflow-hidden transform transition-all duration-500 hover:border-[#f7941d]/40 group bg-[#0a0a0a]/90 w-full border-[#f7941d]/20 border rounded-lg ring-white/5 ring-1 my-10 pt-0 pb-0 shadow-[0_0_50px_-10px_rgba(247,148,29,0.15)] backdrop-blur-xl">
+
+                        <!-- Terminal Header -->
+
+
+                        <!-- Terminal Content Area -->
+
+
+                        <!-- Footer Status Bar -->
+
+                    </div>
+
+                    <!-- Inline Style for custom scan animation -->
+                    <style>
+                        @keyframes scan-line {
+                            0% {
+                                top: 0%;
+                                opacity: 0;
+                            }
+
+                            10% {
+                                opacity: 1;
+                            }
+
+                            90% {
+                                opacity: 1;
+                            }
+
+                            100% {
+                                top: 100%;
+                                opacity: 0;
+                            }
+                        }
+
+                        .animate-scan-line {
+                            animation: scan-line 3s linear infinite;
+                        }
+                    </style>
+
+                    <!-- Script for Sequential Typing -->
+                    <script>
+                        (function () {
+                            const container = document.getElementById('terminal-output');
+                            const cursor = document.getElementById('terminal-cursor');
+
+                            // The three paragraphs of text
+                            const paragraphs = [
+                                "INITIALIZING VISUAL UPLINK... Access granted. We are the architects of the new digital frontier, merging high-fidelity CGI with narrative depth to engineer reality itself.",
+                                "Our methodology leverages real-time rendering and neural processing to construct immersive environments. We dismantle the barrier between user and interface, turning passive viewing into active engagement.",
+                                "The future is rendered in real-time. From B2B motion graphics to interactive web experiences, we execute every frame with surgical precision. Welcome to the nexus of art and technology."
+                            ];
+
+                            let pIndex = 0;
+                            let charIndex = 0;
+                            let isTyping = true;
+
+                            function typeWriter() {
+                                if (pIndex < paragraphs.length) {
+                                    // Start new paragraph if charIndex is 0
+                                    if (charIndex === 0) {
+                                        const p = document.createElement('p');
+                                        p.className = "text-neutral-300 text-sm md:text-base leading-relaxed font-light tracking-wide border-l-2 border-[#f7941d]/0 pl-0 transition-all duration-300";
+                                        p.id = `para-${pIndex}`;
+
+                                        // Add prompt symbol
+                                        const prompt = document.createElement('span');
+                                        prompt.className = "text-[#f7941d] mr-3 font-semibold select-none";
+                                        prompt.textContent = ">>";
+
+                                        const textNode = document.createElement('span');
+                                        textNode.className = "text-shadow-sm"; // custom class for slight glow
+
+                                        p.appendChild(prompt);
+                                        p.appendChild(textNode);
+                                        container.appendChild(p);
+
+                                        // Highlight active paragraph
+                                        p.classList.remove('border-[#f7941d]/0', 'pl-0');
+                                        p.classList.add('border-[#f7941d]/40', 'pl-4', 'bg-white/5');
+                                    }
+
+                                    const currentParaText = paragraphs[pIndex];
+                                    const currentParaEl = document.getElementById(`para-${pIndex}`);
+                                    const textSpan = currentParaEl.lastElementChild;
+
+                                    if (charIndex < currentParaText.length) {
+                                        textSpan.textContent += currentParaText.charAt(charIndex);
+                                        charIndex++;
+                                        // Random typing speed for realism
+                                        const speed = Math.random() * 30 + 15;
+                                        setTimeout(typeWriter, speed);
+                                    } else {
+                                        // Paragraph complete
+                                        currentParaEl.classList.remove('border-[#f7941d]/40', 'bg-white/5');
+                                        currentParaEl.classList.add('border-[#f7941d]/0', 'opacity-80'); // Dim slightly
+
+                                        pIndex++;
+                                        charIndex = 0;
+                                        setTimeout(typeWriter, 600); // Pause between paragraphs
+                                    }
+                                } else {
+                                    // All done
+                                    isTyping = false;
+                                    cursor.classList.add('animate-ping'); // Change cursor animation
+                                }
+                            }
+
+                            // Start typing after short delay
+                            setTimeout(typeWriter, 800);
+                        })();
+                    </script>
+                </div>
+
+            </div>
+
+            <!-- The Journey: Timeline -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-4">
+                    <h3 class="text-3xl font-bold text-white tracking-tight mb-2">THE JOURNEY</h3>
+                    <p class="text-sm text-neutral-500">Our Creative Timeline</p>
+                </div>
+                <div class="md:col-span-8 relative">
+                    <!-- Connecting Neon Line -->
+                    <div class="absolute top-1/2 left-0 w-full h-[1px] bg-neutral-800 -translate-y-1/2 hidden md:block">
+                    </div>
+                    <div
+                        class="absolute top-1/2 left-0 w-3/4 h-[1px] bg-gradient-to-r from-[#f7941d] to-transparent -translate-y-1/2 hidden md:block shadow-[0_0_10px_#f7941d]">
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between gap-8 relative z-10">
+                        <div
+                            class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-[#f7941d] transition-colors">
+                            <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors">
+                                4+</div>
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4">Years Active</div>
+                            <p class="leading-relaxed text-xs text-neutral-400">Specializing in Motion Graphics, we’ve
+                                consistently delivered impactful visuals that elevate brands and digital products.</p>
+                        </div>
+                        <div
+                            class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-orange-500 transition-colors md:ml-auto">
+                            <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors">
+                                20+</div>
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4">Trusted Client
+                            </div>
+                            <p class="leading-relaxed text-xs text-neutral-400">Partnering with startups, agencies, and
+                                businesses to craft engaging motion-driven experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Reach: Map Simulation -->
+            <div class="border-white/5 border-t pt-12 relative overflow-hidden">
+                <style>
+                    @keyframes scroll-left {
+                        0% {
+                            transform: translateX(0);
+                        }
+
+                        100% {
+                            transform: translateX(-50%);
+                        }
+                    }
+
+                    @keyframes scroll-right {
+                        0% {
+                            transform: translateX(-50%);
+                        }
+
+                        100% {
+                            transform: translateX(0);
+                        }
+                    }
+
+                    .animate-logo-scroll-left {
+                        animation: scroll-left 40s linear infinite;
+                    }
+
+                    .animate-logo-scroll-right {
+                        animation: scroll-right 40s linear infinite;
+                    }
+
+                    .animate-logo-scroll-left:hover,
+                    .animate-logo-scroll-right:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
+
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                    <div class="">
+                        <h3 class="text-xl font-bold tracking-tight text-white uppercase mb-2">Trusted Partners</h3>
+                        <p class="text-sm text-neutral-400 max-w-lg">
+                            Collaborating with industry leaders to define the future of visual storytelling and digital
+                            experiences.
+                        </p>
+                    </div>
+                    <div class="hidden md:block mt-4 md:mt-0">
+                        <span
+                            class="text-[10px] font-mono text-orange-500/80 uppercase tracking-widest border border-orange-500/20 bg-orange-950/30 px-3 py-1 rounded-full">
+                            16+ Enterprise Clients
+                        </span>
+                    </div>
+                </div>
+
+                <div class="relative w-full overflow-hidden py-4">
+                    <!-- Gradient Masks 
+                    <div
+                        class="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none">
+                    </div> -->
+
+                    <!-- Row 1: Scrolling Left -->
+                    <div class="flex w-max animate-logo-scroll-left gap-20 items-center mb-10 pl-4">
+                        <!-- Set (8 Logos) -->
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/aka.png" alt="AKA"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/educampus.png" alt="Educampus"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/fpt.png" alt="FPT"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/hf.png" alt="HF"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/kiotviet.png" alt="KiotViet"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/pti.png" alt="PTI"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/stringee.png" alt="Stringee"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/vnd.png" alt="VND"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+
+                        <!-- Duplicate Set -->
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/aka.png" alt="AKA"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/educampus.png" alt="Educampus"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/fpt.png" alt="FPT"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/hf.png" alt="HF"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/kiotviet.png" alt="KiotViet"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/pti.png" alt="PTI"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/stringee.png" alt="Stringee"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/vnd.png" alt="VND"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Scrolling Right -->
+                    <div class="flex w-max animate-logo-scroll-right gap-20 items-center pl-4">
+                        <!-- Set (8 Logos) -->
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/aka.png" alt="AKA"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/educampus.png" alt="Educampus"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/fpt.png" alt="FPT"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/hf.png" alt="HF"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/kiotviet.png" alt="KiotViet"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/pti.png" alt="PTI"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/stringee.png" alt="Stringee"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/vnd.png" alt="VND"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+
+                        <!-- Duplicate Set -->
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/aka.png" alt="AKA"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/educampus.png" alt="Educampus"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/fpt.png" alt="FPT"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/hf.png" alt="HF"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/kiotviet.png" alt="KiotViet"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/pti.png" alt="PTI"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/stringee.png" alt="Stringee"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                        <div class="group cursor-pointer min-w-[150px] flex justify-center">
+                            <img src="Logo%20Customer/vnd.png" alt="VND"
+                                class="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: CORE DISCIPLINES (Expanding Modules) -->
+    <section class="border-y bg-black/20 border-white/5 pt-24 pb-24" id="disciplines">
+        <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6">
+            <style>
+                @keyframes blob-bounce {
+                    0% {
+                        transform: translate(0, 0) scale(1);
+                    }
+
+                    33% {
+                        transform: translate(30px, -50px) scale(1.1);
+                    }
+
+                    66% {
+                        transform: translate(-20px, 20px) scale(0.9);
+                    }
+
+                    100% {
+                        transform: translate(0, 0) scale(1);
+                    }
+                }
+
+                @keyframes blob-spin {
+                    0% {
+                        transform: rotate(0deg) scale(1);
+                    }
+
+                    50% {
+                        transform: rotate(180deg) scale(1.2);
+                    }
+
+                    100% {
+                        transform: rotate(360deg) scale(1);
+                    }
+                }
+
+                .animate-blob-slow {
+                    animation: blob-bounce 20s infinite ease-in-out alternate;
+                }
+
+                .animate-blob-medium {
+                    animation: blob-bounce 15s infinite ease-in-out alternate-reverse;
+                }
+
+                .animate-blob-fast {
+                    animation: blob-spin 30s linear infinite;
+                }
+
+                .delay-2000 {
+                    animation-delay: 2s;
+                }
+
+                .delay-5000 {
+                    animation-delay: 5s;
+                }
+
+                /* Simulate grain/noise overlay */
+                .noise-bg {
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+                    opacity: 0.3;
+                    mix-blend-mode: overlay;
+                }
+            </style>
+
+            <div class="flex items-center gap-3 mb-12">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20"
+                    viewBox="0 0 24 24" data-icon="lucide:layers" data-width="20"
+                    class="iconify text-[#f7941d] iconify--lucide">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2">
+                        <path
+                            d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z">
+                        </path>
+                        <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path>
+                        <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
+                    </g>
+                </svg>
+                <h2 class="text-xs font-semibold tracking-widest text-neutral-500 uppercase">Our Services
+                </h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row h-auto md:h-[600px] gap-2">
+                <!-- Module 1: CGI -->
+                <div
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    <!-- Animated Background: Fluid Gradients -->
+                    <div
+                        class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                        <div
+                            class="absolute inset-0 bg-[url('img/module%201.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        </div>
+                        <div
+                            class="absolute -top-[20%] -left-[20%] w-[80%] h-[80%] bg-[#3a1d00] rounded-full blur-[80px] animate-blob-slow mix-blend-screen opacity-70">
+                        </div>
+                        <div
+                            class="absolute -bottom-[20%] -right-[20%] w-[80%] h-[80%] bg-orange-900 rounded-full blur-[80px] animate-blob-medium mix-blend-screen opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-[30%] left-[30%] w-[40%] h-[40%] bg-[#f7941d] rounded-full blur-[60px] animate-blob-fast mix-blend-overlay opacity-50 group-hover:opacity-80 transition-opacity duration-700">
+                        </div>
+                        <div class="absolute inset-0 noise-bg"></div>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
+                        <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">01</span>
+                        <h3
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            B2B Motion Graphic</h3>
+                    </div>
+                    <div class="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col bg-black/20 pt-10 pr-10 pb-10 pl-10 absolute top-0 right-0 bottom-0 left-0 backdrop-blur-sm justify-center"
+                        onclick="window.location.href='out-service.html'" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
+                            viewBox="0 0 24 24" data-icon="lucide:monitor-play" data-width="32"
+                            class="iconify text-[#f7941d] mb-4 iconify--lucide">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2">
+                                <path
+                                    d="M15.033 9.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56V7.648a.645.645 0 0 1 .967-.56zM12 17v4m-4 0h8">
+                                </path>
+                                <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                            </g>
+                        </svg>
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">B2B GRAPHIC VIDEO
+                        </h3>
+                        <p class="leading-relaxed text-sm text-neutral-300">We produce high quality commercial videos,
+                            including testimonials
+                            and TVCs.</p>
+                    </div>
+                </div>
+
+                <!-- Module 2: Rendering -->
+                <div
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    <!-- Animated Background: Fluid Gradients -->
+                    <div
+                        class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                        <div
+                            class="absolute inset-0 bg-[url('img/module%202.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        </div>
+                        <div
+                            class="absolute top-[10%] -right-[10%] w-[90%] h-[90%] bg-neutral-800 rounded-full blur-[90px] animate-blob-medium mix-blend-screen opacity-80">
+                        </div>
+                        <div
+                            class="absolute -bottom-[10%] -left-[10%] w-[70%] h-[70%] bg-orange-800/40 rounded-full blur-[70px] animate-blob-slow delay-2000 mix-blend-screen opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-[40%] right-[40%] w-[30%] h-[30%] bg-orange-400/30 rounded-full blur-[50px] animate-blob-fast delay-5000 mix-blend-overlay group-hover:opacity-100 opacity-40 transition-opacity duration-700">
+                        </div>
+                        <div class="absolute inset-0 noise-bg"></div>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
+                        <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">02</span>
+                        <h3
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            INTERACTIVE MOTION</h3>
+                    </div>
+                    <div
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
+                            viewBox="0 0 24 24" data-icon="lucide:box" data-width="32"
+                            class="iconify text-orange-400 mb-4 iconify--lucide">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2">
+                                <path
+                                    d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z">
+                                </path>
+                                <path d="m3.3 7l8.7 5l8.7-5M12 22V12"></path>
+                            </g>
+                        </svg>
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">Interactive motion
+                        </h3>
+                        <p class="leading-relaxed text-sm text-neutral-300">We craft stunning UI animations, from
+                            engaging emoji packs to smooth UI interactions for websites</p>
+                    </div>
+                </div>
+
+                <!-- Module 3: Modeling -->
+                <div
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    <!-- Animated Background: Fluid Gradients -->
+                    <div
+                        class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                        <div
+                            class="absolute inset-0 bg-[url('img/module%203.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        </div>
+                        <div
+                            class="absolute -top-[30%] left-[20%] w-[100%] h-[100%] bg-[#502500] rounded-full blur-[100px] animate-blob-slow delay-2000 mix-blend-screen opacity-70">
+                        </div>
+                        <div
+                            class="absolute bottom-[10%] right-[10%] w-[60%] h-[60%] bg-orange-500/20 rounded-full blur-[60px] animate-blob-medium mix-blend-screen opacity-50">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80">
+                        </div>
+                        <div class="absolute inset-0 noise-bg"></div>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
+                        <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">03</span>
+                        <h3
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            BUILDING WEBSITE</h3>
+                    </div>
+                    <div
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
+                            viewBox="0 0 24 24" data-icon="lucide:component" data-width="32"
+                            class="iconify text-orange-300 mb-4 iconify--lucide">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0zm-13.239 0a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0zm6.619 6.619a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0zm0-13.238a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z">
+                            </path>
+                        </svg>
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">BUILDING WEBSITE
+                        </h3>
+                        <p class="leading-relaxed text-sm text-neutral-300">We create high performance websites with
+                            stunning UI/UX, ensuring seamless interactions and engaging user experience</p>
+                    </div>
+                </div>
+
+                <!-- Module 4: Animation -->
+                <div
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    <!-- Animated Background: Fluid Gradients -->
+                    <div
+                        class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                        <div
+                            class="absolute inset-0 bg-[url('img/module%204.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                        </div>
+                        <div
+                            class="absolute top-[20%] -right-[20%] w-[100%] h-[100%] bg-red-950 rounded-full blur-[100px] animate-blob-slow mix-blend-screen opacity-70">
+                        </div>
+                        <div
+                            class="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] bg-orange-950/60 rounded-full blur-[80px] animate-blob-medium delay-5000 mix-blend-screen opacity-60">
+                        </div>
+                        <div
+                            class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-orange-700/20 rounded-full blur-[60px] animate-blob-fast mix-blend-overlay group-hover:opacity-100 opacity-40 transition-opacity duration-700">
+                        </div>
+                        <div class="absolute inset-0 noise-bg"></div>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
+                        <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">04</span>
+                        <h3
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            Graphic Design</h3>
+                    </div>
+                    <div
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
+                            viewBox="0 0 24 24" data-icon="lucide:activity" data-width="32"
+                            class="iconify text-[#f7941d] mb-4 iconify--lucide">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
+                            </path>
+                        </svg>
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" style="">Graphic
+                            Design</h3>
+                        <p class="leading-relaxed text-sm text-neutral-300">We deliver creative and impactful design
+                            solutions that bring ideas to life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PORTFOLIO (Horizontal + Flip) -->
+    <section class="overflow-hidden pt-24 pb-24" id="archive">
+        <div class="max-w-7xl mx-auto px-6 mb-12" style="">
+            <span class="text-xs font-mono text-[#f7941d] mb-2 block">/// ARCHIVE_ACCESS</span>
+            <h2 class="uppercase text-3xl font-semibold text-white tracking-tight mb-6">Selected Works</h2>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap items-center gap-4 text-[10px] font-semibold uppercase tracking-widest text-neutral-400"
+                id="portfolio-filters">
+                <button onclick="filterPortfolio('all', this)"
+                    class="filter-btn text-white border-b border-white hover:text-white transition-colors pb-0.5 cursor-pointer outline-none">All
+                    Works</button>
+                <span class="">/</span>
+                <button onclick="filterPortfolio('b2b', this)"
+                    class="filter-btn hover:text-white hover:border-white transition-colors cursor-pointer outline-none border-transparent border-b pb-0.5">B2B
+                    Graphic Video</button>
+                <span class="">/</span>
+                <button onclick="filterPortfolio('interactive', this)"
+                    class="filter-btn hover:text-white border-b border-transparent hover:border-white transition-colors pb-0.5 cursor-pointer outline-none">Interactive
+                    Motion</button>
+                <span class="">/</span>
+                <button onclick="filterPortfolio('web', this)"
+                    class="filter-btn hover:text-white border-b border-transparent hover:border-white transition-colors pb-0.5 cursor-pointer outline-none">Web
+                    Design</button>
+                <span class="">/</span>
+                <button onclick="filterPortfolio('marketing', this)"
+                    class="filter-btn hover:text-white border-b border-transparent hover:border-white transition-colors pb-0.5 cursor-pointer outline-none">Marketing
+                    Design</button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto scrollbar-hide snap-x snap-mandatory w-full pr-6 pb-12 pl-6 relative">
+
+            <!-- Project Modal Overlay -->
+            <div class="fixed z-[200] inset-0 flex pointer-events-none opacity-0 transition-all duration-500 bg-[#050505]/95 backdrop-blur-xl items-center justify-center p-4 md:p-8"
+                id="project-modal" aria-hidden="true" style="visibility: hidden;">
+
+                <!-- Close Button -->
+                <button onclick="closeProjectModal()"
+                    class="absolute top-4 right-4 md:top-8 md:right-8 z-50 p-3 text-neutral-400 hover:text-white hover:bg-white/10 transition-all rounded-full group bg-black/50 border border-white/5 backdrop-blur-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="group-hover:rotate-90 transition-transform duration-300">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Main Content Area -->
+                <div class="w-full max-w-7xl h-full md:h-[85vh] flex flex-col md:flex-row gap-6 md:gap-12 relative"
+                    onclick="event.stopPropagation()">
+
+                    <!-- Media Slider Section -->
+                    <div
+                        class="flex-[2] relative flex flex-col h-full justify-center group/slider bg-neutral-900/50 rounded-2xl border border-white/5 overflow-hidden">
+                        <!-- Viewer Frame -->
+                        <div class="relative w-full h-full flex items-center justify-center bg-black/50">
+                            <div id="modal-media-container"
+                                class="w-full h-full flex items-center justify-center relative">
+                                <!-- Dynamic Content Injected Here -->
+                            </div>
+                        </div>
+
+                        <!-- Navigation Dots -->
+                        <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20" id="modal-dots">
+                        </div>
+
+                        <!-- Slider Arrows -->
+                        <button onclick="changeSlide(-1)"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white hover:text-[#f7941d] bg-black/50 hover:bg-black/80 transition-all rounded-full border border-white/10 backdrop-blur-md opacity-0 group-hover/slider:opacity-100 -translate-x-4 group-hover/slider:translate-x-0 duration-300 z-20"
+                            aria-label="Previous Slide">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"></path>
+                            </svg>
+                        </button>
+                        <button onclick="changeSlide(1)"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white hover:text-[#f7941d] bg-black/50 hover:bg-black/80 transition-all rounded-full border border-white/10 backdrop-blur-md opacity-0 group-hover/slider:opacity-100 translate-x-4 group-hover/slider:translate-x-0 duration-300 z-20"
+                            aria-label="Next Slide">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div
+                        class="md:w-[400px] flex-shrink-0 flex flex-col justify-between text-left h-full overflow-y-auto scrollbar-hide">
+                        <div class="space-y-6 pt-4 md:pt-0">
+                            <div>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span
+                                        class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest border border-[#f7941d]/20 bg-[#f7941d]/10 px-2 py-1 rounded"
+                                        id="modal-category">Category</span>
+                                    <span class="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></span>
+                                </div>
+                                <h2 class="text-3xl md:text-5xl font-bold text-white uppercase leading-[0.9] tracking-tighter mb-4 font-geist"
+                                    id="modal-title">Project Title</h2>
+                            </div>
+
+                            <p class="text-sm md:text-base text-neutral-400 leading-relaxed font-light border-l-2 border-white/10 pl-4"
+                                id="modal-desc">Description of the project goes here.</p>
+
+                            <div class="grid grid-cols-2 gap-4 py-6 border-y border-white/5">
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 text-neutral-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-0.5">
+                                            Location</div>
+                                        <div class="text-xs text-white">FPT IS</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 text-neutral-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                                            <line x1="16" x2="16" y1="2" y2="6"></line>
+                                            <line x1="8" x2="8" y1="2" y2="6"></line>
+                                            <line x1="3" x2="21" y1="10" y2="10"></line>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold mb-0.5">
+                                            Year</div>
+                                        <div class="text-xs text-white">2023 - 2024</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 md:pt-0">
+                            <button
+                                class="w-full py-4 bg-white hover:bg-[#f7941d] text-black font-bold uppercase tracking-widest transition-all duration-300 rounded-sm flex items-center justify-center gap-2 group relative overflow-hidden">
+                                <span class="relative z-10">View Case Study</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="group-hover:translate-x-1 transition-transform relative z-10">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid Container -->
+            <div class="flex gap-6 w-max transition-all duration-500 ease-out" id="portfolio-grid">
+
+                <!-- Card 1 -->
+                <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-category="b2b" onclick="openProjectModal(this)" data-title="SAAS VIDEO CÔMMERCIAL"
+                    data-desc="The Made by FIS (MBF) Product Package is a powerful suite of solutions designed to streamline operations, enhance customer engagement, and drive business growth. Backed by FIS’s expertise, it offers innovative, secure, and scalable tools to help businesses thrive."
+                    data-media="[
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1078217820?h=8311443927&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1055810406?h=a79751180c&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1048499044?h=8971e483d1&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;}
+             ]">
+                    <div
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
+                        <div
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
+                            <img src="Img/thumb1.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    SaaS Video Introduction</h3>
+                                <p class="text-[10px] text-orange-300 font-mono mt-2">Video Commercial</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercae text-xl font-semibold text-white tracking-tight mb-2">SaaS Video
+                                Introduction
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">The Made by FIS (MBF) Product
+                                Package is a powerful suite of solutions designed to streamline operations, enhance
+                                customer engagement, and drive business growth. Backed by FIS’s expertise, it offers
+                                innovative, secure, and scalable tools to help businesses thrive.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-category="b2b" onclick="openProjectModal(this)" data-title="SAAS VIDEO Commercial"
+                    data-desc="The Made by FIS (MBF) Product Package is a powerful suite of solutions designed to streamline operations, enhance customer engagement, and drive business growth. Backed by FIS’s expertise, it offers innovative, secure, and scalable tools to help businesses thrive."
+                    data-media="[
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/896410553?h=0348e5725b&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1055810406?h=a79751180c&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1048499044?h=8971e483d1&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;}
+             ]">
+                    <div
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
+                        <div
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
+                            <img src="Img/thumb2.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Video Explanation</h3>
+                                <p class="text-[10px] text-orange-300 font-mono mt-2">Video Commercial</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Video Explanation
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">The Made by FIS (MBF) Product
+                                Package is a powerful suite of solutions designed to streamline operations, enhance
+                                customer engagement, and drive business growth. Backed by FIS’s expertise, it offers
+                                innovative, secure, and scalable tools to help businesses thrive.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
+                    data-category="interactive" onclick="openProjectModal(this)" data-title="Brochure Interactive"
+                    data-desc="Photorealistic automotive rendering focusing on lighting and reflection physics for a major B2B product launch."
+                    data-media="[
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/thap_tai_san.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;thap tai san&quot;},
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/brochure_vertzero.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <img src="Img/thumb3.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Brochure Interactive</h3>
+                                <p class="text-[10px] text-orange-200 font-mono mt-2">Interactive motion</p>
+                            </div>
+                        </div>
+                        <div
+                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-orange-500/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Brochure
+                                Interactive</h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Photorealistic automotive rendering
+                                focusing on lighting and reflection physics.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
+                    data-category="interactive" onclick="openProjectModal(this)" data-title="Mascot Animation"
+                    data-desc="Dynamic motion graphics for the Web3 ecosystem, emphasizing brand identity through immersive web experiences."
+                    data-media="[
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/mascot.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;},
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/mascot2.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <canvas id="thumb-canvas-4"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"></canvas>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Mascot Animation</h3>
+                                <p class="text-[10px] text-yellow-600 font-mono mt-2">Interactive motion</p>
+                            </div>
+                        </div>
+                        <div
+                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-yellow-800/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            <span class="text-xs font-mono text-yellow-600 mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Mascot Animation
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Dynamic motion graphics for the
+                                Web3 ecosystem, emphasizing brand identity.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
+                    data-category="interactive" onclick="openProjectModal(this)"
+                    data-title="Inforgraphic interactive brochure"
+                    data-desc="High-fidelity texturing and environment design for luxury automotive marketing campaign."
+                    data-media="[
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/interactive_anatomy.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;},
+                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/thap_tai_san.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;thap tai san&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <img src="Img/thumb5.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Infographic Interactive Motion</h3>
+                                <p class="text-[10px] text-orange-300 font-mono mt-2">Interactive motion</p>
+                            </div>
+                        </div>
+                        <div
+                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-orange-500/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Infographic
+                                Interactive Motion</h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">High-fidelity texturing and
+                                environment design for luxury automotive.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
+                    data-category="web" onclick="openProjectModal(this)" data-title="KiotViet Project"
+                    data-desc="Engaging educational content editing that boosted viewer retention significantly for KiotViet."
+                    data-media="[
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://vertzero.eco&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://kyta.fpt.com/en&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://kumessi1997.github.io/weddinginvitation/&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <img src="Img/thumb6.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Landing page websites</h3>
+                                <p class="text-[10px] text-orange-400 font-mono mt-2">Website Building</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Landing page
+                                websites
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Engaging educational content
+                                editing that boosted viewer retention significantly.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
+                    data-category="marketing" onclick="openProjectModal(this)" data-title="KiotViet Project"
+                    data-desc="Engaging educational content editing that boosted viewer retention significantly for KiotViet."
+                    data-media="[
+                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1640906152676-dace6710d24b?w=2160&amp;q=80&quot;},
+                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://www.youtube.com/embed/Z7aMCp9RCbk?autoplay=1&amp;mute=0&amp;controls=0&amp;loop=1&amp;playlist=Z7aMCp9RCbk&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <img src="Img/thumb7.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Report/Slide Design</h3>
+                                <p class="text-[10px] text-orange-400 font-mono mt-2">Graphic Design</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Report/Slide
+                                Design
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Engaging educational content
+                                editing that boosted viewer retention significantly.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8-->
+                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
+                    data-category="marketing" onclick="openProjectModal(this)" data-title="VNDIRECT Campaign"
+                    data-desc="Comprehensive video introduction campaign for financial services leader VNDIRECT."
+                    data-media="[
+                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1724525647065-f948fc102e68?w=2160&amp;q=80&quot;},
+                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1629946832022-c327f74956e0?w=2160&amp;q=80&quot;}
+             ]">
+                    <div
+                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        <div
+                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            <img src="Img/thumb8.png"
+                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                alt="Thumbnail">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
+                                <h3
+                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
+                                    Slide/Report Design</h3>
+                                <p class="text-[10px] text-orange-400 font-mono mt-2">Graphic Design</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
+                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
+                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Slide/Report
+                                Design
+                            </h3>
+                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Engaging educational content
+                                editing that boosted viewer retention significantly.</p>
+                            <span
+                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
+                                to View</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Logic for Modal & Slider & Scroll Animation -->
+                <script>
+                    let currentSlideIndex = 0;
+                    let currentMedia = [];
+                    let currentRiveInstance = null;
+
+                    function openProjectModal(card) {
+                        const modal = document.getElementById('project-modal');
+                        const title = document.getElementById('modal-title');
+                        const desc = document.getElementById('modal-desc');
+                        const category = document.getElementById('modal-category');
+
+                        // Get data from attributes
+                        const dataTitle = card.getAttribute('data-title');
+                        const dataDesc = card.getAttribute('data-desc');
+                        const dataCat = card.getAttribute('data-category');
+                        const mediaJson = card.getAttribute('data-media');
+
+                        // Set text content
+                        title.textContent = dataTitle;
+                        desc.textContent = dataDesc;
+                        category.textContent = (dataCat || 'PROJECT').toUpperCase();
+
+                        // Parse Media
+                        try {
+                            currentMedia = JSON.parse(mediaJson);
+                        } catch (e) {
+                            console.error("Error parsing media", e);
+                            currentMedia = [];
+                        }
+
+                        currentSlideIndex = 0;
+                        renderSlide();
+
+                        // Show Modal
+                        modal.classList.remove('opacity-0', 'pointer-events-none');
+                        modal.style.visibility = 'visible';
+                        document.body.style.overflow = 'hidden';
+
+                        // Close on outside click
+                        modal.onclick = function (e) {
+                            if (e.target === modal || e.target.closest('#modal-close')) closeProjectModal();
+                        };
+                    }
+
+                    function closeProjectModal() {
+                        const modal = document.getElementById('project-modal');
+                        modal.classList.add('opacity-0', 'pointer-events-none');
+
+                        if (currentRiveInstance) {
+                            currentRiveInstance.cleanup();
+                            currentRiveInstance = null;
+                        }
+
+                        // Delay visibility hidden to allow fade out
+                        setTimeout(() => {
+                            modal.style.visibility = 'hidden';
+                            document.getElementById('modal-media-container').innerHTML = ''; // Stop videos
+                        }, 500);
+                        document.body.style.overflow = '';
+                    }
+
+                    function changeSlide(direction) {
+                        if (currentMedia.length === 0) return;
+                        currentSlideIndex += direction;
+                        if (currentSlideIndex >= currentMedia.length) currentSlideIndex = 0;
+                        if (currentSlideIndex < 0) currentSlideIndex = currentMedia.length - 1;
+                        renderSlide();
+                    }
+
+                    function renderSlide() {
+                        const container = document.getElementById('modal-media-container');
+                        const dotsContainer = document.getElementById('modal-dots');
+
+                        if (!currentMedia || currentMedia.length === 0) {
+                            container.innerHTML = '<div class="text-neutral-500">No media available</div>';
+                            return;
+                        }
+
+                        const item = currentMedia[currentSlideIndex];
+                        let content = '';
+
+                        // Handle Video vs Image vs Rive
+                        if (currentRiveInstance) {
+                            currentRiveInstance.cleanup();
+                            currentRiveInstance = null;
+                        }
+
+                        if (item.type === 'video') {
+                            // Ensure generic iframe properties work for Youtube and Vimeo
+                            content = `<div class="w-full h-full animate-fade-in rounded-lg overflow-hidden bg-black shadow-2xl relative">
+                    <iframe 
+                        class="w-full h-full object-cover" 
+                        src="${item.src}" 
+                        title="Project Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                        allowfullscreen>
+                    </iframe>
+                </div>`;
+                        } else if (item.type === 'rive') {
+                            content = `<div class="w-full h-full flex items-center justify-center relative rounded-lg overflow-hidden">
+                            <canvas id="riveCanvas" class="w-full h-full object-contain"></canvas>
+                         </div>`;
+                        } else {
+                            const imgSrc = item.src || "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg";
+                            content = `<img src="${imgSrc}" class="w-full h-full object-contain animate-fade-in shadow-2xl rounded-lg" alt="Project Media">`;
+                        }
+
+                        container.innerHTML = content;
+
+                        if (item.type === 'rive') {
+                            setTimeout(() => {
+                                const canvas = document.getElementById("riveCanvas");
+                                if (!canvas) return;
+
+                                const r = new rive.Rive({
+                                    src: item.src,
+                                    canvas: canvas,
+                                    autoplay: true,
+                                    autoBind: true,
+                                    stateMachines: item.stateMachine || "State Machine 1",
+                                    artboard: item.artboard || "thap tai san",
+                                    onLoad: () => {
+                                        r.resizeDrawingSurfaceToCanvas();
+                                    },
+                                });
+                                currentRiveInstance = r;
+
+                                window.addEventListener('resize', () => {
+                                    if (currentRiveInstance) currentRiveInstance.resizeDrawingSurfaceToCanvas();
+                                });
+                            }, 50);
+                        }
+
+                        // Render Dots
+                        if (currentMedia.length > 1) {
+                            dotsContainer.innerHTML = currentMedia.map((_, idx) => `
+                    <button onclick="event.stopPropagation(); currentSlideIndex = ${idx}; renderSlide()" 
+                        class="h-1.5 rounded-full transition-all duration-300 ${idx === currentSlideIndex ? 'bg-[#f7941d] w-6' : 'bg-white/20 w-2 hover:bg-white/50'}" 
+                        aria-label="Go to slide ${idx + 1}">
+                    </button>
+                `).join('');
+                        } else {
+                            dotsContainer.innerHTML = '';
+                        }
+                    }
+
+                    // Keyboard Support
+                    document.addEventListener('keydown', function (event) {
+                        const modal = document.getElementById('project-modal');
+                        if (modal && !modal.classList.contains('pointer-events-none')) {
+                            if (event.key === "Escape") closeProjectModal();
+                            if (event.key === "ArrowRight") changeSlide(1);
+                            if (event.key === "ArrowLeft") changeSlide(-1);
+                        }
+                    });
+
+                    // Add Styles for Animations
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+            @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+            .animate-fade-in { animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        `;
+                    document.head.appendChild(style);
+
+                    // Scroll Animation Logic
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach((entry, index) => {
+                                if (entry.isIntersecting) {
+                                    setTimeout(() => {
+                                        entry.target.classList.remove('opacity-0', 'translate-y-8', 'blur-sm');
+                                        entry.target.classList.add('opacity-100', 'translate-y-0', 'blur-0');
+                                    }, index * 100);
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.15 });
+
+                        document.querySelectorAll('.project-card').forEach(card => observer.observe(card));
+
+                        // Initialize Rive Thumbnail for Card 4
+                        const thumbCanvas4 = document.getElementById('thumb-canvas-4');
+                        if (thumbCanvas4) {
+                            const r = new rive.Rive({
+                                src: 'Rive file/thumb.riv',
+                                canvas: thumbCanvas4,
+                                autoplay: true,
+                                stateMachines: 'State Machine 1',
+                                artboard: 'Main',
+                                onLoad: () => {
+                                    r.resizeDrawingSurfaceToCanvas();
+                                },
+                            });
+
+                            // Resize observer to handle responsiveness
+                            new ResizeObserver(() => {
+                                r.resizeDrawingSurfaceToCanvas();
+                            }).observe(thumbCanvas4);
+                        }
+                    });
+                </script>
+            </div>
+
+            <script class="">
+                function filterPortfolio(category, btn) {
+                    // Reset all button styles
+                    const buttons = document.querySelectorAll('.filter-btn');
+                    buttons.forEach(button => {
+                        button.classList.remove('text-white', 'border-white');
+                        button.classList.add('text-neutral-400', 'border-transparent');
+                    });
+
+                    // Set active button style
+                    btn.classList.remove('text-neutral-400', 'border-transparent');
+                    btn.classList.add('text-white', 'border-white');
+
+                    // Filter cards with animation
+                    const cards = document.querySelectorAll('.project-card');
+
+                    cards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+
+                        if (category === 'all' || cardCategory === category) {
+                            card.style.display = 'block';
+                            // Small delay to allow display block to apply before opacity transition
+                            requestAnimationFrame(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            });
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300); // Wait for transition to finish
+                        }
+                    });
+                }
+            </script>
+    </section>
+
+    <!-- SECTION 5: DIFFERENTIATORS & EVIDENCE (Testimonials) -->
+    <section class="overflow-hidden pt-24 pb-24 relative">
+        <!-- Floating Differentiators -->
+        <div class="max-w-7xl mx-auto px-6 mb-20">
+            <h2 class="text-xs font-mono text-neutral-500 mb-10 text-center uppercase">[ KEY_DIFFERENTIATORS ]</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="animate-float-subtle p-6 bg-white/5 border border-white/10 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24"
+                        viewBox="0 0 24 24" data-icon="lucide:users" data-width="24"
+                        class="iconify block mx-auto text-[#f7941d] mb-3 iconify--lucide">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="">
+                            <path
+                                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"
+                                class=""></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </g>
+                    </svg>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-widest">Referral-Based Trust</h4>
+                </div>
+                <div class="animate-float-subtle p-6 bg-white/5 border border-white/10 rounded-lg"
+                    style="animation-delay: 1s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24"
+                        viewBox="0 0 24 24" data-icon="lucide:eye" data-width="24"
+                        class="iconify block mx-auto text-orange-400 mb-3 iconify--lucide">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2">
+                            <path
+                                d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0">
+                            </path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </g>
+                    </svg>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-widest">Expertise in Visuals</h4>
+                </div>
+                <div class="animate-float-subtle p-6 bg-white/5 border border-white/10 rounded-lg"
+                    style="animation-delay: 2s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24"
+                        viewBox="0 0 24 24" data-icon="lucide:sliders" data-width="24"
+                        class="iconify block mx-auto text-orange-600 mb-3 iconify--lucide">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M10 8h4m-2 13v-9m0-4V3m5 13h4m-2-4V3m0 18v-5M3 14h4m-2-4V3m0 18v-7">
+                        </path>
+                    </svg>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-widest">Tailored Solutions</h4>
+                </div>
+                <div class="animate-float-subtle p-6 bg-white/5 border border-white/10 rounded-lg"
+                    style="animation-delay: 3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24"
+                        viewBox="0 0 24 24" data-icon="lucide:award" data-width="24"
+                        class="iconify block mx-auto text-yellow-600 mb-3 iconify--lucide">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2">
+                            <path
+                                d="m15.477 12.89l1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
+                            </path>
+                            <circle cx="12" cy="8" r="6"></circle>
+                        </g>
+                    </svg>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-widest">Industry Recognition</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Testimonials 
+        <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6">
+            <h2 class="uppercase text-2xl font-bold text-white tracking-tight mb-8" style="">Transmission Logs</h2>
+            <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide">
+
+                <!-- Testimonial 1 
+                <div class="glass-panel p-8 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-[#3a1d00] border border-orange-500/30 flex items-center justify-center font-bold text-xs text-white">
+                            M</div>
+                        <div class="">
+                            <h4 class="text-sm font-bold text-white">Metadonprofits</h4>
+                            <p class="text-[10px] text-neutral-400 uppercase">New York, USA</p>
+                        </div>
+                    </div>
+                    <p class="leading-relaxed text-sm italic text-neutral-300">"Our collaboration has been remarkable,
+                        with Streax Studios producing over 8 dynamic videos and 3D passes under Metadon's insightful
+                        guidance."</p>
+                </div>
+
+                <!-- Testimonial 2
+                <div class="glass-panel p-8 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-[#3a1d00] border border-orange-500/30 flex items-center justify-center font-bold text-xs text-white">
+                            C</div>
+                        <div class="">
+                            <h4 class="text-sm font-bold text-white">Caleb</h4>
+                            <p class="text-[10px] text-neutral-400 uppercase">UK, Unity Academy</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-neutral-300 italic leading-relaxed">"Caleb's clear vision and commitment to
+                        excellence have guided each project, leading to content that resonates deeply with their
+                        audience."</p>
+                </div>
+
+                <!-- Testimonial 3 
+                <div class="glass-panel p-8 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-[#3a1d00] border border-orange-500/30 flex items-center justify-center font-bold text-xs text-white">
+                            CC</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Canna Case Co.</h4>
+                            <p class="text-[10px] text-neutral-400 uppercase">Canada</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-neutral-300 italic leading-relaxed">"Working with Canna Case has been an
+                        exciting journey... We're proud of the work we've accomplished together."</p>
+                </div>
+
+                <!-- Testimonial 4 
+                <div class="glass-panel p-8 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-[#3a1d00] border border-orange-500/30 flex items-center justify-center font-bold text-xs text-white">
+                            PB</div>
+                        <div class="">
+                            <h4 class="text-sm font-bold text-white">PiotrBorowiec</h4>
+                            <p class="text-[10px] text-neutral-400 uppercase">Canada</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-neutral-300 italic leading-relaxed">"Our fruitful partnership has evolved
+                        into a strong bond, and we're excited to continue this journey as partners."</p>
+                </div>
+
+                <!-- Testimonial 5 
+                <div class="glass-panel p-8 rounded-xl min-w-[300px] md:min-w-[400px] snap-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="flex text-xs font-bold text-white bg-[#3a1d00] w-8 h-8 border-orange-500/30 border rounded-full items-center justify-center">
+                            K</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Krusher</h4>
+                            <p class="text-[10px] text-neutral-400 uppercase">Germany, Tokyo 2923</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-neutral-300 italic leading-relaxed">"Krusher's innovative vision and
+                        dedication to excellence have made our collaboration seamless and productive."</p>
+                </div>
+
+            </div>
+        </div> -->
+    </section>
+
+    <!-- SECTION 6: TEAM (Visual Grid + Slide Reveal) -->
+    <section class="bg-black/40 pt-24 pb-24" id="team">
+        <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6">
+            <h2 class="text-xs font-mono text-neutral-500 mb-8 uppercase">[ UNIT_MEMBERS ]</h2>
+            <p class="text-sm text-neutral-400 max-w-2xl mb-12">
+                Double D was founded in 2018 by a young team with a passion and desire to create multimedia
+                communication products.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-1">
+                <!-- Member 1 -->
+                <div class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative"
+                    onclick="window.location.href='https://www.behance.net/nguyentrungdung2'" role="button">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1601576084861-5de423553c0f?w=800&amp;q=80)]"
+                        style=""></div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content group-hover:text-white">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">DNT</h3>
+                        <p class="text-[10px] font-mono text-[#f7941d] uppercase relative z-30">Founder</p>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div
+                    class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1624224971170-2f84fed5eb5e?w=800&amp;q=80)]"
+                        style=""></div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">Thang Doan</h3>
+                        <p class="text-[10px] font-mono text-orange-400 uppercase relative z-30">Marketing</p>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div
+                    class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
+                    <div
+                        class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1582233479366-6d38bc390a08?w=800&amp;q=80)]">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative" style="">MrX
+                        </h3>
+                        <p class="text-[10px] font-mono text-orange-600 uppercase relative z-30">Manager &amp; Biz Dev
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div
+                    class="diagonal-wipe h-64 bg-neutral-900 border border-white/5 relative group cursor-pointer overflow-hidden">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1564564244660-5d73c057f2d2?w=800&amp;q=80)]"
+                        style=""></div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative" style="">Nghia
+                        </h3>
+                        <p class="text-[10px] font-mono text-orange-300 uppercase relative z-30">Social Media Manager
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div
+                    class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800&amp;q=80)]"
+                        style=""></div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative" style="">Khoi
+                        </h3>
+                        <p class="text-[10px] font-mono text-yellow-500 uppercase relative z-30">Strategy Planner</p>
+                    </div>
+                </div>
+
+                <!-- Member 6 -->
+                <div
+                    class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1532170579297-281918c8ae72?w=800&amp;q=80)]"
+                        style=""></div>
+                    <div class="absolute bottom-0 left-0 p-6 wipe-content">
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">Quanx</h3>
+                        <p class="text-[10px] font-mono text-orange-500 uppercase relative z-30">Work &amp; VFX Manager
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: TRANSMISSION (Contact) -->
+    <section class="border-white/5 border-t pt-24 pb-24 relative" id="transmission">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4">WITH ANIMATION, THERE IS NO BOUNDARY
+                    </h2>
+                    <div class="flex flex-col space-y-2 text-sm text-neutral-400 font-mono">
+                        <a href="/mailto:doubledlab1002@gmail.com"
+                            class="hover:text-[#f7941d] transition-colors flex items-center justify-center md:justify-start gap-2">doubledlab1002@gmail.com</a>
+                        <a href="/tel:+84337735004"
+                            class="hover:text-[#f7941d] transition-colors flex items-center justify-center md:justify-start gap-2">+
+                            84 337 735 004</a>
+                        <div class="flex md:justify-start gap-2 gap-x-2 gap-y-2 items-center justify-center">@Doubledlab
+                            (Facebook/Instagram/Tiktok)</div>
+                    </div>
+                </div>
+
+                <a href="contact-us.html"
+                    class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border-orange-500/20 border rounded-sm pt-5 pr-10 pb-5 pl-10">Let't
+                    work together</a>
+            </div>
+
+            <div
+                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest">
+                © 2024 Streax Studios. All Systems Operational.
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Loading Screen Logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('loader-hidden');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2500); // 2.5s simulated load
+        });
+    </script>
+
+    <script>
+        // Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                // Trigger reflow
+                void mobileMenu.offsetWidth;
+                mobileMenu.classList.remove('opacity-0');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }, 300);
+            }
+        }
+
+        if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+    </script>
+</body>
+
+</html>

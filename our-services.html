@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+  <title>DOUBLE D | Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <style>
+    /* --- Core Theme & Background --- */
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+      background-color: #050505;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+    }
+
+    /* --- Utilities --- */
+    .tracking-ultra {
+      letter-spacing: -0.05em;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 2px;
+    }
+
+    /* --- Animations --- */
+    .group:hover .group-hover\:rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+
+    /* Glass & Borders */
+    .glass-panel {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .bento-card {
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover {
+      border-color: rgba(247, 148, 29, 0.4);
+      box-shadow: 0 0 30px -10px rgba(247, 148, 29, 0.15);
+    }
+
+    /* Neon Pulse */
+    @keyframes neon-pulse-slow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(247, 148, 29, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 25px rgba(247, 148, 29, 0.6);
+      }
+    }
+
+    .neon-glow-btn {
+      animation: neon-pulse-slow 3s infinite ease-in-out;
+    }
+
+    /* Custom Utilities */
+    .text-accent-orange {
+      color: #f7941d;
+    }
+
+    .border-accent-orange {
+      border-color: #f7941d;
+    }
+
+    .font-geist {
+      font-family: 'Geist', sans-serif;
+    }
+  </style>
+  <link id="all-fonts-link-font-roboto" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-roboto">
+    .font-roboto {
+      font-family: 'Roboto', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-montserrat" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-montserrat">
+    .font-montserrat {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-poppins" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-poppins">
+    .font-poppins {
+      font-family: 'Poppins', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-playfair" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap">
+  <style id="all-fonts-style-font-playfair">
+    .font-playfair {
+      font-family: 'Playfair Display', serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-instrument-serif" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-instrument-serif">
+    .font-instrument-serif {
+      font-family: 'Instrument Serif', serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-merriweather" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap">
+  <style id="all-fonts-style-font-merriweather">
+    .font-merriweather {
+      font-family: 'Merriweather', serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-bricolage" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-bricolage">
+    .font-bricolage {
+      font-family: 'Bricolage Grotesque', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-jakarta" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+  <style id="all-fonts-style-font-jakarta">
+    .font-jakarta {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-manrope" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap">
+  <style id="all-fonts-style-font-manrope">
+    .font-manrope {
+      font-family: 'Manrope', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-space-grotesk" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-space-grotesk">
+    .font-space-grotesk {
+      font-family: 'Space Grotesk', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-work-sans" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+  <style id="all-fonts-style-font-work-sans">
+    .font-work-sans {
+      font-family: 'Work Sans', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-pt-serif" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap">
+  <style id="all-fonts-style-font-pt-serif">
+    .font-pt-serif {
+      font-family: 'PT Serif', serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-geist-mono" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-geist-mono">
+    .font-geist-mono {
+      font-family: 'Geist Mono', monospace !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-space-mono" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap">
+  <style id="all-fonts-style-font-space-mono">
+    .font-space-mono {
+      font-family: 'Space Mono', monospace !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-quicksand" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-quicksand">
+    .font-quicksand {
+      font-family: 'Quicksand', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-nunito" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap">
+  <style id="all-fonts-style-font-nunito">
+    .font-nunito {
+      font-family: 'Nunito', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-newsreader" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap">
+  <style id="all-fonts-style-font-newsreader">
+    .font-newsreader {
+      font-family: 'Newsreader', serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-google-sans-flex" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-google-sans-flex">
+    .font-google-sans-flex {
+      font-family: 'Google Sans Flex', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-oswald" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-oswald">
+    .font-oswald {
+      font-family: 'Oswald', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-dm-sans" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-dm-sans">
+    .font-dm-sans {
+      font-family: 'DM Sans', sans-serif !important;
+    }
+  </style>
+  <link id="all-fonts-link-font-geist" rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+  <style id="all-fonts-style-font-geist">
+    .font-geist {
+      font-family: 'Geist', sans-serif !important;
+    }
+  </style>
+  <style>
+    /* 3D Transform utilities */
+  </style>
+  <script>
+    // Configure Tailwind to include our custom 3D transform utilities
+    tailwind.config = {
+      theme: {
+        extend: {
+          // Add any custom theme extensions here if needed
+        }
+      },
+      plugins: [
+        function ({ addUtilities }) {
+          const rotateXUtilities = {};
+          const rotateYUtilities = {};
+          const rotateZUtilities = {};
+          const rotateValues = [0, 5, 10, 15, 20, 30, 45, 75];
+          // Generate rotate-x utilities
+          rotateValues.forEach((value) => {
+            rotateXUtilities[`.rotate-x-${value}`] = {
+              '--tw-rotate-x': `${value}deg`,
+              transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+            };
+            if (value !== 0) {
+              rotateXUtilities[`.-rotate-x-${value}`] = {
+                '--tw-rotate-x': `-${value}deg`,
+                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+              };
+            }
+          });
+          // Generate rotate-y utilities
+          rotateValues.forEach((value) => {
+            rotateYUtilities[`.rotate-y-${value}`] = {
+              '--tw-rotate-y': `${value}deg`,
+              transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+            };
+            if (value !== 0) {
+              rotateYUtilities[`.-rotate-y-${value}`] = {
+                '--tw-rotate-y': `-${value}deg`,
+                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+              };
+            }
+          });
+          // Generate rotate-z utilities
+          rotateValues.forEach((value) => {
+            rotateZUtilities[`.rotate-z-${value}`] = {
+              '--tw-rotate-z': `${value}deg`,
+              transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+            };
+            if (value !== 0) {
+              rotateZUtilities[`.-rotate-z-${value}`] = {
+                '--tw-rotate-z': `-${value}deg`,
+                transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+              };
+            }
+          });
+          // Perspective utilities
+          const perspectiveUtilities = {
+            ".perspective-none": { perspective: "none" },
+            ".perspective-dramatic": { perspective: "100px" },
+            ".perspective-near": { perspective: "300px" },
+            ".perspective-normal": { perspective: "500px" },
+            ".perspective-midrange": { perspective: "800px" },
+            ".perspective-distant": { perspective: "1200px" },
+          };
+          // Transform style utilities
+          const transformStyleUtilities = {
+            ".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+            ".transform-style-flat": { "transform-style": "flat" },
+          };
+          addUtilities({
+            ...rotateXUtilities,
+            ...rotateYUtilities,
+            ...rotateZUtilities,
+            ...perspectiveUtilities,
+            ...transformStyleUtilities,
+          });
+        }
+      ]
+    };
+  </script>
+</head>
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+    <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <img src="logo/logo doubled.svg" alt="Double D Media" class="h-8 w-auto transition-opacity hover:opacity-80" />
+      </a>
+      <div
+        class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+        <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+        <a href="showcase.html" class="transition-colors text-white">SHOWCASE</a>
+
+        <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
+      </div>
+      <a href="#contact"
+        class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+        <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button">contact us</span>
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14" viewBox="0 0 24 24"
+          data-icon="lucide:arrow-up-right" class="iconify iconify--lucide">
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M7 7h10v10M7 17L17 7"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header
+    class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 uppercase font-geist">
+        Our
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f7941d] to-white">
+          Services
+        </span>
+      </h1>
+      <p class="text-neutral-400 max-w-2xl text-lg font-light leading-relaxed">
+        We craft digital experiences that merge technical precision with
+        narrative depth. Explore our specialized divisions below.
+      </p>
+    </div>
+  </header>
+
+  <!-- SECTION 1: B2B GRAPHIC VIDEO (Vimeo Embeds) -->
+  <section id="b2b" class="py-24 border-b border-white/5 relative overflow-hidden">
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#f7941d]/5 rounded-full blur-[120px] pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-4 mb-12">
+        <span class="w-1 h-8 bg-[#f7941d]"></span>
+        <h2 class="text-2xl font-semibold uppercase tracking-tight text-white">
+          B2B Graphic Video
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Video 1 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/1055810406?h=a79751180c"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 01
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              VertZero Video Introduction
+            </h3>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/953790853?h=63c483f6a1&amp;title=0&amp;byline=0&amp;portrait=0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" class=""></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 02
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              KiotViet Video Introduction
+            </h3>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/924142958?h=4e79e35792&amp;title=0&amp;byline=0&amp;portrait=0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 03
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              Vndirect Showreel
+            </h3>
+          </div>
+        </div>
+
+        <!-- Video 4 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/1048499044?h=8971e483d1;title=0&amp;byline=0&amp;portrait=0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" class=""></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 04
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              LendVero Saas Video Introduction
+            </h3>
+          </div>
+        </div>
+
+        <!-- Video 5 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/1078217820?h=8311443927&amp;title=0&amp;byline=0&amp;portrait=0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" class=""></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 04
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              AkaFortune Video Introduction
+            </h3>
+          </div>
+        </div>
+
+        <!-- Video 6 -->
+        <div
+          class="group relative bg-neutral-900 rounded-xl overflow-hidden border border-white/10 hover:border-[#f7941d]/50 transition-colors duration-300">
+          <div class="aspect-video w-full bg-black relative">
+            <iframe src="https://player.vimeo.com/video/476387159?h=e7cbe7901f&amp;title=0&amp;byline=0&amp;portrait=0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" class=""></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-[#f7941d] uppercase tracking-widest">
+                Case Study 02
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-neutral-500">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white tracking-tight">
+              KiotViet Video Introduction
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: INTERACTIVE MOTION (5 Rive Bento) -->
+  <section id="interactive" class="py-24 bg-neutral-950 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-end justify-between mb-12">
+        <div class="flex items-center gap-4">
+          <span class="w-1 h-8 bg-white"></span>
+          <h2 class="text-2xl font-semibold uppercase tracking-tight text-white">
+            Interactive Motion
+          </h2>
+        </div>
+        <div
+          class="flex items-center gap-2 text-[10px] font-mono text-neutral-500 border border-white/10 px-2 py-1 rounded">
+          <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          POWERED BY RIVE
+        </div>
+      </div>
+
+      <!-- Bento Grid -->
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-4 gap-4 h-auto md:h-[1200px]">
+        <!-- Item 1: Large Featured -->
+        <div
+          class="bento-card col-span-2 md:col-span-2 md:row-span-2 rounded-2xl relative group bg-[#0f0f0f] aspect-square md:aspect-auto">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <!-- Placeholder for Rive Canvas -->
+            <!-- Rive Canvas -->
+            <canvas id="rive-mascot"
+              class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"></canvas>
+          </div>
+          <div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black to-transparent">
+            <div class="flex items-center gap-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                class="text-[#f7941d]">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m16 10-4 4-4-4"></path>
+              </svg>
+              <span class="text-xs font-mono text-neutral-400">
+                Mascot Interactive
+              </span>
+            </div>
+
+          </div>
+          <div
+            class="absolute top-4 right-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-white border border-white/5 uppercase tracking-wider">
+            Interactive
+          </div>
+        </div>
+
+        <!-- Item 2: Small -->
+        <div
+          class="bento-card col-span-1 md:col-span-1 md:row-span-1 rounded-2xl relative group bg-[#111] flex items-center justify-center aspect-square md:aspect-auto">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <canvas id="rive-rating" class="w-full h-full object-contain"></canvas>
+          </div>
+          <div class="absolute bottom-4 left-4 pointer-events-none">
+            <h4 class="text-sm font-semibold text-white">Rating</h4>
+          </div>
+        </div>
+
+        <!-- Item 3: Small -->
+        <div
+          class="bento-card col-span-1 md:col-span-1 md:row-span-1 rounded-2xl relative group bg-[#111] overflow-hidden aspect-square md:aspect-auto">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <canvas id="rive-mixing" class="w-full h-full object-contain"></canvas>
+          </div>
+          <div class="absolute bottom-4 left-4 pointer-events-none">
+            <h4 class="text-sm font-semibold text-white">
+              Mixing
+            </h4>
+          </div>
+        </div>
+
+        <!-- Item 4: Wide -->
+        <div
+          class="bento-card col-span-1 md:col-span-1 md:row-span-1 rounded-2xl relative group bg-[#111] aspect-square md:aspect-auto">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <canvas id="rive-homefood" class="w-full h-full object-contain"></canvas>
+          </div>
+          <div class="absolute bottom-4 left-4 pointer-events-none">
+            <h4 class="text-sm font-semibold text-white">
+              Home Food
+            </h4>
+          </div>
+        </div>
+
+        <!-- Item 5: Small -->
+        <div
+          class="bento-card col-span-1 md:col-span-1 md:row-span-1 rounded-2xl relative group bg-[#111] aspect-square md:aspect-auto">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <canvas id="rive-leaf" class="w-full h-full object-contain"></canvas>
+          </div>
+          <div class="absolute bottom-4 left-4 pointer-events-none">
+            <h4 class="text-sm font-semibold text-white">Leaf</h4>
+          </div>
+        </div>
+
+        <!-- Item 6: Wide (Replaced by Rive) -->
+        <div class="bento-card col-span-2 md:col-span-4 rounded-2xl relative group bg-[#0f0f0f] aspect-video">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <canvas id="rive-brochure" class="w-full h-full object-contain"></canvas>
+          </div>
+          <div
+            class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black to-transparent pointer-events-none">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-mono text-neutral-400">
+                Interactive Brochure
+              </span>
+            </div>
+            <h3 class="text-2xl font-bold text-white tracking-tight">
+              VertZero Experience
+            </h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: UI/UX WEBSITE (2 Showcase) -->
+  <section id="uiux" class="py-24 border-b border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-4 mb-16 justify-center">
+        <span class="w-1 h-8 bg-[#3a1d00] border border-[#f7941d]/50"></span>
+        <h2 class="text-2xl font-semibold uppercase tracking-tight text-white">
+          UI/UX Showcase
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Showcase 1 -->
+        <a href="https://vertzero.eco" target="_blank" class="group cursor-pointer block">
+          <div
+            class="relative bg-neutral-900 rounded-lg border border-white/10 overflow-hidden aspect-[4/3] mb-6 perspective-1000 group-hover:border-[#f7941d]/30 transition-colors">
+            <!-- Browser Header -->
+            <div class="h-8 bg-neutral-950 border-b border-white/5 flex items-center px-4 gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+            </div>
+            <!-- Content -->
+            <div class="relative h-full w-full overflow-hidden bg-neutral-800">
+              <img src="Img/thumb web 1.png" alt="UI Project 1"
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3
+                class="text-xl font-bold text-white mb-1 uppercase tracking-tight group-hover:text-[#f7941d] transition-colors">
+                VertZero
+              </h3>
+              <p class="text-sm text-neutral-500">
+                Fintech / Dashboard / React
+              </p>
+            </div>
+            <div
+              class="p-2 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Showcase 2 -->
+        <a href="https://kyta.fpt.com/en" target="_blank" class="group cursor-pointer mt-12 md:mt-0 block">
+          <div
+            class="relative bg-neutral-900 rounded-lg border border-white/10 overflow-hidden aspect-[4/3] mb-6 perspective-1000 group-hover:border-[#f7941d]/30 transition-colors">
+            <!-- Browser Header -->
+            <div class="h-8 bg-neutral-950 border-b border-white/5 flex items-center px-4 gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+            </div>
+            <!-- Content -->
+            <div class="relative h-full w-full overflow-hidden bg-neutral-800">
+              <img src="Img/thumb web 2.png" alt="UI Project 2"
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-1">
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3
+                class="text-xl font-bold text-white mb-1 uppercase tracking-tight group-hover:text-[#f7941d] transition-colors">
+                Kyta Platform
+              </h3>
+              <p class="text-sm text-neutral-500">
+                E-Commerce / Mobile First / Web3
+              </p>
+            </div>
+            <div
+              class="p-2 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Showcase 3 -->
+        <a href="https://www.educampus.co.uk" target="_blank" class="group cursor-pointer block">
+          <div
+            class="relative bg-neutral-900 rounded-lg border border-white/10 overflow-hidden aspect-[4/3] mb-6 perspective-1000 group-hover:border-[#f7941d]/30 transition-colors">
+            <!-- Browser Header -->
+            <div class="h-8 bg-neutral-950 border-b border-white/5 flex items-center px-4 gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+            </div>
+            <!-- Content -->
+            <div class="relative h-full w-full overflow-hidden bg-neutral-800">
+              <img src="Img/thumb web 3.png" alt="UI Project 1"
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3
+                class="text-xl font-bold text-white mb-1 uppercase tracking-tight group-hover:text-[#f7941d] transition-colors">
+                Educampus
+              </h3>
+              <p class="text-sm text-neutral-500">
+                Fintech / Dashboard / React
+              </p>
+            </div>
+            <div
+              class="p-2 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Showcase 4 -->
+        <a href="https://kumessi1997.github.io/weddinginvitation/" target="_blank" class="group cursor-pointer block">
+          <div
+            class="relative bg-neutral-900 rounded-lg border border-white/10 overflow-hidden aspect-[4/3] mb-6 perspective-1000 group-hover:border-[#f7941d]/30 transition-colors">
+            <!-- Browser Header -->
+            <div class="h-8 bg-neutral-950 border-b border-white/5 flex items-center px-4 gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+            </div>
+            <!-- Content -->
+            <div class="relative h-full w-full overflow-hidden bg-neutral-800">
+              <img src="Img/thumb web 4.png" alt="UI Project 1"
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3
+                class="text-xl font-bold text-white mb-1 uppercase tracking-tight group-hover:text-[#f7941d] transition-colors">
+                Wedding Invitation
+              </h3>
+              <p class="text-sm text-neutral-500">
+                Fintech / Dashboard / React
+              </p>
+            </div>
+            <div
+              class="p-2 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: MARKETING DESIGN (Bento Images) -->
+  <section id="marketing" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-4 mb-12">
+        <span class="w-1 h-8 bg-white"></span>
+        <h2 class="text-2xl font-semibold uppercase tracking-tight text-white">
+          Graphic Design
+        </h2>
+      </div>
+
+      <!-- Masonry-style Bento -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+        <!-- Tall Item -->
+        <a href="https://www.behance.net/gallery/220800387/Delivie-Bio-French-Bakery" target="_blank"
+          class="bento-card col-span-2 md:col-span-1 row-span-2 rounded-2xl relative group block">
+          <img src="Img/module 5.png"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            alt="Social Post">
+          <div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+            <span class="text-xs font-bold text-white uppercase">
+              Brand Identity
+            </span>
+          </div>
+        </a>
+
+        <!-- Wide Item -->
+        <a href="https://www.behance.net/gallery/178744503/VND-Social-Media-Vol2" target="_blank"
+          class="bento-card col-span-2 row-span-1 rounded-2xl relative group block">
+          <img src="Img/module 6.png"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            alt="Campaign Banner">
+          <div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+            <span class="text-xs font-bold text-white uppercase">
+              Social Media
+            </span>
+          </div>
+        </a>
+
+        <!-- Square Item -->
+        <a href="https://www.behance.net/gallery/239667761/Mikes-mascot" target="_blank"
+          class="bento-card col-span-1 row-span-1 rounded-2xl relative group block">
+          <img src="Img/module 7.png"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            alt="Logo Design">
+          <div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+            <span class="text-xs font-bold text-white uppercase">
+              Mascot Design
+            </span>
+          </div>
+        </a>
+
+        <!-- Square Item -->
+        <a href="https://www.behance.net/gallery/106178283/VNDIRECT-14th-Birthday-Print-ads" target="_blank"
+          class="bento-card col-span-1 row-span-1 rounded-2xl relative group block">
+          <img src="Img/module 8.png"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            alt="Product Mockup">
+          <div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+            <span class="text-xs font-bold text-white uppercase">
+              Event Assets
+            </span>
+          </div>
+        </a>
+
+        <!-- Wide Item -->
+        <a href="https://www.behance.net/gallery/230036659/J-Trust-Royal-Bank-2024-Annual-Report-Design" target="_blank"
+          class="bento-card col-span-2 row-span-1 rounded-2xl relative group block">
+          <img src="Img/module 9.png"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            alt="Tech Conference">
+          <div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+            <span class="text-xs font-bold text-white uppercase">
+              Digital Document
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <section id="contact" class="border-t border-white/5 bg-black py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+        <div class="text-center md:text-left">
+          <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">
+            Ready to Upgrade?
+          </h2>
+          <p class="text-neutral-400 mb-6 max-w-md">
+            Transform your digital presence with high-end motion graphics and
+            interactive design.
+          </p>
+          <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
+            <a href="mailto:doubledlab1002@gmail.com" class="hover:text-[#f7941d] transition-colors">
+              doubledlab1002@gmail.com
+            </a>
+            <span class="">+ 84 337 735 004</span>
+          </div>
+        </div>
+
+        <a href="contact-us.html"
+          class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm pt-5 pr-10 pb-5 pl-10">
+          Contact Us
+        </a>
+      </div>
+
+      <div
+        class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
+        <span>© 2024 Double D Media.</span>
+        <span class="mt-2 md:mt-0">All Systems Operational.</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Initialize Rive Animation
+    const r = new rive.Rive({
+      src: 'Rive file/mascot2.riv',
+      canvas: document.getElementById('rive-mascot'),
+      autoplay: true,
+      artboard: 'Main',
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      r.resizeDrawingSurfaceToCanvas();
+      if (typeof r2 !== 'undefined') r2.resizeDrawingSurfaceToCanvas();
+      if (typeof r3 !== 'undefined') r3.resizeDrawingSurfaceToCanvas();
+      if (typeof r4 !== 'undefined') r4.resizeDrawingSurfaceToCanvas();
+      if (typeof r5 !== 'undefined') r5.resizeDrawingSurfaceToCanvas();
+      if (typeof r6 !== 'undefined') r6.resizeDrawingSurfaceToCanvas();
+    });
+
+    // Initialize Second Rive Animation (Brochure)
+    const r2 = new rive.Rive({
+      src: 'Rive file/brochure_vertzero.riv',
+      canvas: document.getElementById('rive-brochure'),
+      autoplay: true,
+      artboard: 'Main',
+      autoBind: true,
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r2.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    // Initialize Third Rive Animation (Rating)
+    const r3 = new rive.Rive({
+      src: 'Rive file/rating.riv',
+      canvas: document.getElementById('rive-rating'),
+      autoplay: true,
+      artboard: 'Main',
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r3.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    // Initialize Fourth Rive Animation (Mixing)
+    const r4 = new rive.Rive({
+      src: 'Rive file/mixing_animations.riv',
+      canvas: document.getElementById('rive-mixing'),
+      autoplay: true,
+      artboard: 'Main',
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r4.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    // Initialize Fifth Rive Animation (Homefood)
+    const r5 = new rive.Rive({
+      src: 'Rive file/homefood.riv',
+      canvas: document.getElementById('rive-homefood'),
+      autoplay: true,
+      artboard: 'Main',
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r5.resizeDrawingSurfaceToCanvas();
+      },
+    });
+
+    // Initialize Sixth Rive Animation (Leaf)
+    const r6 = new rive.Rive({
+      src: 'Rive file/leaf.riv',
+      canvas: document.getElementById('rive-leaf'),
+      autoplay: true,
+      artboard: 'Main',
+      stateMachines: 'State Machine 1',
+      onLoad: () => {
+        r6.resizeDrawingSurfaceToCanvas();
+      },
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>DOUBLE D | Contact &amp; Order</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #050505;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Glass & Borders */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #f7941d;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 1px rgba(247, 148, 29, 0.2);
+        }
+
+        /* Custom Checkbox/Radio Styling */
+        input[type="checkbox"],
+        input[type="radio"] {
+            accent-color: #f7941d;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* Service Card Active State */
+        .service-card.active {
+            border-color: #f7941d;
+            background: rgba(247, 148, 29, 0.05);
+        }
+
+        .service-card.active .icon-box {
+            color: #f7941d;
+            background: rgba(247, 148, 29, 0.1);
+        }
+
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+    </style>
+    <link id="all-fonts-link-font-geist" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-geist">
+        .font-geist {
+            font-family: 'Geist', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-roboto" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-roboto">
+        .font-roboto {
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-montserrat" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-montserrat">
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-poppins" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-poppins">
+        .font-poppins {
+            font-family: 'Poppins', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-playfair" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap">
+    <style id="all-fonts-style-font-playfair">
+        .font-playfair {
+            font-family: 'Playfair Display', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-instrument-serif" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-instrument-serif">
+        .font-instrument-serif {
+            font-family: 'Instrument Serif', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-merriweather" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap">
+    <style id="all-fonts-style-font-merriweather">
+        .font-merriweather {
+            font-family: 'Merriweather', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-bricolage" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-bricolage">
+        .font-bricolage {
+            font-family: 'Bricolage Grotesque', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-jakarta" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-jakarta">
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-manrope">
+        .font-manrope {
+            font-family: 'Manrope', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-space-grotesk" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-space-grotesk">
+        .font-space-grotesk {
+            font-family: 'Space Grotesk', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-work-sans" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-work-sans">
+        .font-work-sans {
+            font-family: 'Work Sans', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-pt-serif" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap">
+    <style id="all-fonts-style-font-pt-serif">
+        .font-pt-serif {
+            font-family: 'PT Serif', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-geist-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-geist-mono">
+        .font-geist-mono {
+            font-family: 'Geist Mono', monospace !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-space-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap">
+    <style id="all-fonts-style-font-space-mono">
+        .font-space-mono {
+            font-family: 'Space Mono', monospace !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-quicksand" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-quicksand">
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-nunito" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap">
+    <style id="all-fonts-style-font-nunito">
+        .font-nunito {
+            font-family: 'Nunito', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-newsreader" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap">
+    <style id="all-fonts-style-font-newsreader">
+        .font-newsreader {
+            font-family: 'Newsreader', serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-google-sans-flex" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-google-sans-flex">
+        .font-google-sans-flex {
+            font-family: 'Google Sans Flex', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-oswald" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-oswald">
+        .font-oswald {
+            font-family: 'Oswald', sans-serif !important;
+        }
+    </style>
+    <link id="all-fonts-link-font-dm-sans" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-dm-sans">
+        .font-dm-sans {
+            font-family: 'DM Sans', sans-serif !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+                <a href="showcase.html" class="hover:text-white transition-colors">SHOWCASE</a>
+                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
+
+            </div>
+            <a href="#order-form"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+                <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button">CONTACT
+                    US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
+                    viewBox="0 0 24 24" class="iconify iconify--lucide">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+        class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 uppercase font-geist">
+                Let's Build Your <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f7941d] to-white">Next Project</span>
+            </h1>
+            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                From concept to deployment. We bring industrial-grade motion, design, and technology to your brand.
+            </p>
+            <div class="mt-8">
+                <a href="#order-form"
+                    class="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-[#f7941d] border border-[#f7941d]/30 bg-[#3a1d00]/20 hover:bg-[#3a1d00]/40 px-6 py-3 rounded-sm transition-all">
+                    Start Your Order
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7"></path>
+                        <path d="M7 7h10v10"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+
+        <!-- Step Guide (How to Order) -->
+        <section class="mb-20">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="w-8 h-[1px] bg-[#f7941d]"></span>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500">How to Order</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Step 1 -->
+                <div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl text-white group-hover:opacity-20 transition-opacity">
+                        01</div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#f7941d]">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20"
+                            viewBox="0 0 24 24" data-icon="lucide:layout-grid" data-width="20"
+                            class="iconify iconify--lucide">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2">
+                                <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+                                <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Choose Service</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Select the specific domain you need help with
+                        from our core offerings.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl text-white group-hover:opacity-20 transition-opacity">
+                        02</div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#f7941d]">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20"
+                            viewBox="0 0 24 24" data-icon="lucide:clipboard-list" data-width="20"
+                            class="iconify iconify--lucide">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2">
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                                <path
+                                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2m4 7h4m-4 5h4m-8-5h.01M8 16h.01">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Briefing</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Fill out the dynamic form to give us context on
+                        your goals and timeline.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl text-white group-hover:opacity-20 transition-opacity">
+                        03</div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#f7941d]">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20"
+                            viewBox="0 0 24 24" data-icon="lucide:rocket" data-width="20"
+                            class="iconify iconify--lucide">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2">
+                                <path
+                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2">
+                                </path>
+                                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0m1 7v5s3.03-.55 4-2c1.08-1.62 0-5 0-5">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Launch</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">Our team will analyze your request and reach out
+                        within 24 hours.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Form Area -->
+        <section id="order-form" class="scroll-mt-24">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="w-8 h-[1px] bg-[#f7941d]"></span>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500">Project Details</h2>
+            </div>
+
+            <!-- Service Selection -->
+            <div class="mb-10">
+                <label class="block text-sm font-medium text-neutral-300 mb-4 uppercase tracking-wide text-xs">Select a
+                    Service Domain <span class="text-[#f7941d]">*</span></label>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    <!-- Card 1: Video -->
+                    <div onclick="selectService('video')" id="card-video"
+                        class="service-card cursor-pointer glass-panel p-5 rounded-lg border border-white/10 hover:border-white/30 transition-all text-left">
+                        <div
+                            class="icon-box w-8 h-8 rounded bg-white/5 flex items-center justify-center text-neutral-400 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="18" height="18"
+                                viewBox="0 0 24 24" data-icon="lucide:video" data-width="18"
+                                class="iconify iconify--lucide">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path d="m16 13l5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5">
+                                    </path>
+                                    <rect width="14" height="12" x="2" y="6" rx="2"></rect>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4 class="text-white font-semibold text-sm">Video Production</h4>
+                        <p class="text-neutral-500 text-xs mt-1">TVC, Social, Demo</p>
+                    </div>
+
+                    <!-- Card 2: Interactive -->
+                    <div onclick="selectService('interactive')" id="card-interactive"
+                        class="service-card cursor-pointer glass-panel p-5 rounded-lg border border-white/10 hover:border-white/30 transition-all text-left">
+                        <div
+                            class="icon-box w-8 h-8 rounded bg-white/5 flex items-center justify-center text-neutral-400 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="18" height="18"
+                                viewBox="0 0 24 24" data-icon="lucide:mouse-pointer-2" data-width="18"
+                                class="iconify iconify--lucide">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="text-white font-semibold text-sm">Interactive Motion</h4>
+                        <p class="text-neutral-500 text-xs mt-1">Rive, Web, App</p>
+                    </div>
+
+                    <!-- Card 3: UI/UX -->
+                    <div onclick="selectService('uiux')" id="card-uiux"
+                        class="service-card cursor-pointer glass-panel p-5 rounded-lg border border-white/10 hover:border-white/30 transition-all text-left">
+                        <div
+                            class="icon-box w-8 h-8 rounded bg-white/5 flex items-center justify-center text-neutral-400 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="18" height="18"
+                                viewBox="0 0 24 24" data-icon="lucide:layers" data-width="18"
+                                class="iconify iconify--lucide">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path
+                                        d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z">
+                                    </path>
+                                    <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12">
+                                    </path>
+                                    <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17">
+                                    </path>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4 class="text-white font-semibold text-sm">UI / UX Design</h4>
+                        <p class="text-neutral-500 text-xs mt-1">Web, Mobile, System</p>
+                    </div>
+
+                    <!-- Card 4: Marketing -->
+                    <div onclick="selectService('marketing')" id="card-marketing"
+                        class="service-card cursor-pointer glass-panel p-5 rounded-lg border border-white/10 hover:border-white/30 transition-all text-left">
+                        <div
+                            class="icon-box w-8 h-8 rounded bg-white/5 flex items-center justify-center text-neutral-400 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="18" height="18"
+                                viewBox="0 0 24 24" data-icon="lucide:megaphone" data-width="18"
+                                class="iconify iconify--lucide">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path
+                                        d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z">
+                                    </path>
+                                    <path d="M6 14a12 12 0 0 0 2.4 7.2a2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14M8 6v8"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4 class="text-white font-semibold text-sm">Marketing Design</h4>
+                        <p class="text-neutral-500 text-xs mt-1">Ads, Key Visual, Social</p>
+                    </div>
+                </div>
+                <input type="hidden" id="selectedServiceInput" name="service_type" required="">
+            </div>
+
+            <!-- Dynamic Form -->
+            <form id="mainForm" onsubmit="handleFormSubmit(event)"
+                class="glass-panel p-8 rounded-lg border-t-4 border-[#f7941d] hidden transition-opacity duration-500">
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage" class="hidden text-center py-12">
+                    <div
+                        class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 border border-green-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
+                            viewBox="0 0 24 24" data-icon="lucide:check" data-width="32"
+                            class="iconify iconify--lucide">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M20 6L9 17l-5-5"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl text-white font-bold mb-2">Request Received!</h3>
+                    <p class="text-neutral-400 max-w-md mx-auto">Thank you for briefing us. Our team will review your
+                        requirements and contact you via email within 24 hours.</p>
+                    <button type="button" onclick="location.reload()"
+                        class="mt-8 text-xs uppercase tracking-widest text-[#f7941d] hover:text-white transition-colors">Submit
+                        Another Request</button>
+                </div>
+
+                <!-- Form Content -->
+                <div id="formContent">
+                    <div class="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
+                        <h3 class="text-xl font-semibold text-white" id="formTitle">Project Information</h3>
+                        <span class="text-xs text-neutral-500 font-mono uppercase">* Required Fields</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Common Fields -->
+                        <div class="col-span-1">
+                            <label
+                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Full
+                                Name *</label>
+                            <input type="text" required="" id="fullName" name="full_name"
+                                class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                placeholder="John Doe">
+                        </div>
+                        <div class="col-span-1">
+                            <label
+                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Email
+                                Address *</label>
+                            <input type="email" required="" id="email" name="email"
+                                class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                placeholder="john@company.com">
+                        </div>
+                        <div class="col-span-1">
+                            <label
+                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Company
+                                / Brand</label>
+                            <input type="text" id="companyBrand" name="company_brand"
+                                class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                placeholder="Acme Inc.">
+                        </div>
+                        <div class="col-span-1">
+                            <label
+                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Timeline
+                                / Deadline</label>
+                            <select id="timeline" name="timeline"
+                                class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                <option>Flexible</option>
+                                <option>Within 2 weeks</option>
+                                <option>Within 1 month</option>
+                                <option>1-3 Months</option>
+                                <option>Urgent (ASAP)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- DYNAMIC SECTIONS START -->
+
+                    <!-- 1. Video Production Fields -->
+                    <div id="fields-video" class="dynamic-section hidden mb-8 space-y-6 border-y border-white/5 py-6">
+                        <h4 class="text-[#f7941d] text-xs font-mono uppercase tracking-widest mb-4">Video Specifics</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Video
+                                    Type</label>
+                                <select id="videoType" name="video_type"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Brand Video</option>
+                                    <option>Product Demo</option>
+                                    <option>TVC / Ads</option>
+                                    <option>Social Content</option>
+                                    <option>Explainer Video</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Estimated
+                                    Length</label>
+                                <select id="videoLength" name="video_length"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>&lt; 30 seconds</option>
+                                    <option>30s – 1 minute</option>
+                                    <option>1 – 3 minutes</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Style
+                                    Preference</label>
+                                <div class="flex flex-col gap-2 mt-2">
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 cursor-pointer hover:text-white">
+                                        <input type="radio" name="video_style" value="live"> Live-action
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 cursor-pointer hover:text-white">
+                                        <input type="radio" name="video_style" value="motion"> Motion Graphic
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 cursor-pointer hover:text-white">
+                                        <input type="radio" name="video_style" value="hybrid"> Hybrid
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Distribution</label>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="video_distribution" value="Facebook/IG">
+                                        Facebook/IG</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="video_distribution" value="YouTube"> YouTube</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="video_distribution" value="Website"> Website</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="video_distribution" value="Event"> Event</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Interactive Motion Fields -->
+                    <div id="fields-interactive"
+                        class="dynamic-section hidden mb-8 space-y-6 border-y border-white/5 py-6">
+                        <h4 class="text-[#f7941d] text-xs font-mono uppercase tracking-widest mb-4">Interactive
+                            Specifics</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Platform</label>
+                                <select id="interactivePlatform" name="interactive_platform"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Website</option>
+                                    <option>Mobile App</option>
+                                    <option>Microsite</option>
+                                    <option>Presentation / Slides</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Tech
+                                    Preference</label>
+                                <select id="interactiveTech" name="interactive_tech"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Not Sure / Recommend me</option>
+                                    <option>Rive</option>
+                                    <option>Lottie</option>
+                                    <option>Web Animation (GSAP/CSS)</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Interaction
+                                    Type</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-2">
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="interactive_type" value="Scroll-based">
+                                        Scroll-based
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="interactive_type" value="Click / Tap"> Click / Tap
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="interactive_type" value="Data-driven"> Data-driven
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="interactive_type" value="Game / Mini Exp"> Game /
+                                        Mini Exp
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. UI/UX Design Fields -->
+                    <div id="fields-uiux" class="dynamic-section hidden mb-8 space-y-6 border-y border-white/5 py-6">
+                        <h4 class="text-[#f7941d] text-xs font-mono uppercase tracking-widest mb-4">UI/UX Specifics</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Product
+                                    Type</label>
+                                <select id="uiuxProductType" name="uiux_product_type"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Website</option>
+                                    <option>Web App / SaaS</option>
+                                    <option>Mobile App</option>
+                                    <option>Dashboard / Internal Tool</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Current
+                                    Status</label>
+                                <select id="uiuxStatus" name="uiux_status"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Idea Stage (New)</option>
+                                    <option>In Development</option>
+                                    <option>Existing (Redesign)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Scope
+                                    Needed</label>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="uiux_scope" value="UX Research"> UX Research</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="uiux_scope" value="Wireframe"> Wireframe</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="uiux_scope" value="UI Design"> UI Design</label>
+                                    <label class="flex items-center gap-2 text-sm text-neutral-300"><input
+                                            type="checkbox" name="uiux_scope" value="Design System"> Design
+                                        System</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Est.
+                                    Screens</label>
+                                <input type="number" id="uiuxScreens" name="uiux_screens" placeholder="e.g. 10"
+                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Marketing Design Fields -->
+                    <div id="fields-marketing"
+                        class="dynamic-section hidden mb-8 space-y-6 border-y border-white/5 py-6">
+                        <h4 class="text-[#f7941d] text-xs font-mono uppercase tracking-widest mb-4">Marketing Specifics
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Assets
+                                    Available?</label>
+                                <select id="marketingAssets" name="marketing_assets"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Yes (Logo, Guidelines)</option>
+                                    <option>Partial</option>
+                                    <option>No (Need branding)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Duration</label>
+                                <input type="text" id="marketingDuration" name="marketing_duration"
+                                    placeholder="e.g. 1 month campaign"
+                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600">
+                            </div>
+                            <div class="col-span-2">
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Design
+                                    Type</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-2">
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="marketing_type" value="Key Visual"> Key Visual
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="marketing_type" value="Social Media"> Social Media
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="marketing_type" value="Ads Banner"> Ads Banner
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
+                                        <input type="checkbox" name="marketing_type" value="Pitch Deck"> Pitch Deck
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DYNAMIC SECTIONS END -->
+
+                    <!-- Final Common Fields -->
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Budget
+                                    Range</label>
+                                <select id="budgetRange" name="budget_range"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option disabled="" selected="">Select Range</option>
+                                    <option>&lt; $1,000</option>
+                                    <option>$1,000 - $5,000</option>
+                                    <option>$5,000 - $10,000</option>
+                                    <option>$10,000+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">How
+                                    did you hear about us?</label>
+                                <select id="referralSource" name="referral_source"
+                                    class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
+                                    <option>Google Search</option>
+                                    <option>Social Media</option>
+                                    <option>Referral</option>
+                                    <option>Journal / Blog</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Project
+                                Description</label>
+                            <textarea rows="4" id="projectDescription" name="project_description"
+                                class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                placeholder="Tell us about your goals, target audience, and any specific requirements..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="mt-8 pt-6 border-t border-white/5 flex justify-end">
+                        <button id="submitBtn" type="submit"
+                            class="group relative inline-flex items-center gap-3 bg-white text-black px-8 py-3 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-[#f7941d] hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span>Submit Request</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                height="1em" viewBox="0 0 24 24" data-icon="lucide:arrow-right"
+                                class="iconify group-hover:translate-x-1 transition-transform iconify--lucide">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Default Placeholder when no service selected -->
+            <div id="formPlaceholder"
+                class="glass-panel p-12 rounded-lg border border-dashed border-white/10 text-center flex flex-col items-center justify-center opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="48" height="48"
+                    viewBox="0 0 24 24" data-icon="lucide:arrow-up-circle" data-width="48"
+                    class="iconify text-neutral-600 mb-4 iconify--lucide">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="m16 12l-4-4l-4 4m4 4V8"></path>
+                    </g>
+                </svg>
+                <p class="text-neutral-400 text-sm">Please select a service above to begin your application.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <section class="border-t border-white/5 bg-black py-16">
+        <div
+            class="max-w-7xl mx-auto px-6 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center">
+            <div class="flex flex-col gap-1">
+                <span class="text-white font-bold">Double D Media</span>
+                <span>doubledlab1002@gmail.com</span>
+                <span>+ 84 337 735 004</span>
+            </div>
+            <div class="mt-6 md:mt-0 flex gap-6">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <span>© 2024 All Systems Operational.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logic Script -->
+    <script>
+        // Supabase Configuration
+        const supabaseUrl = 'https://tgpavkxghyzhddvgqbkw.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncGF2a3hnaHl6aGRkdmdxYmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0NzE0NDYsImV4cCI6MjA4MjA0NzQ0Nn0.jlgBi20YSp1U3Gzyp4UmvLNQtzTQ1XDo6GdlsxTkx2w'
+        // Initialize Supabase client
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+        function selectService(serviceName) {
+            // 1. Update Hidden Input
+            document.getElementById('selectedServiceInput').value = serviceName;
+
+            // 2. UI: Highlight selected card
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => card.classList.remove('active'));
+            document.getElementById('card-' + serviceName).classList.add('active');
+
+            // 3. UI: Show Form, Hide Placeholder
+            document.getElementById('formPlaceholder').classList.add('hidden');
+            const mainForm = document.getElementById('mainForm');
+            mainForm.classList.remove('hidden');
+            mainForm.style.opacity = '0';
+            setTimeout(() => mainForm.style.opacity = '1', 50); // Fade in effect
+
+            // 4. Dynamic Fields Logic
+            // Hide all specific sections first
+            document.querySelectorAll('.dynamic-section').forEach(el => el.classList.add('hidden'));
+
+            // Show specific section
+            const targetSection = document.getElementById('fields-' + serviceName);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+
+            // Loading State
+            btn.disabled = true;
+            btn.innerHTML = '<span class="iconify animate-spin" data-icon="lucide:loader-2"></span> Processing...';
+
+            // Gather Common Data
+            const formData = {
+                full_name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                company_brand: document.getElementById('companyBrand').value,
+                timeline: document.getElementById('timeline').value,
+                service_type: document.getElementById('selectedServiceInput').value,
+                budget_range: document.getElementById('budgetRange').value,
+                referral_source: document.getElementById('referralSource').value,
+                project_description: document.getElementById('projectDescription').value,
+                details: {}
+            };
+
+            // Gather Dynamic Data based on Service Type
+            const serviceType = formData.service_type;
+
+            if (serviceType === 'video') {
+                formData.details = {
+                    type: document.getElementById('videoType').value,
+                    length: document.getElementById('videoLength').value,
+                    style: document.querySelector('input[name="video_style"]:checked')?.value || '',
+                    distribution: Array.from(document.querySelectorAll('input[name="video_distribution"]:checked')).map(el => el.value)
+                };
+            } else if (serviceType === 'interactive') {
+                formData.details = {
+                    platform: document.getElementById('interactivePlatform').value,
+                    tech: document.getElementById('interactiveTech').value,
+                    type: Array.from(document.querySelectorAll('input[name="interactive_type"]:checked')).map(el => el.value)
+                };
+            } else if (serviceType === 'uiux') {
+                formData.details = {
+                    product_type: document.getElementById('uiuxProductType').value,
+                    status: document.getElementById('uiuxStatus').value,
+                    scope: Array.from(document.querySelectorAll('input[name="uiux_scope"]:checked')).map(el => el.value),
+                    screens: document.getElementById('uiuxScreens').value
+                };
+            } else if (serviceType === 'marketing') {
+                formData.details = {
+                    assets_available: document.getElementById('marketingAssets').value,
+                    duration: document.getElementById('marketingDuration').value,
+                    type: Array.from(document.querySelectorAll('input[name="marketing_type"]:checked')).map(el => el.value)
+                };
+            }
+
+            try {
+                // Submit to Supabase
+                const { data, error } = await supabase
+                    .from('contact_submissions')
+                    .insert([formData]);
+
+                if (error) {
+                    throw error;
+                }
+
+                // Success State
+                document.getElementById('formContent').classList.add('hidden');
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.remove('hidden');
+                successMsg.classList.add('fade-in');
+
+                // Scroll to message
+                document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+
+                // Clear form for next time (optional, but good practice if user reloads or similar)
+                document.getElementById('mainForm').reset();
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('We encountered an error submitting your request (' + error.message + '). Please try again later.');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

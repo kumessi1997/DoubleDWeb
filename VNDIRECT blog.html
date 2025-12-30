@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>DOUBLE D | Các ấn phẩm media đã thực hiện cho VNDIRECT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #050505;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Custom Utilities */
+        .text-accent-orange {
+            color: #f7941d;
+        }
+
+        .border-accent-orange {
+            border-color: #f7941d;
+        }
+
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Article Typography Overrides */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.75;
+            color: #d4d4d4;
+            font-size: 1.125rem;
+        }
+
+        .article-content h2 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 1.875rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content h3 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #d4d4d4;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content blockquote {
+            border-left: 2px solid #f7941d;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #a3a3a3;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+
+    <!-- Background (image) -->
+    <div class="fixed top-0 w-full h-screen bg-cover bg-center -z-10"
+        style="background-image: url(&quot;https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3dbe29bf-23fb-46ee-afa7-3f0d2319c83b_3840w.jpg&quot;); mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"
+        data-alpha-mask="80"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+                <a href="showcase.html" class="text-white">SHOWCASE</a>
+                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
+            </div>
+            <a href="#contact"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+                <span>CONTACT US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
+                    viewBox="0 0 24 24" data-icon="lucide:arrow-right" class="iconify iconify--lucide">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ARTICLE HEADER / HERO SECTION -->
+    <header
+        class="pt-32 pb-12 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/50 via-black to-black">
+        <div class="max-w-4xl mx-auto text-center md:text-left md:max-w-7xl">
+
+            <!-- Breadcrumb / Type -->
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#f7941d] font-mono mb-6">
+                <a href="showcase.html" class="hover:text-white transition-colors">Showcase</a>
+                <span class="text-neutral-600">/</span>
+                <span class="text-neutral-400">Media</span>
+            </div>
+
+            <!-- Title & Description -->
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6 font-geist leading-[1.1]">
+                Các ấn phẩm media đã thực hiện cho VNDIRECT
+            </h1>
+            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mb-8">
+                Tổng hợp các nhóm sản phẩm media tiêu biểu và tư duy sáng tạo đứng sau mỗi ấn phẩm.
+            </p>
+
+            <!-- Article Meta Data -->
+            <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-400 border-t border-white/10 pt-6">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80" alt="Author"
+                        class="w-8 h-8 rounded-full border border-white/10 object-cover">
+                    <span class="text-white font-medium">Double D Team</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:calendar" width="14" height="14"></span>
+                    <span>Dec 26, 2024</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:clock" width="14" height="14"></span>
+                    <span>5 min read</span>
+                </div>
+                <div class="flex items-center gap-2 ml-auto">
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Media
+                        Production</span>
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Finance</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- Hero Image -->
+        <div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden border border-white/10 mb-16 group">
+            <canvas id="thap-tai-san-canvas" class="absolute inset-0 w-full h-full object-cover"></canvas>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
+
+            <!-- LEFT COLUMN: ARTICLE CONTENT (CMS) -->
+            <article class="lg:col-span-8 article-content">
+
+                <h2 id="brand-video">1. Video truyền thông thương hiệu</h2>
+                <p>
+                    Trong quá trình đồng hành cùng VNDIRECT – một trong những công ty chứng khoán hàng đầu tại Việt Nam,
+                    đội ngũ chúng tôi đã triển khai nhiều ấn phẩm media với mục tiêu truyền tải kiến thức tài chính một
+                    cách trực quan, dễ hiểu và hiện đại, đồng thời củng cố hình ảnh thương hiệu chuyên nghiệp, đáng tin
+                    cậy.
+                </p>
+                <p>
+                    Bài viết này chia sẻ tổng quan các nhóm sản phẩm media tiêu biểu mà chúng tôi đã thực hiện cho
+                    VNDIRECT, cùng tư duy sáng tạo đứng sau mỗi ấn phẩm.
+                </p>
+
+                <p>
+                    Các video thương hiệu được xây dựng nhằm làm rõ giá trị cốt lõi, tầm nhìn và định vị của VNDIRECT
+                    trên thị trường tài chính.
+                </p>
+                <ul>
+                    <li>Phong cách hình ảnh hiện đại, tối giản, bám sát hệ thống nhận diện thương hiệu.</li>
+                    <li>Nội dung cô đọng, tập trung vào thông điệp chính.</li>
+                    <li>Chuyển động mượt mà, nhịp dựng phù hợp với nhóm khách hàng đầu tư.</li>
+                </ul>
+                <p>
+                    Những video này thường được sử dụng trên website, fanpage và trong các chiến dịch truyền thông tổng
+                    thể.
+                </p>
+
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/oRUtnUZ6eYU?si=9xXdR_0T_onJOqmX"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <h2 id="explainer-video">2. Video giải thích sản phẩm & dịch vụ</h2>
+                <p>
+                    Đối với các sản phẩm tài chính, tính rõ ràng và dễ hiểu luôn được đặt lên hàng đầu. Chúng tôi đã
+                    triển khai nhiều video dạng explainer nhằm:
+                </p>
+                <ul>
+                    <li>Giải thích tính năng các nền tảng, dịch vụ đầu tư.</li>
+                    <li>Minh họa quy trình sử dụng bằng hình ảnh và motion graphic.</li>
+                    <li>Giảm rào cản tiếp cận cho người mới tham gia thị trường.</li>
+                </ul>
+                <p>
+                    Hình thức thể hiện chủ yếu là 2D animation kết hợp UI motion, giúp người xem dễ dàng nắm bắt thông
+                    tin chỉ trong vài phút.
+                </p>
+
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/8EeVop37xJY?si=NFXW5b_aLK2quOku"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <h2 id="motion-graphic">3. Motion graphic cho báo cáo & nội dung tài chính</h2>
+                <p>
+                    Bên cạnh video, các ấn phẩm motion graphic ngắn được sử dụng để:
+                </p>
+                <ul>
+                    <li>Tóm tắt báo cáo thị trường, xu hướng đầu tư.</li>
+                    <li>Trình bày số liệu tài chính một cách trực quan.</li>
+                    <li>Tăng khả năng ghi nhớ thông tin so với nội dung tĩnh.</li>
+                </ul>
+                <p>
+                    Thiết kế tập trung vào data visualization, chuyển động tiết chế nhưng chính xác, đảm bảo tính nghiêm
+                    túc của nội dung tài chính.
+                </p>
+
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/KZktnDIzd3s?si=3UmUrb-e9M8hWy95"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <h2 id="digital-media">4. Ấn phẩm media cho nền tảng số</h2>
+                <p>
+                    Các ấn phẩm được tối ưu cho nhiều nền tảng khác nhau như:
+                </p>
+                <ul>
+                    <li>Website và landing page</li>
+                    <li>Mạng xã hội (Facebook, YouTube, nền tảng nội bộ)</li>
+                    <li>Slide thuyết trình và tài liệu truyền thông</li>
+                </ul>
+                <p>
+                    Tất cả đều được xây dựng theo cùng một tư duy: nhất quán thương hiệu – dễ tiếp cận – thân thiện với
+                    người dùng.
+                </p>
+
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/B7MCOrqyUVI?si=lzFaeoP-40JnNfZd"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <h2 id="methodology">5. Tư duy triển khai & giá trị mang lại</h2>
+                <p>
+                    Trong mỗi dự án với VNDIRECT, chúng tôi luôn bám sát 3 nguyên tắc chính:
+                </p>
+                <ol style="list-style-type: decimal; margin-left: 1.5rem; color: #d4d4d4; margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 0.5rem;">Hiểu đúng sản phẩm tài chính trước khi thiết kế.</li>
+                    <li style="margin-bottom: 0.5rem;">Đặt người xem làm trung tâm, đặc biệt là nhóm nhà đầu tư mới.
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">Kết hợp sáng tạo và tính chuẩn mực, phù hợp với lĩnh vực tài
+                        chính – chứng khoán.</li>
+                </ol>
+                <p>
+                    Nhờ đó, các ấn phẩm media không chỉ đẹp về mặt hình ảnh mà còn thực sự phát huy hiệu quả truyền
+                    thông, hỗ trợ VNDIRECT trong việc giáo dục thị trường và xây dựng niềm tin với khách hàng.
+                </p>
+
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/LvQYAI0KJ-k?si=ra6nyRvcModDAJT3"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <h2 id="conclusion">Kết luận</h2>
+                <p>
+                    Hợp tác cùng VNDIRECT là cơ hội để chúng tôi tiếp cận sâu hơn với lĩnh vực tài chính và liên tục
+                    hoàn thiện năng lực sản xuất media chuyên sâu cho doanh nghiệp. Những ấn phẩm đã thực hiện là minh
+                    chứng cho cách media sáng tạo có thể đồng hành hiệu quả cùng các thương hiệu lớn trong việc truyền
+                    tải giá trị dài hạn.
+                </p>
+                <p>
+                    Nếu bạn đang tìm kiếm giải pháp media phù hợp cho lĩnh vực tài chính, đầu tư hoặc sản phẩm số, chúng
+                    tôi luôn sẵn sàng chia sẻ thêm kinh nghiệm và góc nhìn thực tế từ các dự án đã triển khai.
+                </p>
+
+                <!-- Article Footer / Author Bio -->
+                <div class="mt-16 pt-8 border-t border-white/10">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80"
+                            alt="Author" class="w-12 h-12 rounded-full border border-white/10 object-cover">
+                        <div>
+                            <h4 class="text-white font-bold text-sm uppercase tracking-wide">Double D Team</h4>
+                            <p class="text-neutral-500 text-xs uppercase tracking-widest mb-2">Creative Team</p>
+                            <p class="text-neutral-400 text-sm max-w-md leading-relaxed">
+                                Chuyên cung cấp các giải pháp media sáng tạo cho lĩnh vực tài chính và công nghệ.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- RIGHT COLUMN: SIDEBAR (TOC + CTA) -->
+            <aside class="hidden lg:block lg:col-span-4 relative">
+                <div class="sticky top-24 space-y-8">
+
+                    <!-- Table of Contents -->
+                    <div class="p-6 rounded-lg border border-white/5 bg-white/5 backdrop-blur-sm">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-4 block">On this
+                            page</span>
+                        <nav class="flex flex-col space-y-3">
+                            <a href="#brand-video"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Video thương hiệu
+                            </a>
+                            <a href="#explainer-video"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Video giải thích
+                            </a>
+                            <a href="#motion-graphic"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Motion Graphic
+                            </a>
+                            <a href="#digital-media"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Ấn phẩm số
+                            </a>
+                            <a href="#methodology"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Tư duy & Giá trị
+                            </a>
+                            <a href="#conclusion"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Kết luận
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Client Info / CTA -->
+                    <div class="p-6 rounded-lg border border-white/10 bg-neutral-900/50">
+                        <span
+                            class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4 block">Project
+                            Details</span>
+                        <div class="space-y-4 mb-6">
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Client</span>
+                                <span class="text-sm text-white font-medium">VNDIRECT</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Services</span>
+                                <span class="text-sm text-white font-medium">Media Production, Motion Graphic</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Year</span>
+                                <span class="text-sm text-white font-medium">2024</span>
+                            </div>
+                        </div>
+                        <a href="#contact"
+                            class="flex w-full items-center justify-center gap-2 text-[11px] uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm py-3">
+                            Start a Project
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ARTICLE CTA SECTION -->
+    <section class="border-y border-white/5 bg-neutral-900/30 py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white tracking-tight mb-4 font-geist">Need a transformation like this?
+            </h2>
+            <p class="text-neutral-400 mb-8 max-w-xl mx-auto">We help enterprise clients scale their digital presence
+                through robust design systems and high-fidelity motion.</p>
+            <div class="flex justify-center gap-4">
+                <a href="#contact"
+                    class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                    Get in touch
+                </a>
+                <a href="showcase.html"
+                    class="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:border-white transition-colors">
+                    View more work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATED ARTICLES -->
+    <section class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-12">
+            <h2 class="text-2xl font-bold text-white uppercase tracking-tight font-geist">Read Next</h2>
+            <a href="blog.html"
+                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">View all</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Related 1 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Blog</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Why WebGL is the future of landing pages
+                </h3>
+            </article>
+
+            <!-- Related 2 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span
+                    class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2 block group-hover:text-[#f7941d] transition-colors">Showcase</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    VNDIRECT: Mobile App Redesign
+                </h3>
+            </article>
+
+            <!-- Related 3 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Blog</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Managing creative burnout in 2024
+                </h3>
+            </article>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="border-t border-white/5 bg-black py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Join the Newsletter</h2>
+                    <p class="text-neutral-400 mb-6 max-w-md">Get the latest insights on design and technology delivered
+                        to your inbox.</p>
+                    <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
+                        <a href="mailto:doubledlab1002@gmail.com"
+                            class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
+                        <span class="">+ 84 337 735 004</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <input type="email" placeholder="ENTER EMAIL"
+                        class="bg-neutral-900 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#f7941d] w-64 rounded-sm">
+                    <button
+                        class="uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm px-6 text-xs">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
+                <span>© 2024 Double D Media.</span>
+                <span class="mt-2 md:mt-0">All Systems Operational.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Rive Animation Setup
+        const r = new rive.Rive({
+            src: 'Rive file/thap_tai_san.riv',
+            canvas: document.getElementById('thap-tai-san-canvas'),
+            autoplay: true,
+            autoBind: true,
+            artboard: 'thap tai san',
+            stateMachines: 'State Machine 1',
+            layout: new rive.Layout({
+                fit: rive.Fit.Cover,
+                alignment: rive.Alignment.Center,
+            }),
+            onLoad: () => {
+                r.resizeDrawingSurfaceToCanvas();
+            },
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            r.resizeDrawingSurfaceToCanvas();
+        });
+    </script>
+</body>
+
+</html>

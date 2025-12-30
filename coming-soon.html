@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>COMING SOON | Double D Media</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;family=Oswald:wght@400;500;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Core Theme --- */
+        :root {
+            --orange: #f7941d;
+            --dark-bg: #050505;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            background-color: var(--dark-bg);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 70%);
+        }
+
+        /* --- Typography --- */
+        .font-mono-custom {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .font-display {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* --- Utilities --- */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Animations --- */
+        @keyframes scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent, rgba(247, 148, 29, 0.03), transparent);
+            pointer-events: none;
+            z-index: 50;
+            animation: scanline 8s linear infinite;
+        }
+
+        /* Glitch Text */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050505;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #f7941d;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00ffff;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(10px, 9999px, 30px, 0);
+            }
+
+            20% {
+                clip: rect(80px, 9999px, 100px, 0);
+            }
+
+            40% {
+                clip: rect(10px, 9999px, 50px, 0);
+            }
+
+            100% {
+                clip: rect(40px, 9999px, 90px, 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(60px, 9999px, 80px, 0);
+            }
+
+            20% {
+                clip: rect(10px, 9999px, 30px, 0);
+            }
+
+            100% {
+                clip: rect(90px, 9999px, 110px, 0);
+            }
+        }
+
+        /* --- Mini Game Styles (The Core) --- */
+        .core-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .core-container:active {
+            transform: scale(0.95);
+        }
+
+        .core-circle {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            fill: #1a1a1a;
+            stroke: #333;
+            stroke-width: 1;
+        }
+
+        .core-active .core-circle {
+            fill: #3a1d00;
+            stroke: #f7941d;
+            filter: drop-shadow(0 0 15px rgba(247, 148, 29, 0.4));
+        }
+
+        .core-ring {
+            transform-origin: center;
+            animation: spin-slow 10s linear infinite;
+            stroke: #333;
+        }
+
+        .core-active .core-ring {
+            stroke: #f7941d;
+            animation: spin-fast 2s linear infinite;
+        }
+
+        .progress-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f7941d;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: fly-out 0.8s ease-out forwards;
+        }
+
+        @keyframes spin-slow {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-fast {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fly-out {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .shake {
+            animation: shake 0.3s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        /* Project Card Hover */
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: { DEFAULT: '#f7941d', 500: '#f7941d', 900: '#3a1d00' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased selection:bg-orange-500/30 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Visual Noise/Scanline -->
+    <div class="scanline-overlay"></div>
+    <div class="fixed inset-0 z-[0] opacity-[0.03] pointer-events-none"
+        style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E');">
+    </div>
+
+    <!-- Navigation (Simplified) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group   ">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <a href="/contact"
+                class="text-xs font-mono-custom text-neutral-400 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                System Operational
+            </a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow flex flex-col items-center justify-center relative pt-32 pb-20 px-6 z-10">
+
+        <!-- Hero Section -->
+        <div class="text-center max-w-3xl mx-auto mb-16 relative">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-900/10 mb-6">
+                <span class="iconify text-orange-500 animate-spin" data-icon="lucide:loader-2" data-width="14"></span>
+                <span class="text-[10px] font-mono-custom text-orange-500 uppercase tracking-widest">Construction in
+                    Progress</span>
+            </div>
+
+            <h1 class="glitch font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white mb-6"
+                data-text="THIS PAGE IS COMING SOON">
+                THIS PAGE IS COMING SOON
+            </h1>
+
+            <p class="text-neutral-400 text-sm md:text-base font-light max-w-lg mx-auto leading-relaxed">
+                We’re crafting something exciting. In the meantime, enjoy a small interactive experience from our team.
+            </p>
+        </div>
+
+        <!-- INTERACTIVE MINI GAME: THE CORE -->
+        <div class="relative w-full max-w-md mx-auto aspect-square md:aspect-video flex flex-col items-center justify-center mb-24 group select-none"
+            id="game-container">
+
+            <!-- Game Canvas / SVG -->
+            <div class="relative w-64 h-64 cursor-pointer core-container tap-highlight-transparent" id="core-reactor"
+                onclick="handleInteraction(event)">
+                <!-- Background Pulse -->
+                <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-3xl opacity-0 transition-opacity duration-300"
+                    id="core-glow"></div>
+
+                <svg viewBox="0 0 200 200" class="w-full h-full relative z-10">
+                    <!-- Outer Ring -->
+                    <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1"
+                        stroke-dasharray="10 5" class="text-white/10 core-ring"></circle>
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1"
+                        class="text-white/10 core-ring" style="animation-direction: reverse; animation-duration: 15s;">
+                    </circle>
+
+                    <!-- The Core -->
+                    <circle cx="100" cy="100" r="40" class="core-circle"></circle>
+
+                    <!-- Icon Inside Core -->
+                    <foreignObject x="84" y="84" width="32" height="32" class="pointer-events-none">
+                        <div class="w-full h-full flex items-center justify-center text-white/50" id="core-icon">
+                            <span class="iconify" data-icon="lucide:zap" data-width="24"></span>
+                        </div>
+                    </foreignObject>
+                </svg>
+
+                <!-- Particles Container -->
+                <div id="particles" class="absolute inset-0 pointer-events-none overflow-visible"></div>
+            </div>
+
+            <!-- Game HUD -->
+            <div class="mt-8 w-64">
+                <div
+                    class="flex justify-between text-[10px] font-mono-custom text-neutral-500 uppercase tracking-widest mb-2">
+                    <span>Power Level</span>
+                    <span id="score-display">0%</span>
+                </div>
+                <div class="h-1 bg-white/10 rounded-full overflow-hidden">
+                    <div id="progress-bar"
+                        class="h-full bg-orange-500 w-0 transition-all duration-100 ease-out shadow-[0_0_10px_#f7941d]">
+                    </div>
+                </div>
+                <p class="text-center text-xs text-neutral-600 mt-4 animate-pulse" id="instruction-text">
+                    [ CLICK CORE TO CHARGE ]
+                </p>
+            </div>
+        </div>
+
+        <!-- Project Preview Section -->
+        <div class="w-full max-w-6xl border-t border-white/5 pt-16">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <span class="text-xs font-mono-custom text-orange-500 mb-2 block">/// ARCHIVE_PREVIEW</span>
+                    <h2 class="font-display text-2xl font-bold uppercase tracking-tight">While you wait</h2>
+                </div>
+                <a href="showcase.html"
+                    class="hidden md:flex text-xs font-mono-custom text-neutral-400 hover:text-white uppercase tracking-widest items-center gap-2 group">
+                    View All Works
+                    <span class="iconify group-hover:translate-x-1 transition-transform"
+                        data-icon="lucide:arrow-right"></span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div
+                    class="group project-card relative aspect-[4/5] bg-neutral-900 border border-white/10 rounded-lg overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&amp;q=80"
+                        alt="Project 1" class="w-full h-full object-cover opacity-60 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                    <!-- Overlay Info -->
+                    <div class="absolute bottom-0 left-0 w-full p-6">
+                        <div
+                            class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span
+                                class="text-[10px] font-mono-custom text-orange-500 uppercase bg-black/50 px-2 py-1 rounded backdrop-blur-sm">Interactive</span>
+                            <h3 class="text-xl font-bold uppercase text-white mt-2 leading-none">Cyberpunk UI Kit</h3>
+                            <p
+                                class="text-xs text-neutral-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Client: Neon Systems</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div
+                    class="group project-card relative aspect-[4/5] bg-neutral-900 border border-white/10 rounded-lg overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&amp;q=80" alt="Project 2"
+                        class="w-full h-full object-cover opacity-60 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                    <div class="absolute bottom-0 left-0 w-full p-6">
+                        <div
+                            class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span
+                                class="text-[10px] font-mono-custom text-blue-400 uppercase bg-black/50 px-2 py-1 rounded backdrop-blur-sm">3D
+                                Motion</span>
+                            <h3 class="text-xl font-bold uppercase text-white mt-2 leading-none">Data Stream</h3>
+                            <p
+                                class="text-xs text-neutral-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Client: FinTech Global</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div
+                    class="group project-card relative aspect-[4/5] bg-neutral-900 border border-white/10 rounded-lg overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=800&amp;q=80"
+                        alt="Project 3" class="w-full h-full object-cover opacity-60 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                    <div class="absolute bottom-0 left-0 w-full p-6">
+                        <div
+                            class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span
+                                class="text-[10px] font-mono-custom text-green-400 uppercase bg-black/50 px-2 py-1 rounded backdrop-blur-sm">Web
+                                Experience</span>
+                            <h3 class="text-xl font-bold uppercase text-white mt-2 leading-none">Eco Future</h3>
+                            <p
+                                class="text-xs text-neutral-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Client: GreenLife</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="mt-20 text-center">
+            <button onclick="window.location.href='index.html'"
+                class="relative group px-8 py-4 bg-white text-black font-display font-bold text-lg uppercase tracking-widest overflow-hidden rounded-sm hover:bg-orange-500 transition-colors duration-300">
+                <span class="relative z-10 flex items-center gap-2">
+                    <span class="iconify" data-icon="lucide:arrow-left" data-width="18"></span>
+                    Back to Home
+                </span>
+                <div
+                    class="absolute inset-0 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out z-0">
+                </div>
+            </button>
+            <div class="mt-6 flex justify-center gap-6 text-[10px] font-mono-custom uppercase text-neutral-500">
+                <a href="#" class="hover:text-white transition-colors">Contact Us</a>
+                <span>/</span>
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                <span>/</span>
+                <a href="#" class="hover:text-white transition-colors">Behance</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Mini Game Logic -->
+    <script>
+        let score = 0;
+        const maxScore = 100;
+        const core = document.getElementById('core-reactor');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreDisplay = document.getElementById('score-display');
+        const particlesContainer = document.getElementById('particles');
+        const coreGlow = document.getElementById('core-glow');
+        const instruction = document.getElementById('instruction-text');
+        const coreIcon = document.getElementById('core-icon');
+
+        function handleInteraction(e) {
+            if (score >= maxScore) return;
+
+            // Increase Score
+            score += 5;
+            if (score > maxScore) score = maxScore;
+
+            // Update UI
+            updateUI();
+
+            // Visual Feedback
+            triggerShake();
+            spawnParticles(e);
+
+            // Check Win Condition
+            if (score === maxScore) {
+                activateSuperState();
+            }
+        }
+
+        function updateUI() {
+            progressBar.style.width = `${score}%`;
+            scoreDisplay.innerText = `${score}%`;
+
+            // Dynamic color change based on progress
+            if (score > 50) {
+                progressBar.classList.add('bg-orange-400');
+            }
+        }
+
+        function triggerShake() {
+            core.classList.remove('shake');
+            void core.offsetWidth; // trigger reflow
+            core.classList.add('shake');
+        }
+
+        function spawnParticles(e) {
+            const rect = core.getBoundingClientRect();
+            // Calculate click position relative to center if event exists, otherwise random
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('progress-particle');
+
+                // Random angle
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+
+                // Center start
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+
+                particlesContainer.appendChild(particle);
+
+                // Cleanup
+                setTimeout(() => particle.remove(), 800);
+            }
+        }
+
+        function activateSuperState() {
+            core.classList.add('core-active');
+            coreGlow.style.opacity = '1';
+            instruction.innerText = "SYSTEM FULLY OPERATIONAL";
+            instruction.classList.remove('animate-pulse');
+            instruction.classList.add('text-orange-500', 'font-bold');
+
+            // Change Icon
+            coreIcon.innerHTML = '<span class="iconify text-white animate-bounce" data-icon="lucide:check" data-width="32"></span>';
+
+            // Loop particles occasionally
+            setInterval(() => {
+                spawnParticles();
+            }, 2000);
+        }
+    </script>
+
+</body>
+
+</html>

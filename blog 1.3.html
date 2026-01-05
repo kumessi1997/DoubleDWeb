@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>DOUBLE D | Case Study: Vert Zero Interactive Brochure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #050505;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Custom Utilities */
+        .text-accent-orange {
+            color: #f7941d;
+        }
+
+        .border-accent-orange {
+            border-color: #f7941d;
+        }
+
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Article Typography Overrides */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.75;
+            color: #d4d4d4;
+            font-size: 1.125rem;
+        }
+
+        .article-content h2 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 1.875rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content h3 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #d4d4d4;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content blockquote {
+            border-left: 2px solid #f7941d;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #d4d4d4;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: rgba(247, 148, 29, 0.1);
+            border-left: 4px solid #f7941d;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .point-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .point-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(247, 148, 29, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .point-title {
+            color: #f7941d;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Geist', sans-serif;
+        }
+
+        .canvas-container {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .canvas-container.cover {
+            aspect-ratio: 16/9;
+            margin-top: 4rem;
+        }
+
+        .canvas-container.full-hd {
+            aspect-ratio: 16/9;
+        }
+
+        .canvas-container.square-game {
+            aspect-ratio: 1/1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-note {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #666;
+            margin-top: -1rem;
+            margin-bottom: 3rem;
+            font-family: 'Geist Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+
+    <!-- Rive Cover Canvas -->
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="canvas-container cover mt-24">
+            <canvas id="rive-cover" class="w-full h-full"></canvas>
+        </div>
+    </div>
+
+    <!-- Background (image) -->
+    <div class="fixed top-0 w-full h-screen bg-cover bg-center -z-10"
+        style="background-image: url(&quot;https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/d199990b-684c-4a30-8919-09fb9319c83c_3840w.jpg&quot;); mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"
+        data-alpha-mask="80"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+                <a href="showcase.html" class="text-white">SHOWCASE</a>
+                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
+            </div>
+            <a href="#contact"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+                <span>CONTACT US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
+                    viewBox="0 0 24 24" data-icon="lucide:arrow-right" class="iconify iconify--lucide">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ARTICLE HEADER / HERO SECTION -->
+    <header class="pt-12 pb-12 px-6 border-white/5">
+        <div class="max-w-4xl mx-auto text-center md:text-left md:max-w-7xl">
+
+            <!-- Breadcrumb / Type -->
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#f7941d] font-mono mb-6">
+                <a href="showcase.html" class="hover:text-white transition-colors">Showcase</a>
+                <span class="text-neutral-600">/</span>
+                <span class="text-neutral-400">Process</span>
+            </div>
+
+            <!-- Title & Description -->
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6 font-geist leading-[1.1]">
+                The Journey of Creating an Interactive Brochure for Vert Zero
+            </h1>
+            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mb-8">
+                In this article, I share why interactive brochures are a worthy choice, as well as the actual production
+                process I applied for Vert Zero.
+            </p>
+
+            <!-- Article Meta Data -->
+            <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-400 border-t border-white/10 pt-6">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80" alt="Author"
+                        class="w-8 h-8 rounded-full border border-white/10 object-cover">
+                    <span class="text-white font-medium">Double D Media</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:calendar" width="14" height="14"></span>
+                    <span>Jan 05, 2026</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:clock" width="14" height="14"></span>
+                    <span>6 min read</span>
+                </div>
+                <div class="flex items-center gap-2 ml-auto">
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Interactive</span>
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">UX
+                        Design</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
+
+            <!-- LEFT COLUMN: ARTICLE CONTENT (CMS) -->
+            <article class="lg:col-span-8 article-content">
+                <p>
+                    Working with tech products and digital solutions, I realized one thing: <strong>how we tell the
+                        story of a product is just as important as the product itself.</strong>
+                </p>
+
+                <p>
+                    With Vert Zero, instead of choosing a traditional PDF brochure or a full website landing page, I
+                    decided to deploy an <strong>interactive brochure</strong> – compact, flexible, yet deep in
+                    experience.
+                </p>
+
+                <div class="highlight">
+                    <p>
+                        An interactive brochure is not just a beautiful presentation format, but also an effective
+                        communication tool, especially for tech products like Vert Zero.
+                    </p>
+                </div>
+
+                <h2 id="why-interactive">Why use an Interactive Brochure?</h2>
+
+                <div class="space-y-6 my-12">
+                    <div class="point-card">
+                        <div class="point-title">✨ 1. High Interactivity</div>
+                        <p class="text-neutral-400 text-sm">No longer just "view – read – scroll", interactive brochures
+                            allow viewers to touch, click, drag, and explore content actively. This helps customers
+                            remember information better and stay with the content longer than static brochures.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🌍 2. Easy Access and Viewing</div>
+                        <p class="text-neutral-400 text-sm">Interactive brochures can be used directly in browsers, sent
+                            via links, embedded in emails, or presented in pitches. Customers don't need to download
+                            heavy files, aren't device-dependent, and have a consistent experience across platforms.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🎨 3. Diverse Forms of Expression</div>
+                        <p class="text-neutral-400 text-sm">Compared to traditional brochures, interactive ones allow
+                            combining: Motion & animation, Micro-interactions, Step-by-step storytelling, Illustrations,
+                            icons, scene transitions. Thanks to this, Vert Zero is presented visually, vividly, and
+                            easier to understand.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">♻️ 4. Save Printing Costs</div>
+                        <p class="text-neutral-400 text-sm">No need to print paper brochures, no worry about reprint
+                            costs. Everything is digital, environmentally friendly, and fits modern communication
+                            trends.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">⚡ 5. Easy to Change and Update</div>
+                        <p class="text-neutral-400 text-sm">When product info, features, or messages change, interactive
+                            brochures can be updated quickly without starting over like printed ones.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">💰 6. Optimized Production Cost</div>
+                        <p class="text-neutral-400 text-sm">Compared to building a complete landing page, interactive
+                            brochures have faster deployment times, rely less on dev teams, and have lower production
+                            costs while ensuring high experience.</p>
+                    </div>
+                </div>
+
+                <div class="canvas-container full-hd">
+                    <canvas id="rive-vertzero" class="w-full h-full"></canvas>
+                </div>
+                <div class="game-note">Vert Zero Interactive Brochure Demo powered by Rive</div>
+
+                <h2 id="production-process">Production Process for Vert Zero</h2>
+
+                <div class="space-y-8 my-10">
+                    <div id="step-1">
+                        <h3 class="text-[#f7941d] font-bold mb-2">Step 1: Wireframing & Content Structure</h3>
+                        <p>I start by defining: Brochure Goal, Target Audience, and Content Experience Journey.
+                            Wireframes help me answer: <em>“What should viewers see first – understand later – and
+                                interact with where?”</em></p>
+                    </div>
+
+                    <div id="step-2">
+                        <h3 class="text-[#f7941d] font-bold mb-2">Step 2: Design on Figma</h3>
+                        <p>After wireframing, I proceed to detailed design on Figma: Layout for each section, Colors &
+                            typography per Vert Zero identity, and preparing UI states for animation & interaction.
+                            Figma acts as the central design blueprint.</p>
+                    </div>
+
+                    <div id="step-3">
+                        <h3 class="text-[#f7941d] font-bold mb-2">Step 3: Animation & Interactive Development (Low-code)
+                        </h3>
+                        <p>Instead of pure coding, I use a low-code platform to create transition animations, design
+                            hover/click interactions, and control visual content states. This approach helps shorten
+                            production time and makes optimization easy.</p>
+                    </div>
+                </div>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    An interactive brochure is not just a beautiful presentation format, but also an effective
+                    communication tool, especially for tech products like Vert Zero.
+                </p>
+
+                <div class="canvas-container full-hd">
+                    <canvas id="rive-azladin" class="w-full h-full"></canvas>
+                </div>
+                <div class="game-note">Azladin Interactive Brochure Demo</div>
+
+                <p>
+                    With reasonable costs, quick deployment time, and high interactivity, this is a solution I believe
+                    will be increasingly used in product introductions, sales kits, or pitching. If you are looking for
+                    a way to tell a product story that is compact – modern – effective, an interactive brochure is a
+                    choice worth trying.
+                </p>
+
+                <!-- Article Footer / Author Bio -->
+                <div class="mt-16 pt-8 border-t border-white/10">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80"
+                            alt="Author" class="w-12 h-12 rounded-full border border-white/10 object-cover">
+                        <div>
+                            <h4 class="text-white font-bold text-sm uppercase tracking-wide">DOUBLE D MEDIA</h4>
+                            <p class="text-neutral-500 text-xs uppercase tracking-widest mb-2">Motion Design Studio</p>
+                            <p class="text-neutral-400 text-sm max-w-md leading-relaxed">
+                                We help brands tell stories through the language of motion, creating inspiring and vivid
+                                digital experiences.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- RIGHT COLUMN: SIDEBAR (TOC + CTA) -->
+            <aside class="hidden lg:block lg:col-span-4 relative">
+                <div class="sticky top-24 space-y-8">
+
+                    <!-- Table of Contents -->
+                    <div class="p-6 rounded-lg border border-white/5 bg-white/5 backdrop-blur-sm">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-4 block">On This
+                            Page</span>
+                        <nav class="flex flex-col space-y-3">
+                            <a href="#why-interactive"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Why Interactive?
+                            </a>
+                            <a href="#production-process"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Production Process
+                            </a>
+                            <a href="#step-1"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-6 pl-4">
+                                <span class="text-[10px] text-neutral-500">01</span> Wireframe
+                            </a>
+                            <a href="#step-2"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-6 pl-4">
+                                <span class="text-[10px] text-neutral-500">02</span> Figma Design
+                            </a>
+                            <a href="#step-3"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-6 pl-4">
+                                <span class="text-[10px] text-neutral-500">03</span> Low-code
+                            </a>
+                            <a href="#conclusion"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Conclusion
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="p-6 rounded-lg border border-white/10 bg-neutral-900/50">
+                        <span
+                            class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4 block">Article
+                            Details</span>
+                        <div class="space-y-4 mb-6">
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Product</span>
+                                <span class="text-sm text-white font-medium">Vert Zero</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Service</span>
+                                <span class="text-sm text-white font-medium">Interactive Brochure, UX Design</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Year</span>
+                                <span class="text-sm text-white font-medium">2024</span>
+                            </div>
+                        </div>
+                        <a href="contact-us.html"
+                            class="flex w-full items-center justify-center gap-2 text-[11px] uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm py-3">
+                            Start Project
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ARTICLE CTA SECTION -->
+    <section class="border-y border-white/5 bg-neutral-900/30 py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white tracking-tight mb-4 font-geist">Need a modern brochure?</h2>
+            <p class="text-neutral-400 mb-8 max-w-xl mx-auto">We help startups and tech companies elevate product
+                experiences through modern interactive and motion solutions.</p>
+            <div class="flex justify-center gap-4">
+                <a href="contact-us.html"
+                    class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                    Contact Now
+                </a>
+                <a href="showcase.html"
+                    class="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:border-white transition-colors">
+                    View Other Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATED ARTICLES -->
+    <section class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-12">
+            <h2 class="text-2xl font-bold text-white uppercase tracking-tight font-geist">Related Articles</h2>
+            <a href="blog.html"
+                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">View All</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Related 1 -->
+            <article class="group cursor-pointer" onclick="window.location.href='blog 1.2.html'">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Insight</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Why Motion is the Future of Brand Identity
+                </h3>
+            </article>
+
+            <!-- Related 2 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span
+                    class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2 block group-hover:text-[#f7941d] transition-colors">Showcase</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    VNDIRECT: Mobile App Redesign
+                </h3>
+            </article>
+
+            <!-- Related 3 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Blog</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Managing creative burnout in 2024
+                </h3>
+            </article>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="border-t border-white/5 bg-black py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Join our Newsletter</h2>
+                    <p class="text-neutral-400 mb-6 max-w-md">Get the latest design and tech info from Double D Media.
+                    </p>
+                    <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
+                        <a href="mailto:doubledlab1002@gmail.com"
+                            class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
+                        <span class="">+ 84 337 735 004</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <input type="email" placeholder="ENTER EMAIL"
+                        class="bg-neutral-900 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#f7941d] w-64 rounded-sm">
+                    <button
+                        class="uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm px-6 text-xs">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
+                <span>© 2024 Double D Media.</span>
+                <span class="mt-2 md:mt-0">All Systems Operational.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const r1 = new rive.Rive({
+            src: "Rive file/brochure_vertzero.riv",
+            canvas: document.getElementById("rive-cover"),
+            artboard: "Main",
+            autoplay: true,
+            autoBind: true,
+            stateMachines: "State Machine 1",
+            onLoad: () => {
+                r1.resizeDrawingSurfaceToCanvas();
+            },
+        });
+
+        const r2 = new rive.Rive({
+            src: "Rive file/brochure_vertzero.riv",
+            canvas: document.getElementById("rive-vertzero"),
+            artboard: "Main",
+            stateMachines: "State Machine 1",
+            autoplay: true,
+            autoBind: true,
+            onLoad: () => {
+                r2.resizeDrawingSurfaceToCanvas();
+            },
+        });
+
+        const r3 = new rive.Rive({
+            src: "Rive file/brochure_azladin.riv",
+            canvas: document.getElementById("rive-azladin"),
+            artboard: "Main",
+            stateMachines: "State Machine 1",
+            autoplay: true,
+            autoBind: true,
+            onLoad: () => {
+                r3.resizeDrawingSurfaceToCanvas();
+            },
+        });
+    </script>
+</body>
+
+</html>

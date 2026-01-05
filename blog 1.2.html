@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>DOUBLE D | Case Study: FPT Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #050505;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Custom Utilities */
+        .text-accent-orange {
+            color: #f7941d;
+        }
+
+        .border-accent-orange {
+            border-color: #f7941d;
+        }
+
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Article Typography Overrides */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.75;
+            color: #d4d4d4;
+            font-size: 1.125rem;
+        }
+
+        .article-content h2 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 1.875rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content h3 {
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #d4d4d4;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content blockquote {
+            border-left: 2px solid #f7941d;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #d4d4d4;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: rgba(247, 148, 29, 0.1);
+            border-left: 4px solid #f7941d;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .point-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .point-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(247, 148, 29, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .point-title {
+            color: #f7941d;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Geist', sans-serif;
+        }
+
+        .canvas-container {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .canvas-container.cover {
+            aspect-ratio: 16/9;
+            margin-top: 4rem;
+        }
+
+        .canvas-container.full-hd {
+            aspect-ratio: 16/9;
+        }
+
+        .canvas-container.square-game {
+            aspect-ratio: 1/1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-note {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #666;
+            margin-top: -1rem;
+            margin-bottom: 3rem;
+            font-family: 'Geist Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+
+    <!-- Rive Cover Canvas -->
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="canvas-container cover mt-24">
+            <canvas id="rive-cover" class="w-full h-full"></canvas>
+        </div>
+    </div>
+
+    <!-- Background (image) -->
+    <div class="fixed top-0 w-full h-screen bg-cover bg-center -z-10"
+        style="background-image: url(&quot;https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3dbe29bf-23fb-46ee-afa7-3f0d2319c83b_3840w.jpg&quot;); mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"
+        data-alpha-mask="80"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+                <a href="showcase.html" class="text-white">SHOWCASE</a>
+                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
+            </div>
+            <a href="#contact"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
+                <span>CONTACT US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
+                    viewBox="0 0 24 24" data-icon="lucide:arrow-right" class="iconify iconify--lucide">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ARTICLE HEADER / HERO SECTION -->
+    <header class="pt-12 pb-12 px-6 border-white/5">
+        <div class="max-w-4xl mx-auto text-center md:text-left md:max-w-7xl">
+
+            <!-- Breadcrumb / Type -->
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#f7941d] font-mono mb-6">
+                <a href="showcase.html" class="hover:text-white transition-colors">Showcase</a>
+                <span class="text-neutral-600">/</span>
+                <span class="text-neutral-400">Insight</span>
+            </div>
+
+            <!-- Title & Description -->
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6 font-geist leading-[1.1]">
+                Why Motion is the Future of Brand Identity, and How to Do It Right
+            </h1>
+            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mb-8">
+                Vài năm trước, câu hỏi đặt ra là: <strong>Thương hiệu của bạn có nên bao gồm yếu tố chuyển động
+                    không?</strong>
+                Nhưng đến năm 2025, câu hỏi đó đã trở nên lỗi thời — bởi nhận diện tĩnh không còn đủ để kết nối với
+                người dùng hiện đại.
+            </p>
+
+            <!-- Article Meta Data -->
+            <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-400 border-t border-white/10 pt-6">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80" alt="Author"
+                        class="w-8 h-8 rounded-full border border-white/10 object-cover">
+                    <span class="text-white font-medium">Alex Morgan</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:calendar" width="14" height="14"></span>
+                    <span>Oct 24, 2024</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify iconify--lucide" data-icon="lucide:clock" width="14" height="14"></span>
+                    <span>8 min read</span>
+                </div>
+                <div class="flex items-center gap-2 ml-auto">
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Interface
+                        Design</span>
+                    <span
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Motion</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
+
+            <!-- LEFT COLUMN: ARTICLE CONTENT (CMS) -->
+            <article class="lg:col-span-8 article-content">
+                <p>
+                    Ngày nay, điều quan trọng hơn là: <br>
+                    👉 Chuyển động được đan cài như thế nào vào cốt lõi thương hiệu của bạn?
+                    Nó có giúp thương hiệu thể hiện tính cách, truyền tải thông điệp, và kết nối cảm xúc với người dùng
+                    ở mọi điểm chạm không?
+                </p>
+
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 my-12 group">
+                    <iframe title="vimeo-player"
+                        src="https://player.vimeo.com/video/1048489706?h=53a6ed52c4&amp;autoplay=1&amp;loop=1&amp;background=1"
+                        class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+
+                <h2 id="introduction">Tại sao chuyển động là chìa khóa cho thương hiệu hiện đại</h2>
+
+                <p>Trong thời đại mà <strong>màn hình trở thành cửa sổ chính kết nối chúng ta với thế giới</strong>,
+                    <strong>chuyển động</strong> cho phép thương hiệu <strong>tạo ra mối liên kết sâu sắc và chân
+                        thực</strong> với khán giả.
+                </p>
+
+                <p>Và thay vì chỉ là một yếu tố "trang trí" hay "bổ sung" trong hệ thống nhận diện, <strong>chuyển động
+                        cần được tích hợp ngay từ những bước đầu tiên</strong> trong quá trình xây dựng thương hiệu —
+                    như một phần cốt lõi của chiến lược, chứ không phải là ý tưởng đến sau.</p>
+
+                <p>Bởi vì chúng ta — <em>con người</em> — <strong>không chỉ giao tiếp bằng lời nói</strong>. Chúng ta
+                    <strong>cử chỉ, di chuyển, biểu đạt cảm xúc bằng tư thế, ánh mắt, nhịp điệu</strong>.
+                </p>
+
+                <blockquote>👉 Một thương hiệu <strong>thiếu chuyển động</strong> cũng giống như một con người
+                    <strong>bị đóng băng tại chỗ</strong> — <em>về mặt kỹ thuật vẫn hiện diện</em>, nhưng <strong>thiếu
+                        đi sức sống để kết nối và lay động người khác</strong>.
+                </blockquote>
+
+                <p>Trong bài viết này, tôi sẽ chia sẻ <strong>cách tích hợp chuyển động một cách hiệu quả và có chủ
+                        đích</strong> vào công việc sáng tạo — để thương hiệu của bạn <strong>không chỉ được nhìn thấy,
+                        mà còn được cảm nhận</strong>.</p>
+
+
+                <h2 id="traditional-view">Bắt đầu từ góc nhìn truyền thống</h2>
+                <p>Hãy cùng lùi lại một bước. Truyền thống xây dựng nhận diện thương hiệu thường tập trung vào các yếu
+                    tố tĩnh: logo, bảng màu, kiểu chữ và giọng điệu thương hiệu. Những yếu tố này vẫn vô cùng quan trọng
+                    — nhưng giờ đây, chúng không còn đủ nếu đứng một mình.</p>
+                <p>Trong thế giới đầy rẫy mạng xã hội, màn hình và sự tương tác liên tục, khán giả mong đợi các thương
+                    hiệu phản hồi, thích ứng và giao tiếp một cách linh hoạt.
+                    <br><br>
+                    Đây chính là lúc chuyển động phát huy vai trò — nó thổi hồn vào các yếu tố tĩnh, biến chúng thành
+                    những biểu đạt sống động, có nhịp điệu và cảm xúc, đại diện cho tính cách thương hiệu.
+                </p>
+
+                <div class="grid grid-cols-2 gap-6 my-12">
+                    <div class="aspect-video relative rounded-lg overflow-hidden border border-white/10">
+                        <iframe
+                            src="https://player.vimeo.com/video/1048497384?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;loop=1&amp;background=1"
+                            frameborder="0" class="absolute inset-0 w-full h-full" title="Demo Intro logo BSS">
+                        </iframe>
+                    </div>
+
+                    <div class="aspect-video relative rounded-lg overflow-hidden border border-white/10">
+                        <iframe
+                            src="https://player.vimeo.com/video/1048500304?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;loop=1&amp;background=1"
+                            frameborder="0" class="absolute inset-0 w-full h-full" title="Demo intro logo version 2">
+                        </iframe>
+                    </div>
+
+                    <div class="aspect-video relative rounded-lg overflow-hidden border border-white/10">
+                        <iframe
+                            src="https://player.vimeo.com/video/1048484902?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;loop=1&amp;background=1"
+                            frameborder="0" class="absolute inset-0 w-full h-full" title="Intro Motion Logo VertZero">
+                        </iframe>
+                    </div>
+
+                    <div class="aspect-video relative rounded-lg overflow-hidden border border-white/10">
+                        <iframe
+                            src="https://player.vimeo.com/video/1048503231?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;loop=1&amp;background=1"
+                            frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                            class="absolute inset-0 w-full h-full" title="intro asinzu logo">
+                        </iframe>
+                    </div>
+                </div>
+
+                <h2 id="language-without-borders">Ngôn ngữ không biên giới</h2>
+
+                <p>
+                    Một trong những <strong>sức mạnh lớn nhất của motion identity</strong> là khả năng
+                    <strong>vượt qua mọi ranh giới văn hóa và ngôn ngữ</strong>.
+                </p>
+
+                <p>
+                    Khi <em>chữ viết hay hình ảnh</em> có thể bị "lạc nhịp" trong quá trình chuyển ngữ, thì
+                    <strong>chuyển động lại chạm đến bản năng sâu thẳm của con người</strong> — nó
+                    <strong>giao tiếp bằng nhịp điệu, cảm xúc và cảm giác</strong>, những yếu tố mà
+                    ai cũng có thể cảm nhận, bất kể họ đến từ đâu.
+                </p>
+
+                <div class="aspect-video relative rounded-xl overflow-hidden border border-white/10 my-12">
+                    <iframe
+                        src="https://player.vimeo.com/video/1048479991?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;loop=1&amp;background=1"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                        class="absolute inset-0 w-full h-full" title="Motion Intro Logo MBF">
+                    </iframe>
+                </div>
+
+                <div class="highlight">
+                    <p>
+                        Hệ thống <strong>motion identity</strong> mà chúng tôi xây dựng đã góp phần
+                        <strong>định hình rõ nét tính cách thương hiệu</strong>, thông qua các yếu tố hình ảnh linh hoạt
+                        —
+                        có thể phản ứng và thích nghi một cách tự nhiên với nhiều bối cảnh khác nhau.
+                    </p>
+                </div>
+
+                <p>
+                    Nhờ đó, thương hiệu duy trì được <strong>trải nghiệm nhất quán</strong> trên hàng loạt điểm chạm:
+                    từ <em>sự kiện trực tiếp, website, mạng xã hội cho đến các video quảng bá</em>.
+                </p>
+
+                <p>
+                    <strong>Chuyển động không chỉ làm thương hiệu trở nên sống động</strong>, mà còn là cách thương hiệu
+                    <em>tư duy, cảm nhận và phản hồi với thế giới số không ngừng biến chuyển</em>.
+                </p>
+
+
+                <h2 id="motion-language">Ngôn ngữ chuyển động mang dấu ấn thương hiệu</h2>
+
+                <p>
+                    Chúng tôi bắt đầu bằng cách <strong>xây dựng các nguyên tắc chuyển động cốt lõi</strong>, phản ánh
+                    chính xác
+                    <strong>tính cách và giá trị thương hiệu</strong>.
+                </p>
+
+                <p>
+                    Mỗi chuyển động cần mang lại <strong>cảm giác tự nhiên, có chủ đích</strong>, các chuyển cảnh phải
+                    <strong>mượt mà</strong>, và từng tương tác phải <strong>truyền tải được cả chức năng lẫn cảm
+                        xúc</strong>.
+                </p>
+
+                <p>
+                    Hệ thống mà chúng tôi phát triển <strong>không chỉ đơn thuần là làm mọi thứ chuyển động</strong> —
+                    mà là
+                    <strong>kiến tạo một "ngôn ngữ chuyển động" nhất quán</strong>, có khả năng biểu đạt trọn vẹn từ
+                    <em>sự sáng tạo tự do</em> đến <em>sự chuyên nghiệp trong cộng tác</em>.
+                </p>
+
+                <p>
+                    Khi đó, <strong>chuyển động trở thành "giọng nói thứ hai" của thương hiệu</strong> — không cần lời
+                    nói, vẫn có thể
+                    <em>chạm đến trái tim người dùng một cách sâu sắc và tự nhiên</em>.
+                </p>
+
+                <div class="canvas-container full-hd">
+                    <canvas id="rive-vertzero" class="w-full h-full"></canvas>
+                </div>
+
+                <h2 id="key-takeaways">Một vài lưu ý quan trọng khi phát triển Motion Identity hiệu quả</h2>
+
+                <p>Dựa trên kinh nghiệm thực tế từ các dự án đã thực hiện, dưới đây là những yếu tố cốt lõi cần cân nhắc
+                    khi xây dựng hệ thống nhận diện chuyển động cho thương hiệu:</p>
+
+                <div class="space-y-6 my-12">
+                    <div class="point-card">
+                        <div class="point-title">🔹 1. Bắt đầu từ chiến lược – không phải từ animation</div>
+                        <p class="text-neutral-400 text-sm">Motion không chỉ để tạo hiệu ứng bắt mắt — nó phải phản ánh
+                            giá trị và tính cách thương hiệu. Mỗi chuyển động cần có mục đích rõ ràng, mang ý nghĩa và
+                            kết nối với trải nghiệm thương hiệu tổng thể.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🔹 2. Xem xét toàn bộ hệ sinh thái thương hiệu</div>
+                        <p class="text-neutral-400 text-sm">Motion Identity phải hoạt động tốt trên mọi điểm chạm — từ
+                            các <em>micro-interaction</em> trong app, đến chuyển động nổi bật trong các chiến dịch
+                            marketing. Tính nhất quán xuyên suốt giúp thương hiệu trở nên đồng bộ và dễ nhận diện hơn
+                            trong mắt người dùng.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🔹 3. Xây dựng để có thể mở rộng</div>
+                        <p class="text-neutral-400 text-sm">Tạo ra các nguyên tắc chuyển động linh hoạt để có thể áp
+                            dụng ở nhiều bối cảnh và nền tảng khác nhau. Tính linh hoạt giúp đội ngũ thiết kế, sản xuất
+                            và marketing dễ dàng duy trì sự thống nhất.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🔹 4. Giữ chuyển động mang tính con người</div>
+                        <p class="text-neutral-400 text-sm">Chuyển động nên mang cảm giác tự nhiên và có mục đích, không
+                            máy móc hay dư thừa. Sự tự nhiên này giúp tạo nên kết nối cảm xúc, khiến người dùng cảm thấy
+                            thương hiệu chân thật và đáng tin cậy hơn.</p>
+                    </div>
+
+                    <div class="point-card">
+                        <div class="point-title">🔹 5. Thiết kế hướng đến hiệu năng</div>
+                        <p class="text-neutral-400 text-sm">Một chuyển động dù đẹp đến đâu cũng vô nghĩa nếu gây khó
+                            chịu hoặc làm chậm trải nghiệm người dùng. Cần tối ưu hiệu suất web/app và hỗ trợ
+                            accessibility ngay từ đầu.</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="canvas-container square-game">
+                        <canvas id="riveMinigame" class="w-full h-full"></canvas>
+                    </div>
+                    <div class="game-note">Minigame tạo bởi Rive - Nền tảng tạo Interactive Motion</div>
+                </div>
+
+
+
+                <h2 id="future">Tương lai của Motion Identity</h2>
+
+                <p>Trong bối cảnh công nghệ liên tục tiến hóa, <strong>chuyển động sẽ ngày càng đóng vai trò then chốt
+                        trong việc xây dựng nhận diện thương hiệu</strong>.</p>
+
+                <p>Sự phát triển của <strong>spatial computing</strong>, <strong>thực tế tăng cường (AR)</strong> và các
+                    <strong>giao diện số ngày càng tinh vi</strong> không chỉ mang đến <em>nhiều cơ hội sáng tạo
+                        mới</em>, mà còn đặt ra <em>những thách thức đòi hỏi tư duy thiết kế chuyển động sâu sắc hơn bao
+                        giờ hết</em>.
+                </p>
+
+                <blockquote class="my-12">
+                    "Chuyển động chính là thứ mang lại sự sống cho thương hiệu. Không chỉ là việc làm cho hình ảnh
+                    chuyển động, mà là tạo ra kết nối chân thật giữa thương hiệu và con người."
+                </blockquote>
+
+                <p>Một thương hiệu biết ứng dụng chuyển động đúng cách sẽ là thương hiệu <strong>biết truyền cảm hứng,
+                        thể hiện cá tính và nuôi dưỡng niềm tin</strong> trong từng khoảnh khắc tương tác — dù là trên
+                    <em>màn hình nhỏ</em> hay trong <em>không gian số ba chiều của tương lai</em>.
+                </p>
+
+                <!-- Article Footer / Author Bio -->
+                <div class="mt-16 pt-8 border-t border-white/10">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80"
+                            alt="Author" class="w-12 h-12 rounded-full border border-white/10 object-cover">
+                        <div>
+                            <h4 class="text-white font-bold text-sm uppercase tracking-wide">DOUBLE D MEDIA</h4>
+                            <p class="text-neutral-500 text-xs uppercase tracking-widest mb-2">Motion Design Studio</p>
+                            <p class="text-neutral-400 text-sm max-w-md leading-relaxed">
+                                Chúng tôi giúp các thương hiệu kể chuyện thông qua ngôn ngữ chuyển động, kiến tạo những
+                                trải nghiệm kỹ thuật số đầy cảm hứng và sống động.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- RIGHT COLUMN: SIDEBAR (TOC + CTA) -->
+            <aside class="hidden lg:block lg:col-span-4 relative">
+                <div class="sticky top-24 space-y-8">
+
+                    <!-- Table of Contents -->
+                    <div class="p-6 rounded-lg border border-white/5 bg-white/5 backdrop-blur-sm">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-4 block">Trong
+                            bài viết này</span>
+                        <nav class="flex flex-col space-y-3">
+                            <a href="#introduction"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Tại sao cần motion?
+                            </a>
+                            <a href="#traditional-view"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Góc nhìn truyền thống
+                            </a>
+                            <a href="#language-without-borders"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Ngôn ngữ không biên giới
+                            </a>
+                            <a href="#motion-language"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Ngôn ngữ thương hiệu
+                            </a>
+                            <a href="#key-takeaways"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Lưu ý quan trọng
+                            </a>
+                            <a href="#future"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Tương lai
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Client Info / CTA -->
+                    <div class="p-6 rounded-lg border border-white/10 bg-neutral-900/50">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4 block">Chi
+                            tiết
+                            bài viết</span>
+                        <div class="space-y-4 mb-6">
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Tác giả</span>
+                                <span class="text-sm text-white font-medium">Double D Media</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Dịch vụ</span>
+                                <span class="text-sm text-white font-medium">Brand Identity, Motion Design</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-neutral-500 block">Năm</span>
+                                <span class="text-sm text-white font-medium">2025</span>
+                            </div>
+                        </div>
+                        <a href="contact-us.html"
+                            class="flex w-full items-center justify-center gap-2 text-[11px] uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm py-3">
+                            Bắt đầu dự án
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ARTICLE CTA SECTION -->
+    <section class="border-y border-white/5 bg-neutral-900/30 py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white tracking-tight mb-4 font-geist">Need a transformation like this?
+            </h2>
+            <p class="text-neutral-400 mb-8 max-w-xl mx-auto">We help enterprise clients scale their digital presence
+                through robust design systems and high-fidelity motion.</p>
+            <div class="flex justify-center gap-4">
+                <a href="#contact"
+                    class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                    Get in touch
+                </a>
+                <a href="showcase.html"
+                    class="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:border-white transition-colors">
+                    View more work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATED ARTICLES -->
+    <section class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-12">
+            <h2 class="text-2xl font-bold text-white uppercase tracking-tight font-geist">Read Next</h2>
+            <a href="blog.html"
+                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">View all</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Related 1 -->
+            <article class="group cursor-pointer" onclick="window.location.href='blog 1.3.html'">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Process</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Sản xuất Brochure Interactive cho Vert Zero
+                </h3>
+            </article>
+
+            <!-- Related 2 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span
+                    class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2 block group-hover:text-[#f7941d] transition-colors">Showcase</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    VNDIRECT: Mobile App Redesign
+                </h3>
+            </article>
+
+            <!-- Related 3 -->
+            <article class="group cursor-pointer">
+                <div class="relative w-full aspect-video rounded overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&amp;q=80" alt="Thumb"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Blog</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:underline decoration-1 underline-offset-4 decoration-[#f7941d]">
+                    Managing creative burnout in 2024
+                </h3>
+            </article>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="border-t border-white/5 bg-black py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Join the Newsletter</h2>
+                    <p class="text-neutral-400 mb-6 max-w-md">Get the latest insights on design and technology delivered
+                        to your inbox.</p>
+                    <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
+                        <a href="mailto:doubledlab1002@gmail.com"
+                            class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
+                        <span class="">+ 84 337 735 004</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <input type="email" placeholder="ENTER EMAIL"
+                        class="bg-neutral-900 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#f7941d] w-64 rounded-sm">
+                    <button
+                        class="uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm px-6 text-xs">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
+                <span>© 2024 Double D Media.</span>
+                <span class="mt-2 md:mt-0">All Systems Operational.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const r1 = new rive.Rive({
+            src: "Rive file/mbf.riv",
+            canvas: document.getElementById("rive-cover"),
+            artboard: "Main 2",
+            autoplay: true,
+            autoBind: true,
+            stateMachines: "State Machine 1",
+            onLoad: () => {
+                r1.resizeDrawingSurfaceToCanvas();
+            },
+        });
+
+        const r2 = new rive.Rive({
+            src: "Rive file/brochure_vertzero.riv",
+            canvas: document.getElementById("rive-vertzero"),
+            artboard: "Main",
+            stateMachines: "State Machine 1",
+            autoplay: true,
+            autoBind: true,
+            onLoad: () => {
+                r2.resizeDrawingSurfaceToCanvas();
+            },
+        });
+
+        const r3 = new rive.Rive({
+            src: "Rive file/mixing_animations.riv",
+            canvas: document.getElementById("riveMinigame"),
+            autoplay: true,
+            stateMachines: "State Machine 1",
+            onLoad: () => {
+                r3.resizeDrawingSurfaceToCanvas();
+            },
+        });
+    </script>
+</body>
+
+</html>

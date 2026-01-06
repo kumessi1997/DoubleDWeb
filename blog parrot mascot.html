@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="vi" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Social Sharing Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="DOUBLE D | Case Study: Mascot Parrot">
+    <meta property="og:description"
+        content="Hành trình tạo nên mascot interactive cho Parrot app. Từ ý tưởng đến mascot sống động trong trải nghiệm học nghe – chép.">
+    <meta property="og:image" content="Img/parrot_mascot.png">
+    <meta property="og:url" content="">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DOUBLE D | Case Study: Mascot Parrot">
+    <meta name="twitter:description"
+        content="Hành trình tạo nên mascot interactive cho Parrot app. Từ ý tưởng đến mascot sống động trong trải nghiệm học nghe – chép.">
+    <meta name="twitter:image" content="Img/parrot_mascot.png">
+
     <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
-    <title>DOUBLE D | Case Study: UI Workflow</title>
+    <title>DOUBLE D | Case Study: Mascot Parrot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
@@ -153,38 +169,38 @@
             <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#f7941d] font-mono mb-6">
                 <a href="showcase.html" class="hover:text-white transition-colors">Showcase</a>
                 <span class="text-neutral-600">/</span>
-                <span class="text-neutral-400">Workflow</span>
+                <span class="text-neutral-400">Branding & Motion</span>
             </div>
 
             <!-- Title & Description -->
             <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6 font-geist leading-[1.1]">
-                Motion design isn’t just eye candy; it’s UX infrastructure
+                Hành trình tạo nên mascot interactive cho Parroto.app 🦜
             </h1>
             <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mb-8">
-                A deep dive into how motion design strengthens your entire user experience
+                Case study: Từ ý tưởng đến mascot sống động trong trải nghiệm học nghe – chép.
             </p>
 
             <!-- Article Meta Data -->
             <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-400 border-t border-white/10 pt-6">
                 <div class="flex items-center gap-3">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80" alt="Author"
+                    <img src="Img/DNT.jpeg" alt="Author"
                         class="w-8 h-8 rounded-full border border-white/10 object-cover">
-                    <span class="text-white font-medium">Alex Morgan</span>
+                    <span class="text-white font-medium">DNT</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="iconify iconify--lucide" data-icon="lucide:calendar" width="14" height="14"></span>
-                    <span>Oct 24, 2024</span>
+                    <span>Jan 06, 2026</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="iconify iconify--lucide" data-icon="lucide:clock" width="14" height="14"></span>
-                    <span>8 min read</span>
+                    <span>10 phút đọc</span>
                 </div>
                 <div class="flex items-center gap-2 ml-auto">
                     <span
-                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Interface
-                        Design</span>
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Education</span>
                     <span
-                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Motion</span>
+                        class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wide">Rive
+                        Motion</span>
                 </div>
             </div>
         </div>
@@ -195,192 +211,177 @@
 
         <!-- Hero Image -->
         <div class="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-white/10 mb-16 group">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&amp;q=80"
-                alt="FPT Interface Showcase" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+            <canvas id="mascot-hero-canvas" class="absolute inset-0 w-full h-full"></canvas>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none">
             </div>
         </div>
+        <script>
+            window.addEventListener('load', function () {
+                const r = new rive.Rive({
+                    src: 'Rive file/mascot.riv',
+
+                    canvas: document.getElementById('mascot-hero-canvas'),
+                    autoplay: true,
+                    autoBind: true,
+                    artboard: 'Default state',
+                    stateMachines: 'State Machine 1',
+                    layout: new rive.Layout({
+                        fit: rive.Fit.Cover,
+                        alignment: rive.Alignment.Center,
+                    }),
+                    onLoad: () => {
+                        r.resizeDrawingSurfaceToCanvas();
+                    },
+                });
+            });
+        </script>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
 
             <!-- LEFT COLUMN: ARTICLE CONTENT (CMS) -->
             <article class="lg:col-span-8 article-content">
 
-                <h2 id="introduction">Motion design isn’t just eye candy; it’s UX infrastructure</h2>
                 <p>
-                    Remember the days where we had blinking banners and fully static (sometimes, all too colorful)
-                    webpages?
+                    Trong các ứng dụng học ngôn ngữ, mascot không chỉ là một nhân vật trang trí. Nếu được thiết kế đúng
+                    cách, mascot có thể trở thành người đồng hành, dẫn dắt cảm xúc và tăng đáng kể mức độ tương tác của
+                    người học.
                 </p>
                 <p>
-                    Yeah, we’ve come pretty far with the World Wide Web—hello, AI.
+                    Với dự án Parrot – ứng dụng học tiếng Anh theo phương pháp nghe và chép, tôi có cơ hội xây dựng một
+                    mascot interactive lấy cảm hứng từ Duolingo, nhưng được “đo ni đóng giày” cho hành vi học tập cụ thể
+                    của người dùng.
                 </p>
                 <p>
-                    Now, brands are rethinking user experience with one powerful tool: motion design. Motion design
-                    serves both function and feel, which are crucial parts of a user’s digital experience.
-                </p>
-                <p>
-                    But what constitutes a great digital experience? We believe that would be one that flows
-                    effortlessly, is emotionally resonant, and is story-driven; something that motion design can help
-                    you achieve. Plus, you only have about 50 milliseconds to make an impression on the web and
-                    animations can convey a message quickly.
-                </p>
-                <p>
-                    On top of that, users now expect fluidity, feedback, and fast-loading digital interfaces. Artificial
-                    intelligence (AI) can be part of that picture, but it doesn’t mean it has to dominate the entire
-                    process. Now, let’s dive into how motion design can strengthen your entire user experience (UX).
+                    Bài viết này chia sẻ toàn bộ quá trình sản xuất mascot interactive, từ ý tưởng ban đầu đến khi tích
+                    hợp hoàn chỉnh vào ứng dụng.
                 </p>
 
-                <h2 id="aesthetics">Motion design serves more than just aesthetics</h2>
+                <h2 id="working-with-client">1. Làm việc với khách hàng: Làm rõ yêu cầu & hiểu sản phẩm</h2>
                 <p>
-                    Everybody creates content but motion design helps cut through the clutter and noise to get your
-                    message heard.
+                    Bước đầu tiên không phải là vẽ hay làm animation, mà là hiểu rõ sản phẩm:
                 </p>
+                <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                    <li><strong class="text-white">Đối tượng người dùng là ai?</strong> (người mới học, học sinh, người
+                        đi làm)</li>
+                    <li><strong class="text-white">Hành vi chính trong app là gì?</strong> Với Parrot, trọng tâm là nghe
+                        câu tiếng Anh và chép lại.</li>
+                    <li><strong class="text-white">Mascot sẽ đóng vai trò gì?</strong> Hướng dẫn, khuyến khích, phản hồi
+                        đúng / sai, giảm cảm giác “học khô khan”.</li>
+                </ul>
                 <p>
-                    Want your audience to look at your key features? Use scroll-triggered animations that reveal them
-                    one by one. How about creating a brand style for that vibe check? Try slow fluid fades or soft
-                    easing curves for a calming, trustworthy feel (perfect for a wellness brand!). Or use snappy and
-                    clean transitions if you’d like to suggest efficiency and control for a fintech brand.
-                </p>
-                <p>
-                    This isn’t new information though. A study from 1996 evaluated how transition smoothness, realism,
-                    and interactivity influence decision accuracy, speed, and user satisfaction. It confirmed that
-                    gradual and interactive animations support clearer mental models and improve overall performance.
-                </p>
-                <p>
-                    There are also more recent studies that support this. A 2024 study found that techniques like
-                    staging and tracing animations in time-series visualizations help users identify patterns more
-                    accurately and quickly, effectively reducing cognitive load.
-                </p>
-                <p>
-                    Plus, animations convey messages much faster than static images would. In fact, Korean food delivery
-                    app, Baemin, turned their static icons into animated ones to give users more clarity. For example,
-                    their “Order Together” service icon was initially interpreted as a friend-adding icon, but after
-                    animating it, it explained the meaning of togetherness and helped users understand its actual
-                    function.
+                    Từ đây, định hướng mascot được thống nhất: Một chú vẹt thông minh, thân thiện, phản ứng trực tiếp
+                    theo từng bước học của người dùng.
                 </p>
 
-                <h2 id="scaling">How teams are scaling motion today</h2>
+                <h2 id="state-machine">2. Dựng Demo State Machine & chốt flow với khách hàng</h2>
                 <p>
-                    Historically, when thinking of adding animations, we often worried it would compromise our website,
-                    especially the load time. Besides that, adding motion also presented bottlenecks like must-have
-                    After Effects skills, endless rounds of QA, and developer negotiations.
+                    Thay vì nói bằng cảm giác, tôi dựng State Machine demo để khách hàng hình dung rõ mascot sẽ “sống”
+                    như thế nào trong app.
+                </p>
+                <p>Các state chính bao gồm:</p>
+                <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                    <li><strong class="text-white">Idle / Default</strong> – chờ người dùng</li>
+                    <li><strong class="text-white">Hover / Focus</strong> – khi người dùng tương tác</li>
+                    <li><strong class="text-white">Listening</strong> – mascot đeo tai nghe, tập trung nghe</li>
+                    <li><strong class="text-white">Waiting answer</strong> – chờ người dùng nhập câu trả lời</li>
+                    <li><strong class="text-white">User inputting</strong> – theo dõi quá trình gõ</li>
+                    <li><strong class="text-white">Right answer</strong> – phản hồi tích cực</li>
+                    <li><strong class="text-white">Wrong answer</strong> – phản hồi sai nhưng không gây áp lực</li>
+                </ul>
+                <img src="Img/Proposal Parroto Mascot Animation_Page_8.jpg" alt="Parrot State Machine"
+                    class="w-full h-auto mt-6">
+                <h2 id="sketching">3. Phác thảo các state của mascot</h2>
+                <p>
+                    Sau khi flow được duyệt, tôi bắt đầu phác thảo tay từng trạng thái của mascot: tư thế, biểu cảm, phụ
+                    kiện (tai nghe, bàn học, sách…), và mức độ cảm xúc.
                 </p>
                 <blockquote class="text-lg">
-                    But things are different now.
+                    "Mục tiêu không phải đẹp ngay, mà là rõ hành vi. Nhìn vào là hiểu mascot đang làm gì."
                 </blockquote>
+                <img src="Img/Proposal Parroto Mascot Animation_Page_9.jpg" alt="Parrot State Machine"
+                    class="w-full h-auto mt-6 mb-8">
+                <h2 id="visual-design">4. Dựng design hoàn chỉnh cho mascot</h2>
                 <p>
-                    There are more tools that push motion without having to design from scratch. Even LottieFiles for
-                    Webflow allows you to simply drag-and-drop from a library of over 100,000 free and ready-to-use
-                    lightweight, scalable Lottie animations into your Webflow site—without needing to code. And if
-                    you’re an existing LottieFiles user, you can access your team’s private animations and insert them
-                    into your Webflow site too.
-                </p>
-                <p>
-                    Moreover, LottieFiles for Webflow lets you personalize animations with the app’s color palette. The
-                    best part? It also supports trigger-based animations like page load, parallax, and reveal to give
-                    you a more connected UX.
+                    Thiết kế được tối ưu để có thể tách từng bộ phận (mắt, cánh, đầu…), phục vụ animation tương tác
+                    trong Rive và giữ sự nhất quán giữa các trạng thái.
                 </p>
 
-                <h2 id="examples">Real examples of motion in brand UX</h2>
+                <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-neutral-900 my-12">
+                    <iframe class="w-full h-full"
+                        src="https://www.youtube.com/embed/oBqgaekJVRU?si=zzPe6E2iJhUJ89SC&autoplay=1&mute=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+
+                <h2 id="rive-animation">5. Làm animation interactive with Rive</h2>
                 <p>
-                    With elements that enter or respond on a page, it can help signal tone, brand personality, and
-                    intention. For example, a simple bouncing animation could create a playful tone, while using scale
-                    and timing can grab attention.
-                </p>
-                <p>
-                    But not all motion is created equal. There are different file formats such as Lottie animation, a
-                    JSON-based file format, that is more lightweight compared to other formats like GIF or MP4s. Lottie
-                    works better for digital experiences as it’s also infinitely scalable without pixelation and has
-                    multi-platform support and libraries, as well as interactivity (great for interactions like
-                    scrolling, clicking, and hovering). Plus, because it’s small, it doesn’t compromise page load speed.
-                </p>
-                <p>
-                    Besides Lottie animation, there is an even smaller file format — dotLottie. dotLottie is a more
-                    optimized Lottie format that bundles one or more Lottie animations in one, which helps improve load
-                    times and memory usage.
-                </p>
-                <p>
-                    But don’t take just our word for it, here are some other real-life examples of motion in UX:
+                    Đây là bước “thổi hồn” cho mascot. Trong Rive, tôi dựng State Machine chính thức, gắn animation cho
+                    từng state và tạo các input (boolean, trigger, number) để dev điều khiển như <code
+                        class="bg-white/10 px-1 rounded">isListening</code>, <code
+                        class="bg-white/10 px-1 rounded">isTyping</code>, <code
+                        class="bg-white/10 px-1 rounded">isCorrect</code>.
                 </p>
 
-                <h3 id="cnn">CNN Create turns storytelling into a moving experience</h3>
+                <div class="relative w-full aspect-video rounded-lg overflow-hidden border border-white/10 mt-6 group">
+                    <canvas id="mascot-integration-canvas" class="w-full h-full"></canvas>
+                </div>
+                <script>
+                    window.addEventListener('load', function () {
+                        const rIntegration = new rive.Rive({
+                            src: 'Rive file/mascot.riv',
+                            canvas: document.getElementById('mascot-integration-canvas'),
+                            autoplay: true,
+                            autoBind: true,
+                            artboard: 'Main',
+                            stateMachines: 'State Machine 1',
+                            layout: new rive.Layout({
+                                fit: rive.Fit.Cover,
+                                alignment: rive.Alignment.Center,
+                            }),
+                            onLoad: () => {
+                                rIntegration.resizeDrawingSurfaceToCanvas();
+                            },
+                        });
+                    });
+                </script>
+
+                <h2 id="integration">6. Tích hợp file Rive với source code ứng dụng</h2>
                 <p>
-                    CNN Create’s Booming Bangladesh story used simple Lottie animations to complement the narrative.
-                </p>
-                <p>
-                    CNN Create saw the value of animations with their ‘Booming Bangladesh’ story as they used animations
-                    with a long vertical scroll. Their smooth and subtle Lottie animations guided users through the
-                    narrative without causing distractions or breaks in engagement—perfect for an engaging, informative
-                    digital experience.
-                </p>
-                <p>
-                    The result? The average time spent was two and half minutes across 30,000 unique visitors.
+                    Sau khi hoàn thiện, file <code class="bg-white/10 px-1 rounded">.riv</code> được xuất và phối hợp
+                    với dev để mapping input từ logic học tập vào state của mascot. Mascot lúc này thực sự trở thành một
+                    phần của UX.
                 </p>
 
-                <h3 id="gojek">Gojek optimizes performance & app speed with dotLottie</h3>
+
+
+                <h2 id="testing">7. Kiểm thử & fix bug</h2>
                 <p>
-                    Gojek, a Southeast Asian multi-service tech platform, uses animations to convey various service
-                    elements in their user interface (UI). The team implemented dotLottie which allowed them to include
-                    more animations without exceeding app limits. In fact, their “Safe Trip Plus” animation shrank from
-                    844 KB to just 107 KB.
+                    Bước cuối cùng là test animation trên thiết bị thật, kiểm tra transition và timing để đảm bảo trải
+                    nghiệm mượt mà nhất.
                 </p>
 
-                <h3 id="wise">Wise improves customer comprehension with user-friendly animations</h3>
+                <h2 id="conclusion">Kết luận: Mascot interactive không chỉ là “cho vui”</h2>
                 <p>
-                    Wise, a global Fintech company, implemented dotLottie animations in their simplified UI, product
-                    demos, photography, and storytelling— solidifying Wise’s reputation in providing a user-friendly,
-                    dynamic and innovative user experience. Adding these animations ultimately increased user
-                    comprehension of Wise’s key features.
-                </p>
-
-                <h3 id="spoon">Spoon brings emotional resonance with visually-rich animations</h3>
-                <p>
-                    Global tech startup, Spoon, redefines social connection through an audio-based content platform.
-                    They understood that emotions like gratitude, encouragement, and joy are hard to capture with static
-                    visuals, so they turned to animations. But they also needed it to be lightweight and non-disruptive,
-                    which led them to Lottie that keeps their files under 1MB.
-                </p>
-
-                <h2 id="ai">Can AI help with adding motion to your website?</h2>
-                <p>
-                    In short: yes, it can help with motion…but in a more supportive role. AI can help with layout ideas,
-                    auto-tag content, or even recommend design patterns based on your data.
-                </p>
-                <p>
-                    The thing is, AI can’t feel the way we do. At least not yet. That’s where designing a screen
-                    transition, understanding how elements react to a tap, or how an empty state makes you feel still
-                    requires empathy, brand context, and UX thinking— this is where your focus should be.
-                </p>
-                <p>
-                    AI helps move the creative process along much faster, so you can focus on implementing motion that
-                    actually evokes emotion and connects to your audience.
-                </p>
-
-                <h2 id="deliver-results">Motion does more than delight — it delivers results</h2>
-                <p>
-                    By now, we’ve established that motion is no longer for just delight. It helps build trust, set the
-                    site direction, and enhance brand feel—key factors that help drive results.
-                </p>
-                <p>
-                    Motion is a language you speak to reach your users. While AI and no-code tools handle the heavy
-                    lifting, motion can be your differentiator in any industry.
-                </p>
-                <p>
-                    Remember, instead of focusing on your projects looking good, make sure they feel good too. Make it
-                    intuitive— make it move.
+                    Mascot interactive chỉ thực sự hiệu quả khi được thiết kế song song với hành vi người dùng và logic
+                    sản phẩm. Khi mascot hiểu người học và phản hồi đúng thời điểm, trải nghiệm học trở nên nhẹ nhàng và
+                    có động lực hơn rất nhiều.
                 </p>
 
                 <!-- Article Footer / Author Bio -->
                 <div class="mt-16 pt-8 border-t border-white/10">
                     <div class="flex items-start gap-4">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&amp;q=80"
-                            alt="Author" class="w-12 h-12 rounded-full border border-white/10 object-cover">
+                        <img src="Img/DNT.jpeg" alt="Author"
+                            class="w-12 h-12 rounded-full border border-white/10 object-cover">
                         <div>
-                            <h4 class="text-white font-bold text-sm uppercase tracking-wide">Alex Morgan</h4>
-                            <p class="text-neutral-500 text-xs uppercase tracking-widest mb-2">Lead Product Designer</p>
+                            <h4 class="text-white font-bold text-sm uppercase tracking-wide">DNT</h4>
+                            <p class="text-neutral-500 text-xs uppercase tracking-widest mb-2">Senior Motion Designer
+                            </p>
                             <p class="text-neutral-400 text-sm max-w-md leading-relaxed">
-                                Specializes in complex system architecture and motion design. passionate about making
-                                fintech accessible through cleaner UI.
+                                Chuyên gia về animation interactive và hệ thống chuyển động. Đam mê việc mang lại sức
+                                sống cho các sản phẩm kỹ thuật số thông qua ngôn ngữ của chuyển động.
                             </p>
                         </div>
                     </div>
@@ -394,54 +395,53 @@
 
                     <!-- Table of Contents -->
                     <div class="p-6 rounded-lg border border-white/5 bg-white/5 backdrop-blur-sm">
-                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-4 block">On this
-                            page</span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-4 block">Trong
+                            bài viết</span>
                         <nav class="flex flex-col space-y-3">
-                            <a href="#introduction"
+                            <a href="#working-with-client"
                                 class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
-                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> The Challenge
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> 1. Hiểu yêu cầu
                             </a>
-                            <a href="#design-system"
+                            <a href="#state-machine"
                                 class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
-                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Building the System
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> 2. Dựng State Machine
                             </a>
-                            <a href="#typography"
-                                class="text-sm text-neutral-400 hover:text-white hover:translate-x-1 transition-all duration-200 pl-4">
-                                Typography &amp; Hierarchy
-                            </a>
-                            <a href="#implementation"
+                            <a href="#sketching"
                                 class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
-                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Motion with Rive
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> 3. Phác thảo
+                            </a>
+                            <a href="#rive-animation"
+                                class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> 5. Animation với Rive
                             </a>
                             <a href="#conclusion"
                                 class="text-sm text-neutral-300 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2">
-                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> The Outcome
+                                <span class="w-1 h-1 bg-neutral-600 rounded-full"></span> Kết luận
                             </a>
                         </nav>
                     </div>
 
                     <!-- Client Info / CTA -->
                     <div class="p-6 rounded-lg border border-white/10 bg-neutral-900/50">
-                        <span
-                            class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4 block">Project
-                            Details</span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-4 block">Chi
+                            tiết dự án</span>
                         <div class="space-y-4 mb-6">
                             <div>
-                                <span class="text-xs text-neutral-500 block">Client</span>
-                                <span class="text-sm text-white font-medium">FPT Corporation</span>
+                                <span class="text-xs text-neutral-500 block">Khách hàng</span>
+                                <span class="text-sm text-white font-medium">Parrot App</span>
                             </div>
                             <div>
-                                <span class="text-xs text-neutral-500 block">Services</span>
-                                <span class="text-sm text-white font-medium">UI/UX, Design System, Motion</span>
+                                <span class="text-xs text-neutral-500 block">Dịch vụ</span>
+                                <span class="text-sm text-white font-medium">Mascot, Rive Animation, UI/UX</span>
                             </div>
                             <div>
-                                <span class="text-xs text-neutral-500 block">Year</span>
+                                <span class="text-xs text-neutral-500 block">Năm</span>
                                 <span class="text-sm text-white font-medium">2024</span>
                             </div>
                         </div>
                         <a href="#contact"
                             class="flex w-full items-center justify-center gap-2 text-[11px] uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm py-3">
-                            Start a Project
+                            Bắt đầu dự án
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -460,18 +460,18 @@
     <!-- ARTICLE CTA SECTION -->
     <section class="border-y border-white/5 bg-neutral-900/30 py-16">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-white tracking-tight mb-4 font-geist">Need a transformation like this?
+            <h2 class="text-3xl font-bold text-white tracking-tight mb-4 font-geist">Bạn cũng muốn nâng tầm sản phẩm?
             </h2>
-            <p class="text-neutral-400 mb-8 max-w-xl mx-auto">We help enterprise clients scale their digital presence
-                through robust design systems and high-fidelity motion.</p>
+            <p class="text-neutral-400 mb-8 max-w-xl mx-auto">Chúng tôi giúp các thương hiệu kể chuyện thông qua ngôn
+                ngữ của chuyển động, tạo nên những trải nghiệm kỹ thuật số ấn tượng và đầy sức sống.</p>
             <div class="flex justify-center gap-4">
                 <a href="#contact"
                     class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-neutral-200 transition-colors">
-                    Get in touch
+                    Liên hệ ngay
                 </a>
                 <a href="showcase.html"
                     class="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:border-white transition-colors">
-                    View more work
+                    Xem thêm dự án
                 </a>
             </div>
         </div>
@@ -480,9 +480,10 @@
     <!-- RELATED ARTICLES -->
     <section class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex justify-between items-end mb-12">
-            <h2 class="text-2xl font-bold text-white uppercase tracking-tight font-geist">Read Next</h2>
+            <h2 class="text-2xl font-bold text-white uppercase tracking-tight font-geist">Xem tiếp</h2>
             <a href="blog.html"
-                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">View all</a>
+                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">Tất cả bài
+                viết</a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -543,9 +544,9 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-12">
                 <div class="text-center md:text-left">
-                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Join the Newsletter</h2>
-                    <p class="text-neutral-400 mb-6 max-w-md">Get the latest insights on design and technology delivered
-                        to your inbox.</p>
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Nhận tin mới nhất</h2>
+                    <p class="text-neutral-400 mb-6 max-w-md">Đăng ký để nhận những kiến thức mới nhất về thiết kế và
+                        công nghệ.</p>
                     <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
                         <a href="mailto:doubledlab1002@gmail.com"
                             class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
@@ -554,11 +555,11 @@
                 </div>
 
                 <div class="flex gap-4">
-                    <input type="email" placeholder="ENTER EMAIL"
+                    <input type="email" placeholder="EMAIL CỦA BẠN"
                         class="bg-neutral-900 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#f7941d] w-64 rounded-sm">
                     <button
                         class="uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm px-6 text-xs">
-                        Subscribe
+                        Đăng ký
                     </button>
                 </div>
             </div>

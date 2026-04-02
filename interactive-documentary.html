@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+    <title>Từ tài liệu tĩnh đến trải nghiệm tương tác: Giới thiệu Interactive Documentary | Double D Media</title>
+    <!-- Social Sharing Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Interactive Documentary – Khi tài liệu không còn để đọc, mà để trải nghiệm">
+    <meta property="og:description"
+        content="Vấn đề không nằm ở nội dung, mà nằm ở cách truyền tải. Đó là lý do Interactive Documentary ra đời.">
+    <meta property="og:image" content="Img/interactive_documentary_hero.png">
+    <meta property="og:url" content="https://doubleddmedia.vn/interactive-documentary.html">
+    <meta property="og:site_name" content="Double D Media">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Interactive Documentary – Khi tài liệu không còn để đọc, mà để trải nghiệm">
+    <meta name="twitter:description" content="Vấn đề không nằm ở nội dung, mà nằm ở cách truyền tải.">
+    <meta name="twitter:image" content="Img/interactive_documentary_hero.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@rive-app/webgl2"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Core Theme & Background --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-color: #050505;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(58, 29, 0, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.1) 0px, transparent 50%);
+        }
+
+        /* --- Utilities --- */
+        .tracking-ultra {
+            letter-spacing: -0.05em;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* Custom Utilities */
+        .text-accent-orange {
+            color: #f7941d;
+        }
+
+        .border-accent-orange {
+            border-color: #f7941d;
+        }
+
+        /* Article Typography Overrides */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #d4d4d4;
+            font-size: 1.125rem;
+        }
+
+        .article-content h2 {
+            color: white;
+            font-weight: 700;
+            font-size: 2.25rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content h3 {
+            color: #f7941d;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+            scroll-margin-top: 100px;
+        }
+
+        .article-content ul {
+            list-style-type: none;
+            margin-left: 0;
+            margin-bottom: 2rem;
+            color: #d4d4d4;
+        }
+
+        .article-content li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .article-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #f7941d;
+            font-weight: bold;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid #f7941d;
+            padding: 2rem;
+            background: rgba(247, 148, 29, 0.05);
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+            font-size: 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .case-study-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .case-study-card:hover {
+            border-color: rgba(247, 148, 29, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .image-caption {
+            font-size: 0.875rem;
+            color: #737373;
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
+
+    <!-- Background (image) -->
+    <div class="fixed top-0 w-full h-screen bg-cover bg-center -z-10"
+        style="background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3dbe29bf-23fb-46ee-afa7-3f0d2319c83b_3840w.jpg'); mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"
+        data-alpha-mask="80"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
+        <div class="flex h-16 max-w-7xl mx-auto px-6 items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo/logo doubled.svg" alt="Double D Media"
+                    class="h-8 w-auto transition-opacity hover:opacity-80" />
+            </a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
+                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
+                <a href="showcase.html" class="hover:text-white transition-colors">SHOWCASE</a>
+                <a href="blog.html" class="text-white border-b border-[#f7941d] pb-1">BLOG</a>
+            </div>
+            <a href="#contact"
+                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm py-2 px-5">
+                <span>CONTACT US</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14m-7-7 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ARTICLE HEADER / HERO SECTION -->
+    <header
+        class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/50 via-black to-black">
+        <div class="max-w-5xl mx-auto">
+
+            <!-- Breadcrumb / Type -->
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-[#f7941d] font-mono mb-8">
+                <a href="blog.html" class="hover:text-white transition-colors">Blog</a>
+                <span class="text-neutral-600">/</span>
+                <span class="text-neutral-400">Interactive Experience</span>
+            </div>
+
+            <!-- Title & Description -->
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8 leading-[1.05]">
+                Từ tài liệu tĩnh đến trải nghiệm tương tác: Giới thiệu Interactive Documentary
+            </h1>
+            <p class="text-neutral-300 text-xl md:text-2xl font-light leading-relaxed max-w-4xl mb-12">
+                Rất nhiều tài liệu quan trọng ngày nay vẫn đang gặp một vấn đề chung: người dùng không thực sự hiểu nội
+                dung.
+            </p>
+
+            <!-- Article Meta Data -->
+            <div class="flex flex-wrap items-center gap-8 text-sm text-neutral-400 border-t border-white/10 pt-8">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-white text-xs border border-white/10">
+                        DD</div>
+                    <span class="text-white font-medium">Double D Editorial</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify" data-icon="lucide:calendar" width="16" height="16"></span>
+                    <span>Mar 30, 2024</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="iconify" data-icon="lucide:clock" width="16" height="16"></span>
+                    <span>10 min read</span>
+                </div>
+                <div class="flex items-center gap-2 ml-auto">
+                    <span
+                        class="px-3 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wider text-[#f7941d]">Interactive</span>
+                    <span
+                        class="px-3 py-1 rounded bg-white/5 border border-white/10 text-[10px] uppercase tracking-wider text-[#f7941d]">Documentary</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <main class="max-w-7xl mx-auto px-6 py-20">
+
+        <!-- Hero Image -->
+        <div
+            class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 mb-24 shadow-2xl group bg-neutral-900">
+            <canvas id="hero-canvas" class="w-full h-full"></canvas>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 relative">
+
+            <!-- LEFT COLUMN: ARTICLE CONTENT -->
+            <article class="lg:col-span-8 article-content">
+
+                <section id="introduction">
+                    <p
+                        class="text-2xl text-white font-light mb-12 leading-relaxed italic border-l-2 border-[#f7941d] pl-8">
+                        Vấn đề không nằm ở nội dung, mà nằm ở cách truyền tải. Đó là lý do Interactive Documentary ra
+                        đời.
+                    </p>
+
+                    <p>Ngày nay, dù nội dung có giá trị đến đâu, nếu cách trình bày cũ kỹ, người dùng sẽ nhanh chóng bỏ
+                        qua. Chúng ta thường thấy:</p>
+                    <ul>
+                        <li>Slide quá dài, nhồi nhét quá nhiều chữ.</li>
+                        <li>Infographic tĩnh khó theo dõi, thiếu sự liên kết.</li>
+                        <li>PDF truyền thống không tương thích tốt trên các thiết bị di động.</li>
+                    </ul>
+                </section>
+
+                <section id="visual-complex">
+                    <h2>1. Minh họa nội dung phức tạp một cách trực quan</h2>
+                    <p>Một trong những giá trị lớn nhất của Interactive Documentary là: <strong>biến những thứ khó hiểu
+                            thành dễ hiểu.</strong></p>
+                    <p>Thay vì bắt người dùng phải đọc hàng trang mô tả khô khan, chúng ta cho phép họ:</p>
+                    <ul>
+                        <li>Tương tác trực tiếp với từng thành phần của thông tin.</li>
+                        <li>Xem animation giải thích sinh động cho từng phân đoạn.</li>
+                        <li>Khám phá nội dung theo từng bước logic, tự mình điều khiển nhịp độ tìm hiểu.</li>
+                    </ul>
+
+                    <div class="case-study-card">
+                        <h3>Case Study: Product Portfolio – MBF</h3>
+                        <p>Thay vì một bộ slide truyền thống, tài liệu giới thiệu giải pháp được thiết kế lại thành:</p>
+                        <ul>
+                            <li>Một hệ thống nội dung tương tác chuyên sâu.</li>
+                            <li>Người dùng chủ động khám phá từng tính năng của sản phẩm qua các điểm chạm.</li>
+                            <li>Motion làm rõ các tính năng kỹ thuật vốn rất khó giải thích bằng lời.</li>
+                        </ul>
+                        <div
+                            class="mt-8 rounded-lg overflow-hidden border border-white/10 shadow-lg relative aspect-video bg-neutral-900">
+                            <canvas id="mbf-canvas" class="w-full h-full"></canvas>
+                        </div>
+                        <p class="image-caption">Tăng sự tập trung tối đa khi trình bày và tạo trải nghiệm chuyên nghiệp
+                            trong các buổi demo.</p>
+                    </div>
+
+
+
+                </section>
+
+                <section id="multi-form">
+                    <h2>2. Kết hợp nhiều hình thức thể hiện trong một trải nghiệm</h2>
+                    <p>Interactive Documentary không chỉ là text hay video. Nó là một sự giao thoa hoàn hảo giữa:</p>
+                    <ul>
+                        <li><strong>Text & Typography</strong> truyền tải thông điệp cốt lõi.</li>
+                        <li><strong>Motion Graphic</strong> tạo sự sinh động và thu hút.</li>
+                        <li><strong>Interaction</strong> (Click, Hover, Scroll) tạo sự chủ động cho người xem.</li>
+                        <li><strong>Infographic</strong> dữ liệu được trình bày khoa học.</li>
+                    </ul>
+
+                    <div class="case-study-card">
+                        <h3>Case Study: Infographic tương tác – Brochure sản phẩm Azinsu Claim</h3>
+                        <p>Trong dự án này, một mô hình tài chính phức tạp đã được chúng tôi chuyển hóa thành:</p>
+                        <ul>
+                            <li>Một mô hình Infographic có thể tương tác hoàn toàn.</li>
+                            <li>Các tầng tài sản được phân cấp rõ ràng với hiệu ứng thị giác mạnh.</li>
+                            <li>Motion giúp giải thích chi tiết ý nghĩa của từng "tầng" tài sản một cách mượt mà.</li>
+                        </ul>
+                        <div
+                            class="mt-8 rounded-lg overflow-hidden border border-white/10 shadow-lg relative aspect-video bg-neutral-900">
+                            <canvas id="thap-tai-san-canvas" class="w-full h-full"></canvas>
+                        </div>
+                        <p class="image-caption">Tháp tài sản _ VNDIRECT</p>
+                    </div>
+
+
+                </section>
+
+                <section id="low-code">
+                    <h2>3. Triển khai nhanh, linh hoạt với công nghệ low-code</h2>
+                    <p>Trước đây, việc tạo ra một sản phẩm tương tác thường tốn rất nhiều thời gian và nguồn lực lập
+                        trình. Tuy nhiên, với sự phát triển của các công cụ như <strong>Rive</strong> và các thư viện
+                        web animation hiện đại:</p>
+                    <ul>
+                        <li>Thời gian triển khai được rút ngắn đáng kể.</li>
+                        <li>Dễ dàng chỉnh sửa và cập nhật nội dung mà không cần can thiệp sâu vào code.</li>
+                        <li>Khả năng tái sử dụng linh hoạt, không cần xây dựng lại từ đầu cho mỗi dự án mới.</li>
+                    </ul>
+
+
+                    <div
+                        class="mt-8 rounded-lg overflow-hidden border border-white/10 shadow-lg relative aspect-video bg-neutral-900 mb-8">
+                        <canvas id="btc-canvas" class="w-full h-full"></canvas>
+                    </div>
+                    <blockquote>
+                        Nhờ cấu trúc interactive + low-code, việc update diễn ra nhanh chóng, không ảnh hưởng đến toàn
+                        bộ hệ thống.
+                    </blockquote>
+                </section>
+
+                <section id="multi-platform">
+                    <h2>4. Tối ưu đa nền tảng – dùng được trong nhiều ngữ cảnh</h2>
+                    <p>Một điểm mạnh mang tính chiến lược của định dạng này là: <strong>một lần thiết kế – đa dạng cách
+                            sử dụng.</strong></p>
+                    <p>Nội dung Interactive Documentary có thể được triển khai hiệu quả trên:</p>
+                    <ul>
+                        <li><strong>Slide trình chiếu</strong> cao cấp cho các buổi họp quan trọng.</li>
+                        <li><strong>Website</strong> thương hiệu để khách hàng tự khám phá.</li>
+                        <li><strong>Mobile App</strong> cho trải nghiệm cá nhân hóa.</li>
+                        <li><strong>Kiosk cảm ứng</strong> tại các sự kiện hoặc showroom.</li>
+                    </ul>
+
+                    <div
+                        class="mt-8 rounded-lg overflow-hidden border border-white/10 shadow-lg relative aspect-video bg-neutral-900">
+                        <canvas id="vertzero-canvas" class="w-full h-full"></canvas>
+                    </div>
+
+
+                </section>
+
+                <section id="when-to-use">
+                    <h2>Khi nào nên sử dụng Interactive Documentary?</h2>
+                    <p>Đây là giải pháp lý tưởng nếu bạn đang đối mặt với các thách thức:</p>
+                    <ul>
+                        <li>Nội dung quá phức tạp, khó truyền đạt bằng các phương thức truyền thống.</li>
+                        <li>Cần trình bày các sản phẩm hoặc hệ thống công nghệ cao.</li>
+                        <li>Muốn nâng cao trải nghiệm người dùng (UX) và tạo ấn tượng thương hiệu mạnh mẽ.</li>
+                        <li>Cần một tài liệu có tính linh hoạt cao, xuất hiện đồng nhất trên nhiều nền tảng.</li>
+                    </ul>
+                </section>
+
+                <div class="case-study-card">
+                    <h3>Case Study: Tài liệu giáo trình sinh học</h3>
+                    <p>Trong một dự án giáo dục, nội dung đã được tối ưu hóa để:</p>
+                    <ul>
+                        <li>Học sinh tương tác trực tiếp với các mô hình 3D sinh học ngay trong bài học.</li>
+                        <li>Giáo viên sử dụng như một công cụ trình chiếu mạnh mẽ và đầy trực quan.</li>
+                        <li>Hoạt động mượt mà trên cả tablet cá nhân và bảng tương tác tại lớp học.</li>
+                    </ul>
+
+                    <div
+                        class="mt-8 rounded-lg overflow-hidden border border-white/10 shadow-lg relative aspect-video bg-neutral-900">
+                        <canvas id="anatomy-canvas" class="w-full h-full"></canvas>
+                    </div>
+
+                </div>
+
+
+
+                <section id="conclusion" class="mt-20">
+                    <h2 class="text-[#f7941d]">Kết luận</h2>
+                    <p class="text-xl text-white">Interactive Documentary không chỉ là một định dạng mới, mà là một cách
+                        tiếp cận mới:</p>
+                    <p class="text-2xl font-bold text-white tracking-tight leading-snug">
+                        Không chỉ truyền tải thông tin — mà giúp người dùng thực sự thấu hiểu và tương tác với nó.
+                    </p>
+                </section>
+
+                <!-- Article Footer / CTA -->
+                <div
+                    class="mt-24 p-8 rounded-2xl bg-gradient-to-br from-[#3a1d00] to-black border border-[#f7941d]/20 shadow-[0_0_50px_-12px_rgba(247,148,29,0.25)]">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-1 text-center md:text-left">
+                            <h4 class="text-2xl font-bold text-white mb-4">Bạn đã sẵn sàng nâng cấp tài liệu của mình?
+                            </h4>
+                            <p class="text-neutral-400 mb-0">
+                                Nếu bạn đang có Tài liệu sản phẩm, Infographic phức tạp hay Nội dung đào tạo cần được
+                                làm mới... đã đến lúc nâng cấp chúng thành một trải nghiệm tương tác.
+                                <strong>Double D Media</strong> sẽ đồng hành cùng bạn từ concept đến triển khai.
+                            </p>
+                        </div>
+                        <a href="#contact"
+                            class="px-8 py-4 bg-[#f7941d] text-black font-bold uppercase tracking-widest rounded-lg hover:bg-[#ffaa45] transition-all transform hover:scale-105 whitespace-nowrap">
+                            Bắt đầu ngay
+                        </a>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- RIGHT COLUMN: SIDEBAR -->
+            <aside class="hidden lg:block lg:col-span-4 relative">
+                <div class="sticky top-24 space-y-8">
+
+                    <!-- Table of Contents -->
+                    <div class="p-8 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-6 block">Mục lục
+                            bài viết</span>
+                        <nav class="flex flex-col space-y-4">
+                            <a href="#introduction"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> Giới thiệu
+                            </a>
+                            <a href="#visual-complex"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> 1. Minh họa trực quan
+                            </a>
+                            <a href="#multi-form"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> 2. Đa hình thức thể hiện
+                            </a>
+                            <a href="#low-code"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> 3. Công nghệ Low-code
+                            </a>
+                            <a href="#multi-platform"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> 4. Tối ưu đa nền tảng
+                            </a>
+                            <a href="#when-to-use"
+                                class="text-sm text-neutral-400 hover:text-[#f7941d] transition-colors flex items-center gap-3">
+                                <span class="w-1.5 h-1.5 bg-[#f7941d] rounded-full"></span> Khi nào nên sử dụng?
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Client Info / CTA -->
+                    <div class="p-8 rounded-xl border border-white/10 bg-neutral-900/50">
+                        <div class="flex items-center gap-4 mb-8">
+                            <img src="logo/logo doubled.svg" alt="Double D" class="h-6">
+                            <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Solutions</span>
+                        </div>
+                        <p class="text-sm text-neutral-400 leading-relaxed mb-8">
+                            Chúng tôi giúp các doanh nghiệp số hóa tài liệu thành các trải nghiệm tương tác đỉnh cao
+                            (High-fidelity Interactive Content).
+                        </p>
+                        <a href="#contact"
+                            class="flex w-full items-center justify-center gap-3 text-[11px] uppercase hover:bg-[#502500] transition-all font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/40 rounded-lg py-4 group">
+                            Liên hệ tư vấn
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- RELATED ARTICLES -->
+    <section class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div class="flex justify-between items-end mb-12">
+            <h2 class="text-2xl font-bold text-white uppercase tracking-tight">Cùng chủ đề</h2>
+            <a href="blog.html"
+                class="text-xs text-[#f7941d] uppercase tracking-widest hover:text-white transition-colors">Xem tất
+                cả</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Related 1 -->
+            <article class="group cursor-pointer" onclick="window.location.href='blog 1.html'" role="button">
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Motion UX"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">UX Design</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:text-[#f7941d] transition-colors">
+                    Motion design isn’t just eye candy; it’s UX infrastructure
+                </h3>
+            </article>
+
+            <!-- Related 2 -->
+            <article class="group cursor-pointer" onclick="window.location.href='blog 1.2.html'" role="button">
+                <div
+                    class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 mb-4 bg-black">
+                    <iframe src="https://player.vimeo.com/video/1055810406?h=a79751180c"
+                        class="absolute inset-0 w-full h-full opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none"
+                        frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe>
+                </div>
+                <span
+                    class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2 block group-hover:text-[#f7941d]">Brand
+                    Identity</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:text-[#f7941d] transition-colors">
+                    Why Motion is the Future of Brand Identity
+                </h3>
+            </article>
+
+            <!-- Related 3 -->
+            <article class="group cursor-pointer" onclick="window.location.href='blog 1.3.html'" role="button">
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 mb-4">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80" alt="Brochure"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                </div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-[#f7941d] mb-2 block">Case
+                    Study</span>
+                <h3
+                    class="text-lg font-semibold text-white tracking-tight group-hover:text-[#f7941d] transition-colors">
+                    Creating an Interactive Brochure for Vert Zero
+                </h3>
+            </article>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="border-t border-white/5 bg-black py-24">
+        <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Hãy cùng tạo nên trải nghiệm
+                    </h2>
+                    <p class="text-neutral-400 mb-8 max-w-md">Liên hệ với chúng tôi để bắt đầu hành trình chuyển đổi số
+                        nội dung của bạn.</p>
+                    <div class="flex flex-col space-y-3 text-sm text-neutral-500 font-mono">
+                        <a href="mailto:doubledlab1002@gmail.com"
+                            class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
+                        <span>+ 84 337 735 004</span>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-auto">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" placeholder="EMAIL CỦA BẠN"
+                            class="bg-neutral-900 border border-white/10 text-white px-6 py-4 text-sm focus:outline-none focus:border-[#f7941d] min-w-[300px] rounded-lg">
+                        <button
+                            class="uppercase hover:bg-[#f7941d] hover:text-black transition-all font-bold text-white tracking-widest bg-transparent border border-[#f7941d] rounded-lg px-8 py-4 text-xs">
+                            Gửi yêu cầu
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 mt-20 pt-8 text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center">
+                <span>© 2024 Double D Media. All rights reserved.</span>
+                <div class="flex gap-8 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Facebook</a>
+                    <a href="#" class="hover:text-white transition-colors">Behance</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const initRive = (canvasId, src, artboard, stateMachine) => {
+                const canvas = document.getElementById(canvasId);
+                if (canvas) {
+                    const r = new rive.Rive({
+                        src: src,
+                        canvas: canvas,
+                        autoplay: true,
+                        artboard: artboard,
+                        stateMachines: stateMachine,
+                        autoBind: true,
+                        onLoad: () => {
+                            r.resizeDrawingSurfaceToCanvas();
+                        },
+                    });
+
+                    // Handle responsiveness
+                    new ResizeObserver(() => {
+                        if (r) r.resizeDrawingSurfaceToCanvas();
+                    }).observe(canvas);
+                }
+            };
+
+            initRive('hero-canvas', 'Rive file/interactive_anatomy.riv', 'Main', 'State Machine 1');
+            initRive('thap-tai-san-canvas', 'Rive file/azinsu_claim.riv', 'Main', 'State Machine 1');
+            initRive('mbf-canvas', 'Rive file/test.riv', 'Main', 'State Machine 1');
+            initRive('btc-canvas', 'Rive file/brochure_vertzero.riv', 'Main', 'State Machine 1');
+            initRive('anatomy-canvas', 'Rive file/interactive_anatomy.riv', 'Main', 'State Machine 1');
+            initRive('vertzero-canvas', 'Rive file/brochure_azladin.riv', 'Main', 'State Machine 1');
+
+
+        });
+    </script>
+</body>
+
+</html>

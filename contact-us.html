@@ -24,6 +24,7 @@
     <title>DOUBLE D | Contact &amp; Order</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -265,15 +266,28 @@
             </a>
             <div
                 class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
-                <a href="showcase.html" class="hover:text-white transition-colors">SHOWCASE</a>
-                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors">WIKI</a>
+                <a href="our-services.html" class="hover:text-white transition-colors" data-i18n="nav.services">OUR
+                    SERVICES</a>
+                <a href="showcase.html" class="hover:text-white transition-colors" data-i18n="nav.showcase">SHOWCASE</a>
+                <a href="blog.html" class="hover:text-white transition-colors" data-i18n="nav.blog">BLOG</a>
+                <a href="rive-wiki.html" class="hover:text-white transition-colors" data-i18n="nav.wiki">WIKI</a>
+
+                <!-- Language Toggle -->
+                <div class="flex items-center gap-2 border-l border-white/10 pl-6 ml-2 uppercase">
+                    <button onclick="setLanguage('en')"
+                        class="lang-toggle-btn transition-colors hover:text-white cursor-pointer"
+                        data-lang="en">EN</button>
+                    <span class="text-white/10">|</span>
+                    <button onclick="setLanguage('vi')"
+                        class="lang-toggle-btn transition-colors hover:text-white cursor-pointer"
+                        data-lang="vi">VI</button>
+                </div>
 
             </div>
             <a href="#order-form"
                 class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
-                <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button">CONTACT
+                <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button"
+                    data-i18n="nav.contact">CONTACT
                     US</span>
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
                     viewBox="0 0 24 24" class="iconify iconify--lucide">
@@ -288,16 +302,19 @@
     <header
         class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 uppercase font-geist">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 uppercase font-geist"
+                data-i18n="contact.header.title">
                 Let's Build Your <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f7941d] to-white">Next Project</span>
+                Next Project
             </h1>
-            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            <p class="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
+                data-i18n="contact.header.desc">
                 From concept to deployment. We bring industrial-grade motion, design, and technology to your brand.
             </p>
             <div class="mt-8">
                 <a href="#order-form"
-                    class="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-[#f7941d] border border-[#f7941d]/30 bg-[#3a1d00]/20 hover:bg-[#3a1d00]/40 px-6 py-3 rounded-sm transition-all">
+                    class="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-[#f7941d] border border-[#f7941d]/30 bg-[#3a1d00]/20 hover:bg-[#3a1d00]/40 px-6 py-3 rounded-sm transition-all"
+                    data-i18n="contact.header.btn">
                     Start Your Order
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -315,7 +332,8 @@
         <section class="mb-20">
             <div class="flex items-center gap-4 mb-8">
                 <span class="w-8 h-[1px] bg-[#f7941d]"></span>
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500">How to Order</h2>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500"
+                    data-i18n="contact.guide.title">How to Order</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -338,8 +356,9 @@
                             </g>
                         </svg>
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Choose Service</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Select the specific domain you need help with
+                    <h3 class="text-white font-semibold mb-2" data-i18n="contact.guide.1.title">Choose Service</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed" data-i18n="contact.guide.1.desc">Select the
+                        specific domain you need help with
                         from our core offerings.</p>
                 </div>
 
@@ -362,8 +381,9 @@
                             </g>
                         </svg>
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Briefing</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Fill out the dynamic form to give us context on
+                    <h3 class="text-white font-semibold mb-2" data-i18n="contact.guide.2.title">Briefing</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed" data-i18n="contact.guide.2.desc">Fill out the
+                        dynamic form to give us context on
                         your goals and timeline.</p>
                 </div>
 
@@ -387,8 +407,9 @@
                             </g>
                         </svg>
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Launch</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">Our team will analyze your request and reach out
+                    <h3 class="text-white font-semibold mb-2" data-i18n="contact.guide.3.title">Launch</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed" data-i18n="contact.guide.3.desc">Our team will
+                        analyze your request and reach out
                         within 24 hours.</p>
                 </div>
             </div>
@@ -398,12 +419,14 @@
         <section id="order-form" class="scroll-mt-24">
             <div class="flex items-center gap-4 mb-8">
                 <span class="w-8 h-[1px] bg-[#f7941d]"></span>
-                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500">Project Details</h2>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-500"
+                    data-i18n="contact.details.title">Project Details</h2>
             </div>
 
             <!-- Service Selection -->
             <div class="mb-10">
-                <label class="block text-sm font-medium text-neutral-300 mb-4 uppercase tracking-wide text-xs">Select a
+                <label class="block text-sm font-medium text-neutral-300 mb-4 uppercase tracking-wide text-xs"
+                    data-i18n="contact.details.select">Select a
                     Service Domain <span class="text-[#f7941d]">*</span></label>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
@@ -423,8 +446,10 @@
                                 </g>
                             </svg>
                         </div>
-                        <h4 class="text-white font-semibold text-sm">Video Production</h4>
-                        <p class="text-neutral-500 text-xs mt-1">TVC, Social, Demo</p>
+                        <h4 class="text-white font-semibold text-sm" data-i18n="contact.service.video">Video Production
+                        </h4>
+                        <p class="text-neutral-500 text-xs mt-1" data-i18n="contact.service.video.desc">TVC, Social,
+                            Demo</p>
                     </div>
 
                     <!-- Card 2: Interactive -->
@@ -441,8 +466,10 @@
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="text-white font-semibold text-sm">Interactive Motion</h4>
-                        <p class="text-neutral-500 text-xs mt-1">Rive, Web, App</p>
+                        <h4 class="text-white font-semibold text-sm" data-i18n="contact.service.interactive">Interactive
+                            Motion</h4>
+                        <p class="text-neutral-500 text-xs mt-1" data-i18n="contact.service.interactive.desc">Rive, Web,
+                            App</p>
                     </div>
 
                     <!-- Card 3: UI/UX -->
@@ -465,8 +492,10 @@
                                 </g>
                             </svg>
                         </div>
-                        <h4 class="text-white font-semibold text-sm">UI / UX Design</h4>
-                        <p class="text-neutral-500 text-xs mt-1">Web, Mobile, System</p>
+                        <h4 class="text-white font-semibold text-sm" data-i18n="contact.service.uiux">UI / UX Design
+                        </h4>
+                        <p class="text-neutral-500 text-xs mt-1" data-i18n="contact.service.uiux.desc">Web, Mobile,
+                            System</p>
                     </div>
 
                     <!-- Card 4: Marketing -->
@@ -486,8 +515,10 @@
                                 </g>
                             </svg>
                         </div>
-                        <h4 class="text-white font-semibold text-sm">Marketing Design</h4>
-                        <p class="text-neutral-500 text-xs mt-1">Ads, Key Visual, Social</p>
+                        <h4 class="text-white font-semibold text-sm" data-i18n="contact.service.marketing">Marketing
+                            Design</h4>
+                        <p class="text-neutral-500 text-xs mt-1" data-i18n="contact.service.marketing.desc">Ads, Key
+                            Visual, Social</p>
                     </div>
                 </div>
                 <input type="hidden" id="selectedServiceInput" name="service_type" required="">
@@ -508,50 +539,56 @@
                                 stroke-width="2" d="M20 6L9 17l-5-5"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl text-white font-bold mb-2">Request Received!</h3>
-                    <p class="text-neutral-400 max-w-md mx-auto">Thank you for briefing us. Our team will review your
+                    <h3 class="text-2xl text-white font-bold mb-2" data-i18n="contact.form.success.title">Request
+                        Received!</h3>
+                    <p class="text-neutral-400 max-w-md mx-auto" data-i18n="contact.form.success.desc">Thank you for
+                        briefing us. Our team will review your
                         requirements and contact you via email within 24 hours.</p>
                     <button type="button" onclick="location.reload()"
-                        class="mt-8 text-xs uppercase tracking-widest text-[#f7941d] hover:text-white transition-colors">Submit
+                        class="mt-8 text-xs uppercase tracking-widest text-[#f7941d] hover:text-white transition-colors"
+                        data-i18n="contact.form.success.btn">Submit
                         Another Request</button>
                 </div>
 
                 <!-- Form Content -->
                 <div id="formContent">
                     <div class="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
-                        <h3 class="text-xl font-semibold text-white" id="formTitle">Project Information</h3>
-                        <span class="text-xs text-neutral-500 font-mono uppercase">* Required Fields</span>
+                        <h3 class="text-xl font-semibold text-white" id="formTitle" data-i18n="contact.form.info">
+                            Project Information</h3>
+                        <span class="text-xs text-neutral-500 font-mono uppercase" data-i18n="contact.form.required">*
+                            Required Fields</span>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <!-- Common Fields -->
                         <div class="col-span-1">
-                            <label
-                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Full
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.name">Full
                                 Name *</label>
                             <input type="text" required="" id="fullName" name="full_name"
                                 class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
-                                placeholder="John Doe">
+                                placeholder="John Doe" data-i18n-attr="placeholder:contact.form.placeholder.name">
                         </div>
                         <div class="col-span-1">
-                            <label
-                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Email
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.email">Email
                                 Address *</label>
                             <input type="email" required="" id="email" name="email"
                                 class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
-                                placeholder="john@company.com">
+                                placeholder="john@company.com"
+                                data-i18n-attr="placeholder:contact.form.placeholder.email">
                         </div>
                         <div class="col-span-1">
-                            <label
-                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Company
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.company">Company
                                 / Brand</label>
                             <input type="text" id="companyBrand" name="company_brand"
                                 class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
-                                placeholder="Acme Inc.">
+                                placeholder="Acme Inc." data-i18n-attr="placeholder:contact.form.placeholder.company">
                         </div>
                         <div class="col-span-1">
-                            <label
-                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Timeline
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.timeline">Timeline
                                 / Deadline</label>
                             <select id="timeline" name="timeline"
                                 class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
@@ -561,6 +598,13 @@
                                 <option>1-3 Months</option>
                                 <option>Urgent (ASAP)</option>
                             </select>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.phone">Phone / Zalo</label>
+                            <input type="tel" id="phoneZalo" name="phone_zalo"
+                                class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                placeholder="+84 xxx xxx xxx" data-i18n-attr="placeholder:contact.form.placeholder.phone">
                         </div>
                     </div>
 
@@ -658,7 +702,7 @@
                                     <option>Not Sure / Recommend me</option>
                                     <option>Rive</option>
                                     <option>Lottie</option>
-                                    <option>Web Animation (GSAP/CSS)</option>
+
                                 </select>
                             </div>
                             <div class="col-span-2">
@@ -669,15 +713,17 @@
                                     <label
                                         class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
                                         <input type="checkbox" name="interactive_type" value="Scroll-based">
-                                        Scroll-based
+                                        Mascot Interactive Motion
                                     </label>
                                     <label
                                         class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
-                                        <input type="checkbox" name="interactive_type" value="Click / Tap"> Click / Tap
+                                        <input type="checkbox" name="interactive_type" value="Click / Tap"> Infographic
+                                        Motion
                                     </label>
                                     <label
                                         class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
-                                        <input type="checkbox" name="interactive_type" value="Data-driven"> Data-driven
+                                        <input type="checkbox" name="interactive_type" value="Data-driven"> Website UI
+                                        Motion
                                     </label>
                                     <label
                                         class="flex items-center gap-2 text-sm text-neutral-300 border border-white/10 p-2 rounded hover:bg-white/5 cursor-pointer">
@@ -737,7 +783,8 @@
                                     class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Est.
                                     Screens</label>
                                 <input type="number" id="uiuxScreens" name="uiux_screens" placeholder="e.g. 10"
-                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600">
+                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                    data-i18n-attr="placeholder:contact.form.placeholder.screens">
                             </div>
                         </div>
                     </div>
@@ -764,7 +811,8 @@
                                     class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Duration</label>
                                 <input type="text" id="marketingDuration" name="marketing_duration"
                                     placeholder="e.g. 1 month campaign"
-                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600">
+                                    class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
+                                    data-i18n-attr="placeholder:contact.form.placeholder.duration">
                             </div>
                             <div class="col-span-2">
                                 <label
@@ -798,7 +846,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label
-                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Budget
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                    data-i18n="contact.form.budget">Budget
                                     Range</label>
                                 <select id="budgetRange" name="budget_range"
                                     class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
@@ -811,7 +860,8 @@
                             </div>
                             <div>
                                 <label
-                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">How
+                                    class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                    data-i18n="contact.form.source">How
                                     did you hear about us?</label>
                                 <select id="referralSource" name="referral_source"
                                     class="input-field w-full px-4 py-3 rounded text-sm text-neutral-300">
@@ -824,12 +874,13 @@
                         </div>
 
                         <div>
-                            <label
-                                class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider">Project
+                            <label class="block text-xs uppercase text-neutral-400 mb-2 font-semibold tracking-wider"
+                                data-i18n="contact.form.desc">Project
                                 Description</label>
                             <textarea rows="4" id="projectDescription" name="project_description"
                                 class="input-field w-full px-4 py-3 rounded text-sm placeholder-neutral-600"
-                                placeholder="Tell us about your goals, target audience, and any specific requirements..."></textarea>
+                                placeholder="Tell us about your goals, target audience, and any specific requirements..."
+                                data-i18n-attr="placeholder:contact.form.placeholder.desc"></textarea>
                         </div>
                     </div>
 
@@ -837,7 +888,7 @@
                     <div class="mt-8 pt-6 border-t border-white/5 flex justify-end">
                         <button id="submitBtn" type="submit"
                             class="group relative inline-flex items-center gap-3 bg-white text-black px-8 py-3 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-[#f7941d] hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-                            <span>Submit Request</span>
+                            <span data-i18n="contact.form.submit">Submit Request</span>
                             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
                                 height="1em" viewBox="0 0 24 24" data-icon="lucide:arrow-right"
                                 class="iconify group-hover:translate-x-1 transition-transform iconify--lucide">
@@ -861,7 +912,8 @@
                         <path d="m16 12l-4-4l-4 4m4 4V8"></path>
                     </g>
                 </svg>
-                <p class="text-neutral-400 text-sm">Please select a service above to begin your application.</p>
+                <p class="text-neutral-400 text-sm" data-i18n="contact.form.placeholder">Please select a service above
+                    to begin your application.</p>
             </div>
 
         </section>
@@ -878,61 +930,61 @@
                 <span>+ 84 337 735 004</span>
             </div>
             <div class="mt-6 md:mt-0 flex gap-6">
-                <a href="coming-soon.html" class="hover:text-white transition-colors">Privacy</a>
-                <a href="coming-soon.html" class="hover:text-white transition-colors">Terms</a>
-                <span>© 2024 All Systems Operational.</span>
+                <a href="coming-soon.html" class="hover:text-white transition-colors"
+                    data-i18n="footer.privacy">Privacy</a>
+                <a href="coming-soon.html" class="hover:text-white transition-colors" data-i18n="footer.terms">Terms</a>
+                <span>© 2024 <span data-i18n="footer.status">All Systems Operational.</span></span>
             </div>
         </div>
     </section>
 
     <!-- Logic Script -->
+    <script src="lang.js"></script>
     <script>
-        // Supabase Configuration
+        // ─── Supabase ────────────────────────────────────────────────────────────
         const supabaseUrl = 'https://tgpavkxghyzhddvgqbkw.supabase.co'
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncGF2a3hnaHl6aGRkdmdxYmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0NzE0NDYsImV4cCI6MjA4MjA0NzQ0Nn0.jlgBi20YSp1U3Gzyp4UmvLNQtzTQ1XDo6GdlsxTkx2w'
-        // Initialize Supabase client
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+        const { createClient } = window.supabase
+        const supabaseClient = createClient(supabaseUrl, supabaseKey)
 
+        // ─── EmailJS ─────────────────────────────────────────────────────────────
+        const EMAILJS_PUBLIC_KEY = 'q0jzi2l0g3MuFl6Yj'
+        const EMAILJS_SERVICE_ID = 'service_023ccn7'
+        const EMAILJS_TEMPLATE_ID = 'template_3bdignm'
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY })
+
+        // ─── Service Card Selection ───────────────────────────────────────────────
         function selectService(serviceName) {
-            // 1. Update Hidden Input
             document.getElementById('selectedServiceInput').value = serviceName;
 
-            // 2. UI: Highlight selected card
-            const cards = document.querySelectorAll('.service-card');
-            cards.forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
             document.getElementById('card-' + serviceName).classList.add('active');
 
-            // 3. UI: Show Form, Hide Placeholder
             document.getElementById('formPlaceholder').classList.add('hidden');
             const mainForm = document.getElementById('mainForm');
             mainForm.classList.remove('hidden');
             mainForm.style.opacity = '0';
-            setTimeout(() => mainForm.style.opacity = '1', 50); // Fade in effect
+            setTimeout(() => mainForm.style.opacity = '1', 50);
 
-            // 4. Dynamic Fields Logic
-            // Hide all specific sections first
             document.querySelectorAll('.dynamic-section').forEach(el => el.classList.add('hidden'));
-
-            // Show specific section
             const targetSection = document.getElementById('fields-' + serviceName);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
+            if (targetSection) targetSection.classList.remove('hidden');
         }
 
+        // ─── Form Submission ──────────────────────────────────────────────────────
         async function handleFormSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
             const originalText = btn.innerHTML;
 
-            // Loading State
             btn.disabled = true;
             btn.innerHTML = '<span class="iconify animate-spin" data-icon="lucide:loader-2"></span> Processing...';
 
-            // Gather Common Data
+            // Gather common fields
             const formData = {
                 full_name: document.getElementById('fullName').value,
                 email: document.getElementById('email').value,
+                phone_zalo: document.getElementById('phoneZalo').value,
                 company_brand: document.getElementById('companyBrand').value,
                 timeline: document.getElementById('timeline').value,
                 service_type: document.getElementById('selectedServiceInput').value,
@@ -942,9 +994,8 @@
                 details: {}
             };
 
-            // Gather Dynamic Data based on Service Type
+            // Gather service-specific fields
             const serviceType = formData.service_type;
-
             if (serviceType === 'video') {
                 formData.details = {
                     type: document.getElementById('videoType').value,
@@ -974,30 +1025,37 @@
             }
 
             try {
-                // Submit to Supabase
-                const { data, error } = await supabase
+                // 1. Send email notification (primary — must succeed)
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    full_name: formData.full_name,
+                    email: formData.email,
+                    phone_zalo: formData.phone_zalo || '—',
+                    company_brand: formData.company_brand || '—',
+                    service_type: formData.service_type,
+                    budget_range: formData.budget_range,
+                    timeline: formData.timeline,
+                    referral_source: formData.referral_source,
+                    project_description: formData.project_description || '—',
+                    details_formatted: JSON.stringify(formData.details, null, 2)
+                });
+
+                // 2. Save to Supabase (secondary — failure is silent)
+                supabaseClient
                     .from('contact_submissions')
-                    .insert([formData]);
+                    .insert([formData])
+                    .then(({ error }) => { if (error) console.warn('Supabase insert failed:', error.message); });
 
-                if (error) {
-                    throw error;
-                }
-
-                // Success State
+                // 3. Show success state
                 document.getElementById('formContent').classList.add('hidden');
                 const successMsg = document.getElementById('successMessage');
                 successMsg.classList.remove('hidden');
                 successMsg.classList.add('fade-in');
-
-                // Scroll to message
                 document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
-
-                // Clear form for next time (optional, but good practice if user reloads or similar)
                 document.getElementById('mainForm').reset();
 
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('We encountered an error submitting your request (' + error.message + '). Please try again later.');
+            } catch (err) {
+                console.error('Submission error:', err);
+                alert('We encountered an error submitting your request (' + err.message + '). Please try again later.');
                 btn.disabled = false;
                 btn.innerHTML = originalText;
             }

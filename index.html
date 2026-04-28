@@ -241,7 +241,8 @@
 
         /* 5. Custom Flex Transition for Modules */
         .flex-accordion {
-            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: flex;
         }
 
         /* 6. Neon Pulse / Glow */
@@ -699,18 +700,23 @@ scaleY(var(--tw-scale-y, 1))
             </a>
             <div
                 class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-                <a href="our-services.html" class="hover:text-white transition-colors">Our services</a>
-                <a href="showcase.html" class="hover:text-white transition-colors">showcase</a>
-
-
-                <a href="blog.html" class="hover:text-white transition-colors">blog</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors">WIKI</a>
+                <a href="our-services.html" class="hover:text-white transition-colors" data-i18n="nav.services">Our services</a>
+                <a href="showcase.html" class="hover:text-white transition-colors" data-i18n="nav.showcase">showcase</a>
+                <a href="blog.html" class="hover:text-white transition-colors" data-i18n="nav.blog">blog</a>
+                <a href="rive-wiki.html" class="hover:text-white transition-colors" data-i18n="nav.wiki">WIKI</a>
+                
+                <!-- Language Toggle -->
+                <div class="flex items-center gap-2 border-l border-white/10 pl-6 ml-2">
+                    <button onclick="setLanguage('en')" class="lang-toggle-btn transition-colors hover:text-white cursor-pointer" data-lang="en">EN</button>
+                    <span class="text-white/10">|</span>
+                    <button onclick="setLanguage('vi')" class="lang-toggle-btn transition-colors hover:text-white cursor-pointer" data-lang="vi">VI</button>
+                </div>
             </div>
             <a href="#transmission"
                 class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
                 <span class="cursor-pointer"
-                    onclick="window.location.href='contact-us.html';window.location.href='contact-us.html';window.location.href='contact-us.html'"
-                    role="button">CONTACT US</span>
+                    onclick="window.location.href='contact-us.html'"
+                    role="button" data-i18n="nav.contact">CONTACT US</span>
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
                     viewBox="0 0 24 24" data-icon="lucide:arrow-up-right" data-width="14"
                     class="iconify iconify--lucide">
@@ -740,19 +746,26 @@ scaleY(var(--tw-scale-y, 1))
             </button>
 
             <a href="index.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Home</a>
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.home">Home</a>
             <a href="our-services.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Our
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.services">Our
                 Services</a>
             <a href="showcase.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Showcase</a>
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.showcase">Showcase</a>
             <a href="blog.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Blog</a>
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.blog">Blog</a>
             <a href="rive-wiki.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Wiki</a>
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.wiki">Wiki</a>
             <a href="contact-us.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors">Contact
+                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.contact">Contact
                 Us</a>
+
+            <!-- Mobile Language Toggle -->
+            <div class="flex items-center gap-6 pt-8 border-t border-white/10 w-2/3 justify-center">
+                <button onclick="setLanguage('en')" class="lang-toggle-btn text-xl font-bold transition-colors" data-lang="en">EN</button>
+                <span class="text-white/20 text-2xl">|</span>
+                <button onclick="setLanguage('vi')" class="lang-toggle-btn text-xl font-bold transition-colors" data-lang="vi">VI</button>
+            </div>
         </div>
         </div>
     </nav>
@@ -780,14 +793,14 @@ scaleY(var(--tw-scale-y, 1))
             <div class="marquee-container">
                 <div class="marquee-content">
                     <span
-                        class="md:text-6xl uppercase inline-block neon-pulse-text text-4xl font-bold text-white tracking-tighter pr-4 pl-4">AT
+                        class="md:text-6xl uppercase inline-block neon-pulse-text text-4xl font-bold text-white tracking-tighter pr-4 pl-4" data-i18n="hero.marquee.1">AT
                         DOUBLE D, WE KNOW HOW TO MAKE YOUR STORIES IMPACTFUL</span>
                     <span
                         class="text-4xl md:text-6xl font-bold tracking-tighter text-transparent stroke-text uppercase px-4 inline-block"
-                        style="-webkit-text-stroke: 1px rgba(247, 148, 29, 0.5);">With animation, there is no
+                        style="-webkit-text-stroke: 1px rgba(247, 148, 29, 0.5);" data-i18n="hero.marquee.2">With animation, there is no
                         boundary</span>
                     <span
-                        class="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase px-4 inline-block">With
+                        class="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase px-4 inline-block" data-i18n="hero.marquee.2">With
                         animation, there is no
                         boundary</span>
                 </div>
@@ -803,8 +816,8 @@ scaleY(var(--tw-scale-y, 1))
             <div class="relative">
                 <div
                     class="glass-panel md:p-12 border-l-[#f7941d] z-10 text-center max-w-4xl rounded-2xl border-l-4 mr-auto ml-auto pt-8 pr-8 pb-8 pl-8 relative">
-                    <h2 class="text-xs font-mono text-[#f7941d] mb-6 uppercase tracking-widest">[ SYSTEM_OVERVIEW ]</h2>
-                    <p class="md:text-2xl leading-relaxed text-lg font-light text-neutral-200 tracking-tight"><span
+                    <h2 class="text-xs font-mono text-[#f7941d] mb-6 uppercase tracking-widest" data-i18n="system.overview">[ SYSTEM_OVERVIEW ]</h2>
+                    <p class="md:text-2xl leading-relaxed text-lg font-light text-neutral-200 tracking-tight" data-i18n="intro.text"><span
                             class="font-semibold text-white" style="">DOUBLE D</span> was founded in 2018 by a young
                         team with a passion and desire to create multimedia communication products.</p>
                 </div>
@@ -929,8 +942,8 @@ scaleY(var(--tw-scale-y, 1))
             <!-- The Journey: Timeline -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                 <div class="md:col-span-4">
-                    <h3 class="text-3xl font-bold text-white tracking-tight mb-2">THE JOURNEY</h3>
-                    <p class="text-sm text-neutral-500">Our Creative Timeline</p>
+                    <h3 class="text-3xl font-bold text-white tracking-tight mb-2" data-i18n="journey.title">THE JOURNEY</h3>
+                    <p class="text-sm text-neutral-500" data-i18n="journey.subtitle">Our Creative Timeline</p>
                 </div>
                 <div class="md:col-span-8 relative">
                     <!-- Connecting Neon Line -->
@@ -944,20 +957,22 @@ scaleY(var(--tw-scale-y, 1))
                         <div
                             class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-[#f7941d] transition-colors">
                             <div
-                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors">
+                            <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors" data-i18n="journey.years.value">
                                 4+</div>
-                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4">Years Active</div>
-                            <p class="leading-relaxed text-xs text-neutral-400">Specializing in Motion Graphics, we’ve
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4" data-i18n="journey.years.label">Years Active</div>
+                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.years.desc">Specializing in Motion Graphics, we’ve
                                 consistently delivered impactful visuals that elevate brands and digital products.</p>
                         </div>
                         <div
                             class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-orange-500 transition-colors md:ml-auto">
                             <div
-                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors">
+                            <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors" data-i18n="journey.clients.value">
                                 20+</div>
-                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4">Trusted Client
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4" data-i18n="journey.clients.label">Trusted Client
                             </div>
-                            <p class="leading-relaxed text-xs text-neutral-400">Partnering with startups, agencies, and
+                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.clients.desc">Partnering with startups, agencies, and
                                 businesses to craft engaging motion-driven experiences.</p>
                         </div>
                     </div>
@@ -1249,19 +1264,19 @@ scaleY(var(--tw-scale-y, 1))
                         <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
                     </g>
                 </svg>
-                <h2 class="text-xs font-semibold tracking-widest text-neutral-500 uppercase">Our Services
+                <h2 class="text-xs font-semibold tracking-widest text-neutral-500 uppercase" data-i18n="nav.services">Our Services
                 </h2>
             </div>
 
             <div class="flex flex-col md:flex-row h-auto md:h-[600px] gap-2">
                 <!-- Module 1: CGI -->
                 <div
-                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer min-h-[250px] md:min-h-0">
                     <!-- Animated Background: Fluid Gradients -->
                     <div
                         class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                         <div
-                            class="absolute inset-0 bg-[url('Img/module%201.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                            class="absolute inset-0 bg-[url('Img/module%201.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out">
                         </div>
                         <div
                             class="absolute -top-[20%] -left-[20%] w-[80%] h-[80%] bg-[#3a1d00] rounded-full blur-[80px] animate-blob-slow mix-blend-screen opacity-70">
@@ -1282,10 +1297,10 @@ scaleY(var(--tw-scale-y, 1))
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">01</span>
                         <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.1.title">
                             B2B Motion Graphic</h3>
                     </div>
-                    <div class="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col bg-black/20 pt-10 pr-10 pb-10 pl-10 absolute top-0 right-0 bottom-0 left-0 backdrop-blur-sm justify-center"
+                    <div class="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:delay-100 flex flex-col bg-black/20 pt-10 pr-10 pb-10 pl-10 absolute top-0 right-0 bottom-0 left-0 backdrop-blur-sm justify-center translate-y-4 md:group-hover:translate-y-0"
                         onclick="window.location.href='out-service.html'" role="button">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
                             viewBox="0 0 24 24" data-icon="lucide:monitor-play" data-width="32"
@@ -1298,9 +1313,9 @@ scaleY(var(--tw-scale-y, 1))
                                 <rect width="20" height="14" x="2" y="3" rx="2"></rect>
                             </g>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">B2B GRAPHIC VIDEO
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.1.hover_title">B2B GRAPHIC VIDEO
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300">We produce high quality commercial videos,
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.1.desc">We produce high quality commercial videos,
                             including testimonials
                             and TVCs.</p>
                     </div>
@@ -1308,12 +1323,12 @@ scaleY(var(--tw-scale-y, 1))
 
                 <!-- Module 2: Rendering -->
                 <div
-                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer min-h-[250px] md:min-h-0">
                     <!-- Animated Background: Fluid Gradients -->
                     <div
                         class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                         <div
-                            class="absolute inset-0 bg-[url('Img/module%202.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                            class="absolute inset-0 bg-[url('Img/module%202.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out">
                         </div>
                         <div
                             class="absolute top-[10%] -right-[10%] w-[90%] h-[90%] bg-neutral-800 rounded-full blur-[90px] animate-blob-medium mix-blend-screen opacity-80">
@@ -1334,11 +1349,11 @@ scaleY(var(--tw-scale-y, 1))
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">02</span>
                         <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.2.title">
                             INTERACTIVE MOTION</h3>
                     </div>
                     <div
-                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20 translate-y-4 md:group-hover:translate-y-0">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
                             viewBox="0 0 24 24" data-icon="lucide:box" data-width="32"
                             class="iconify text-orange-400 mb-4 iconify--lucide">
@@ -1350,21 +1365,21 @@ scaleY(var(--tw-scale-y, 1))
                                 <path d="m3.3 7l8.7 5l8.7-5M12 22V12"></path>
                             </g>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">Interactive motion
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.2.hover_title">Interactive motion
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300">We craft stunning UI animations, from
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.2.desc">We craft stunning UI animations, from
                             engaging emoji packs to smooth UI interactions for websites</p>
                     </div>
                 </div>
 
                 <!-- Module 3: Modeling -->
                 <div
-                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer min-h-[250px] md:min-h-0">
                     <!-- Animated Background: Fluid Gradients -->
                     <div
                         class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                         <div
-                            class="absolute inset-0 bg-[url('Img/module%203.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                            class="absolute inset-0 bg-[url('Img/module%203.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out">
                         </div>
                         <div
                             class="absolute -top-[30%] left-[20%] w-[100%] h-[100%] bg-[#502500] rounded-full blur-[100px] animate-blob-slow delay-2000 mix-blend-screen opacity-70">
@@ -1385,11 +1400,11 @@ scaleY(var(--tw-scale-y, 1))
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">03</span>
                         <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.3.title">
                             BUILDING WEBSITE</h3>
                     </div>
                     <div
-                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20 translate-y-4 md:group-hover:translate-y-0">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
                             viewBox="0 0 24 24" data-icon="lucide:component" data-width="32"
                             class="iconify text-orange-300 mb-4 iconify--lucide">
@@ -1398,21 +1413,21 @@ scaleY(var(--tw-scale-y, 1))
                                 d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0zm-13.239 0a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0zm6.619 6.619a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0zm0-13.238a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z">
                             </path>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4">BUILDING WEBSITE
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.3.hover_title">BUILDING WEBSITE
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300">We create high performance websites with
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.3.desc">We create high performance websites with
                             stunning UI/UX, ensuring seamless interactions and engaging user experience</p>
                     </div>
                 </div>
 
                 <!-- Module 4: Animation -->
                 <div
-                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-500 ease-out min-h-[250px] md:min-h-0">
+                    class="group relative flex-accordion flex-1 hover:flex-[2] bg-neutral-900 border border-white/10 overflow-hidden cursor-pointer min-h-[250px] md:min-h-0">
                     <!-- Animated Background: Fluid Gradients -->
                     <div
                         class="absolute inset-0 w-full h-full bg-black overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                         <div
-                            class="absolute inset-0 bg-[url('Img/module%204.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                            class="absolute inset-0 bg-[url('Img/module%204.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out">
                         </div>
                         <div
                             class="absolute top-[20%] -right-[20%] w-[100%] h-[100%] bg-red-950 rounded-full blur-[100px] animate-blob-slow mix-blend-screen opacity-70">
@@ -1433,11 +1448,11 @@ scaleY(var(--tw-scale-y, 1))
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">04</span>
                         <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap">
+                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.4.title">
                             Graphic Design</h3>
                     </div>
                     <div
-                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20">
+                        class="absolute inset-0 p-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:delay-100 flex flex-col justify-center backdrop-blur-sm bg-black/20 translate-y-4 md:group-hover:translate-y-0">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32"
                             viewBox="0 0 24 24" data-icon="lucide:activity" data-width="32"
                             class="iconify text-[#f7941d] mb-4 iconify--lucide">
@@ -1446,9 +1461,9 @@ scaleY(var(--tw-scale-y, 1))
                                 d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
                             </path>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" style="">Graphic
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" style="" data-i18n="module.4.hover_title">Graphic
                             Design</h3>
-                        <p class="leading-relaxed text-sm text-neutral-300">We deliver creative and impactful design
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.4.desc">We deliver creative and impactful design
                             solutions that bring ideas to life.</p>
                     </div>
                 </div>
@@ -2392,17 +2407,18 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <a href="contact-us.html"
-                    class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border-orange-500/20 border rounded-sm pt-5 pr-10 pb-5 pl-10">Let't
+                    class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border-orange-500/20 border rounded-sm pt-5 pr-10 pb-5 pl-10" data-i18n="contact.btn">Let't
                     work together</a>
             </div>
 
             <div
                 class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest">
-                © 2024 Streax Studios. All Systems Operational.
+                © 2024 Streax Studios. <span data-i18n="footer.status">All Systems Operational.</span>
             </div>
         </div>
     </section>
 
+    <script src="lang.js"></script>
     <script>
         // Loading Screen Logic
         window.addEventListener('load', () => {

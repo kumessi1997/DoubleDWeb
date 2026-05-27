@@ -4,27 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://doubledmedia.vn/blog%201.2.html">
     <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
     <title>DOUBLE D | Why Motion is the Future of Brand Identity</title>
     <!-- Social Sharing Meta Tags -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="DOUBLE D | Why Motion is the Future of Brand Identity">
     <meta property="og:description" content="Why Motion is the Future of Brand Identity, and How to Do It Right.">
-    <meta property="og:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
-    <meta property="og:url" content="https://doubleddmedia.vn/blog%201.2.html">
+    <meta property="og:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
+    <meta property="og:url" content="https://doubledmedia.vn/blog%201.2.html">
     <meta property="og:site_name" content="Double D Media">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DOUBLE D | Why Motion is the Future of Brand Identity">
     <meta name="twitter:description" content="Why Motion is the Future of Brand Identity, and How to Do It Right.">
-    <meta name="twitter:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
+    <meta name="twitter:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <script src="https://unpkg.com/@rive-app/webgl2"></script>
     <style>
         /* --- Core Theme & Background --- */
         body {
@@ -219,31 +220,7 @@
         data-alpha-mask="80"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
-        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 group">
-                <img src="logo/logo doubled.svg" alt="Double D Media"
-                    class="h-8 w-auto transition-opacity hover:opacity-80" />
-            </a>
-            <div
-                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-                <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
-                <a href="showcase.html" class="text-white">SHOWCASE</a>
-                <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors">WIKI</a>
-            </div>
-            <a href="#contact"
-                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
-                <span>CONTACT US</span>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
-                    viewBox="0 0 24 24" data-icon="lucide:arrow-right" class="iconify iconify--lucide">
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
-                </svg>
-            </a>
-        </div>
-    </nav>
-
+    <div id="nav-placeholder"></div>
     <!-- ARTICLE HEADER / HERO SECTION -->
     <header class="pt-12 pb-12 px-6 border-white/5">
         <div class="max-w-4xl mx-auto text-center md:text-left md:max-w-7xl">
@@ -688,40 +665,7 @@
             </article>
         </div>
     </section>
-
-    <!-- FOOTER -->
-    <footer id="contact" class="border-t border-white/5 bg-black py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-12">
-                <div class="text-center md:text-left">
-                    <h2 class="text-3xl font-bold text-white tracking-tight mb-4 uppercase">Join the Newsletter</h2>
-                    <p class="text-neutral-400 mb-6 max-w-md">Get the latest insights on design and technology delivered
-                        to your inbox.</p>
-                    <div class="flex flex-col space-y-2 text-sm text-neutral-500 font-mono">
-                        <a href="mailto:doubledlab1002@gmail.com"
-                            class="hover:text-[#f7941d] transition-colors">doubledlab1002@gmail.com</a>
-                        <span class="">+ 84 337 735 004</span>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <input type="email" placeholder="ENTER EMAIL"
-                        class="bg-neutral-900 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#f7941d] w-64 rounded-sm">
-                    <button
-                        class="uppercase hover:bg-[#502500] transition-colors font-bold text-white tracking-widest bg-[#3a1d00] border border-[#f7941d]/30 rounded-sm px-6 text-xs">
-                        Subscribe
-                    </button>
-                </div>
-            </div>
-
-            <div
-                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
-                <span>© 2024 Double D Media.</span>
-                <span class="mt-2 md:mt-0">All Systems Operational.</span>
-            </div>
-        </div>
-    </footer>
-
+    <div id="footer-placeholder"></div>
     <script>
         const r1 = new rive.Rive({
             src: "Rive file/mbf.riv",
@@ -748,6 +692,7 @@
         });
 
         const r3 = new rive.Rive({
+            autoBind: true,
             src: "Rive file/mixing_animations.riv",
             canvas: document.getElementById("riveMinigame"),
             autoplay: true,
@@ -757,6 +702,8 @@
             },
         });
     </script>
+    <script src="components.js"></script>
+    <script src="lang.js"></script>
 </body>
 
 </html>

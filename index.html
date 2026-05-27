@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://doubledmedia.vn/">
+    <meta name="description"
+        content="Double D Media — Vietnamese multimedia studio specialising in motion graphics, interactive Rive animations, and UI/UX design. Founded 2018. 20+ clients.">
 
     <!-- Social Sharing Meta Tags -->
     <meta property="og:type" content="website">
@@ -24,7 +27,7 @@
     <title>Double D Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+    <script src="https://unpkg.com/@rive-app/webgl2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
@@ -215,18 +218,22 @@
         }
 
         .transform-style-3d {
+            -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
         }
 
         .backface-hidden {
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
 
         .rotate-y-180 {
+            -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
         }
 
         .group:hover .group-hover\:rotate-y-180 {
+            -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
         }
 
@@ -692,84 +699,7 @@ scaleY(var(--tw-scale-y, 1))
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
-        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 group">
-                <img src="logo/logo doubled.svg" alt="Double D Media"
-                    class="h-8 w-auto transition-opacity hover:opacity-80" />
-            </a>
-            <div
-                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-                <a href="our-services.html" class="hover:text-white transition-colors" data-i18n="nav.services">Our services</a>
-                <a href="showcase.html" class="hover:text-white transition-colors" data-i18n="nav.showcase">showcase</a>
-                <a href="blog.html" class="hover:text-white transition-colors" data-i18n="nav.blog">blog</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors" data-i18n="nav.wiki">WIKI</a>
-                
-                <!-- Language Toggle -->
-                <div class="flex items-center gap-2 border-l border-white/10 pl-6 ml-2">
-                    <button onclick="setLanguage('en')" class="lang-toggle-btn transition-colors hover:text-white cursor-pointer" data-lang="en">EN</button>
-                    <span class="text-white/10">|</span>
-                    <button onclick="setLanguage('vi')" class="lang-toggle-btn transition-colors hover:text-white cursor-pointer" data-lang="vi">VI</button>
-                </div>
-            </div>
-            <a href="#transmission"
-                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
-                <span class="cursor-pointer"
-                    onclick="window.location.href='contact-us.html'"
-                    role="button" data-i18n="nav.contact">CONTACT US</span>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
-                    viewBox="0 0 24 24" data-icon="lucide:arrow-up-right" data-width="14"
-                    class="iconify iconify--lucide">
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M7 7h10v10M7 17L17 7"></path>
-                </svg>
-            </a>
-            <button id="mobile-menu-btn" class="md:hidden text-white p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu"
-            class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl hidden flex flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
-            <button id="close-menu-btn" class="absolute top-6 right-6 text-white p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-
-            <a href="index.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.home">Home</a>
-            <a href="our-services.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.services">Our
-                Services</a>
-            <a href="showcase.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.showcase">Showcase</a>
-            <a href="blog.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.blog">Blog</a>
-            <a href="rive-wiki.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.wiki">Wiki</a>
-            <a href="contact-us.html"
-                class="text-2xl font-bold text-white uppercase tracking-widest hover:text-[#f7941d] transition-colors" data-i18n="nav.contact">Contact
-                Us</a>
-
-            <!-- Mobile Language Toggle -->
-            <div class="flex items-center gap-6 pt-8 border-t border-white/10 w-2/3 justify-center">
-                <button onclick="setLanguage('en')" class="lang-toggle-btn text-xl font-bold transition-colors" data-lang="en">EN</button>
-                <span class="text-white/20 text-2xl">|</span>
-                <button onclick="setLanguage('vi')" class="lang-toggle-btn text-xl font-bold transition-colors" data-lang="vi">VI</button>
-            </div>
-        </div>
-        </div>
-    </nav>
-
+    <div id="nav-placeholder"></div>
     <!-- SECTION 1: HERO (Video Embed) -->
     <header id="nexus" class="relative h-[90vh] bg-black overflow-hidden flex flex-col">
         <!-- Video Container -->
@@ -793,14 +723,16 @@ scaleY(var(--tw-scale-y, 1))
             <div class="marquee-container">
                 <div class="marquee-content">
                     <span
-                        class="md:text-6xl uppercase inline-block neon-pulse-text text-4xl font-bold text-white tracking-tighter pr-4 pl-4" data-i18n="hero.marquee.1">AT
+                        class="md:text-6xl uppercase inline-block neon-pulse-text text-4xl font-bold text-white tracking-tighter pr-4 pl-4"
+                        data-i18n="hero.marquee.1">AT
                         DOUBLE D, WE KNOW HOW TO MAKE YOUR STORIES IMPACTFUL</span>
                     <span
                         class="text-4xl md:text-6xl font-bold tracking-tighter text-transparent stroke-text uppercase px-4 inline-block"
-                        style="-webkit-text-stroke: 1px rgba(247, 148, 29, 0.5);" data-i18n="hero.marquee.2">With animation, there is no
+                        style="-webkit-text-stroke: 1px rgba(247, 148, 29, 0.5);" data-i18n="hero.marquee.2">With
+                        animation, there is no
                         boundary</span>
-                    <span
-                        class="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase px-4 inline-block" data-i18n="hero.marquee.2">With
+                    <span class="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase px-4 inline-block"
+                        data-i18n="hero.marquee.2">With
                         animation, there is no
                         boundary</span>
                 </div>
@@ -816,9 +748,11 @@ scaleY(var(--tw-scale-y, 1))
             <div class="relative">
                 <div
                     class="glass-panel md:p-12 border-l-[#f7941d] z-10 text-center max-w-4xl rounded-2xl border-l-4 mr-auto ml-auto pt-8 pr-8 pb-8 pl-8 relative">
-                    <h2 class="text-xs font-mono text-[#f7941d] mb-6 uppercase tracking-widest" data-i18n="system.overview">[ SYSTEM_OVERVIEW ]</h2>
-                    <p class="md:text-2xl leading-relaxed text-lg font-light text-neutral-200 tracking-tight" data-i18n="intro.text"><span
-                            class="font-semibold text-white" style="">DOUBLE D</span> was founded in 2018 by a young
+                    <h2 class="text-xs font-mono text-[#f7941d] mb-6 uppercase tracking-widest"
+                        data-i18n="system.overview">[ SYSTEM_OVERVIEW ]</h2>
+                    <p class="md:text-2xl leading-relaxed text-lg font-light text-neutral-200 tracking-tight"
+                        data-i18n="intro.text"><span class="font-semibold text-white" style="">DOUBLE D</span> was
+                        founded in 2018 by a young
                         team with a passion and desire to create multimedia communication products.</p>
                 </div>
                 <div class="relative w-full max-w-4xl mx-auto mb-16 z-20 font-mono perspective-normal">
@@ -942,7 +876,8 @@ scaleY(var(--tw-scale-y, 1))
             <!-- The Journey: Timeline -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                 <div class="md:col-span-4">
-                    <h3 class="text-3xl font-bold text-white tracking-tight mb-2" data-i18n="journey.title">THE JOURNEY</h3>
+                    <h3 class="text-3xl font-bold text-white tracking-tight mb-2" data-i18n="journey.title">THE JOURNEY
+                    </h3>
                     <p class="text-sm text-neutral-500" data-i18n="journey.subtitle">Our Creative Timeline</p>
                 </div>
                 <div class="md:col-span-8 relative">
@@ -956,23 +891,27 @@ scaleY(var(--tw-scale-y, 1))
                     <div class="flex flex-col md:flex-row justify-between gap-8 relative z-10">
                         <div
                             class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-[#f7941d] transition-colors">
-                            <div
-                            <div
-                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors" data-i18n="journey.years.value">
+                            <div <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors"
+                                data-i18n="journey.years.value">
                                 4+</div>
-                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4" data-i18n="journey.years.label">Years Active</div>
-                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.years.desc">Specializing in Motion Graphics, we’ve
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4"
+                                data-i18n="journey.years.label">Years Active</div>
+                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.years.desc">
+                                Specializing in Motion Graphics, we’ve
                                 consistently delivered impactful visuals that elevate brands and digital products.</p>
                         </div>
                         <div
                             class="bg-black border border-orange-900/30 p-6 rounded-lg w-full md:w-64 group hover:border-orange-500 transition-colors md:ml-auto">
-                            <div
-                            <div
-                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors" data-i18n="journey.clients.value">
+                            <div <div
+                                class="text-4xl font-bold text-white mb-1 group-hover:text-[#f7941d] transition-colors"
+                                data-i18n="journey.clients.value">
                                 20+</div>
-                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4" data-i18n="journey.clients.label">Trusted Client
+                            <div class="text-[10px] uppercase text-neutral-500 tracking-widest mb-4"
+                                data-i18n="journey.clients.label">Trusted Client
                             </div>
-                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.clients.desc">Partnering with startups, agencies, and
+                            <p class="leading-relaxed text-xs text-neutral-400" data-i18n="journey.clients.desc">
+                                Partnering with startups, agencies, and
                                 businesses to craft engaging motion-driven experiences.</p>
                         </div>
                     </div>
@@ -1264,7 +1203,8 @@ scaleY(var(--tw-scale-y, 1))
                         <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
                     </g>
                 </svg>
-                <h2 class="text-xs font-semibold tracking-widest text-neutral-500 uppercase" data-i18n="nav.services">Our Services
+                <h2 class="text-xs font-semibold tracking-widest text-neutral-500 uppercase" data-i18n="nav.services">
+                    Our Services
                 </h2>
             </div>
 
@@ -1296,8 +1236,8 @@ scaleY(var(--tw-scale-y, 1))
                     <div
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">01</span>
-                        <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.1.title">
+                        <h3 class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap"
+                            data-i18n="module.1.title">
                             B2B Motion Graphic</h3>
                     </div>
                     <div class="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:delay-100 flex flex-col bg-black/20 pt-10 pr-10 pb-10 pl-10 absolute top-0 right-0 bottom-0 left-0 backdrop-blur-sm justify-center translate-y-4 md:group-hover:translate-y-0"
@@ -1313,9 +1253,11 @@ scaleY(var(--tw-scale-y, 1))
                                 <rect width="20" height="14" x="2" y="3" rx="2"></rect>
                             </g>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.1.hover_title">B2B GRAPHIC VIDEO
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4"
+                            data-i18n="module.1.hover_title">B2B GRAPHIC VIDEO
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.1.desc">We produce high quality commercial videos,
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.1.desc">We produce high
+                            quality commercial videos,
                             including testimonials
                             and TVCs.</p>
                     </div>
@@ -1348,8 +1290,8 @@ scaleY(var(--tw-scale-y, 1))
                     <div
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">02</span>
-                        <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.2.title">
+                        <h3 class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap"
+                            data-i18n="module.2.title">
                             INTERACTIVE MOTION</h3>
                     </div>
                     <div
@@ -1365,9 +1307,11 @@ scaleY(var(--tw-scale-y, 1))
                                 <path d="m3.3 7l8.7 5l8.7-5M12 22V12"></path>
                             </g>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.2.hover_title">Interactive motion
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4"
+                            data-i18n="module.2.hover_title">Interactive motion
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.2.desc">We craft stunning UI animations, from
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.2.desc">We craft stunning
+                            UI animations, from
                             engaging emoji packs to smooth UI interactions for websites</p>
                     </div>
                 </div>
@@ -1399,8 +1343,8 @@ scaleY(var(--tw-scale-y, 1))
                     <div
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">03</span>
-                        <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.3.title">
+                        <h3 class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap"
+                            data-i18n="module.3.title">
                             BUILDING WEBSITE</h3>
                     </div>
                     <div
@@ -1413,9 +1357,11 @@ scaleY(var(--tw-scale-y, 1))
                                 d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0zm-13.239 0a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0zm6.619 6.619a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0zm0-13.238a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z">
                             </path>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" data-i18n="module.3.hover_title">BUILDING WEBSITE
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4"
+                            data-i18n="module.3.hover_title">BUILDING WEBSITE
                         </h3>
-                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.3.desc">We create high performance websites with
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.3.desc">We create high
+                            performance websites with
                             stunning UI/UX, ensuring seamless interactions and engaging user experience</p>
                     </div>
                 </div>
@@ -1447,8 +1393,8 @@ scaleY(var(--tw-scale-y, 1))
                     <div
                         class="absolute inset-0 p-8 hidden md:flex flex-col justify-end transition-opacity duration-300 md:group-hover:opacity-0">
                         <span class="text-4xl font-semibold text-white/30 absolute top-6 right-6">04</span>
-                        <h3
-                            class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap" data-i18n="module.4.title">
+                        <h3 class="text-lg font-semibold text-white uppercase tracking-tight rotate-0 md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8 whitespace-nowrap"
+                            data-i18n="module.4.title">
                             Graphic Design</h3>
                     </div>
                     <div
@@ -1461,9 +1407,11 @@ scaleY(var(--tw-scale-y, 1))
                                 d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
                             </path>
                         </svg>
-                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" style="" data-i18n="module.4.hover_title">Graphic
+                        <h3 class="uppercase text-2xl font-semibold text-white tracking-tight mb-4" style=""
+                            data-i18n="module.4.hover_title">Graphic
                             Design</h3>
-                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.4.desc">We deliver creative and impactful design
+                        <p class="leading-relaxed text-sm text-neutral-300" data-i18n="module.4.desc">We deliver
+                            creative and impactful design
                             solutions that bring ideas to life.</p>
                     </div>
                 </div>
@@ -1615,7 +1563,7 @@ scaleY(var(--tw-scale-y, 1))
                             </div>
                         </div>
 
-                        <div class="pt-6 md:pt-0">
+                        <div class="pt-6 md:pt-0 flex flex-col gap-3">
                             <button
                                 class="w-full py-4 bg-white hover:bg-[#f7941d] text-black font-bold uppercase tracking-widest transition-all duration-300 rounded-sm flex items-center justify-center gap-2 group relative overflow-hidden">
                                 <span class="relative z-10">View Case Study</span>
@@ -1627,6 +1575,19 @@ scaleY(var(--tw-scale-y, 1))
                                     <path d="m12 5 7 7-7 7"></path>
                                 </svg>
                             </button>
+                            <button onclick="copyProjectShareUrl()"
+                                class="w-full py-3 border border-white/10 hover:border-[#f7941d]/40 text-neutral-500 hover:text-[#f7941d] text-xs font-semibold uppercase tracking-widest transition-all duration-300 rounded-sm flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="18" cy="5" r="3" />
+                                    <circle cx="6" cy="12" r="3" />
+                                    <circle cx="18" cy="19" r="3" />
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                                </svg>
+                                <span id="modal-share-label">Share</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1637,13 +1598,10 @@ scaleY(var(--tw-scale-y, 1))
 
                 <!-- Card 1 -->
                 <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
-                    data-category="b2b" onclick="openProjectModal(this)" data-title="SAAS VIDEO CÔMMERCIAL"
+                    data-card-id="card-1" data-thumb="Img/thumb1.png" data-category="b2b"
+                    onclick="openProjectModal(this)" data-title="SAAS Video Commercial"
                     data-desc="The Made by FIS (MBF) Product Package is a powerful suite of solutions designed to streamline operations, enhance customer engagement, and drive business growth. Backed by FIS’s expertise, it offers innovative, secure, and scalable tools to help businesses thrive."
-                    data-media="[
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1078217820?h=8311443927&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1055810406?h=a79751180c&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1048499044?h=8971e483d1&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://player.vimeo.com/video/1055810406?h=a79751180c&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;VertZero&quot;},{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://player.vimeo.com/video/1078217820?h=8311443927&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;AkaFortune&quot;},{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://player.vimeo.com/video/1077461285?h=648da91a88&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;Azladin&quot;}]">
                     <div
                         class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
@@ -1678,13 +1636,10 @@ scaleY(var(--tw-scale-y, 1))
 
                 <!-- Card 2 -->
                 <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
-                    data-category="b2b" onclick="openProjectModal(this)" data-title="SAAS VIDEO Commercial"
+                    data-card-id="card-2" data-thumb="Img/thumb2.png" data-category="b2b"
+                    onclick="openProjectModal(this)" data-title="Video Explanation"
                     data-desc="The Made by FIS (MBF) Product Package is a powerful suite of solutions designed to streamline operations, enhance customer engagement, and drive business growth. Backed by FIS’s expertise, it offers innovative, secure, and scalable tools to help businesses thrive."
-                    data-media="[
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/896410553?h=0348e5725b&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1055810406?h=a79751180c&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://player.vimeo.com/video/1048499044?h=8971e483d1&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://www.youtube.com/embed/sglR_a4G49I?si=W6vLhNYudgW3yFHk&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;Ai đang thực sự kiểm soát AI? Từ các tập đoàn công nghệ Mỹ đến gã khổng lồ Trung Quốc, từ chính phủ đến người dùng bình thường — video này khám phá cuộc chiến quyền lực đằng sau công nghệ đang định hình lại thế giới.&quot;},{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://player.vimeo.com/video/896410553?h=0348e5725b&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;In this video, we will provide an in-depth and detailed look into SGBV, including definitions, various types of violence, and the impact it has on both victims and communities. We will also discuss modern strategies and measures to prevent and minimize SGBV.&quot;},{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://www.youtube.com/embed/_A4O-30PKGM?si=yhloXsLACfFmK012&amp;autoplay=1&amp;loop=1&amp;autopause=0&quot;,&quot;desc&quot;:&quot;\&quot;Cẩm nang đầu tư quỹ\&quot; - Series video kiến thức đem đến cho bạn góc nhìn gần gũi, dễ hiểu nhất về CHỨNG CHỈ QUỸ - kênh đầu tư an toàn và đầy tiềm năng tăng trưởng. \nVới chiến lược và mô hình hoạt động minh bạch, an toàn, Quỹ mở trái phiếu VNDBF đang là lựa chọn hoàn hảo cho nhà đầu tư muốn tăng thu nhập thụ động và đầu tư dài hạn vào thị trường trái phiếu, đem đến cho nhà đầu tư một giải pháp tài chính an toàn, bền vững và lợi nhuận đều đặn.&quot;}]">
                     <div
                         class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
@@ -1717,17 +1672,15 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
-                    data-category="interactive" onclick="openProjectModal(this)" data-title="Brochure Interactive"
+                <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-card-id="card-3" data-thumb="Img/thumb3.png" data-category="interactive"
+                    onclick="openProjectModal(this)" data-title="Brochure Interactive"
                     data-desc="Photorealistic automotive rendering focusing on lighting and reflection physics for a major B2B product launch."
-                    data-media="[
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/thap_tai_san.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;thap tai san&quot;},
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/brochure_vertzero.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/brochure_azladin.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/brochure_vertzero.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/test.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;}]">
                     <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
                             <img src="Img/thumb3.png"
                                 class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                 alt="Thumbnail">
@@ -1740,7 +1693,7 @@ scaleY(var(--tw-scale-y, 1))
                             </div>
                         </div>
                         <div
-                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-orange-500/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
                             <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
                             <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Brochure
                                 Interactive</h3>
@@ -1754,17 +1707,15 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <!-- Card 4 -->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
-                    data-category="interactive" onclick="openProjectModal(this)" data-title="Mascot Animation"
+                <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-card-id="card-4" data-thumb="Img/thumb4.png" data-category="interactive"
+                    onclick="openProjectModal(this)" data-title="Mascot Animation"
                     data-desc="Dynamic motion graphics for the Web3 ecosystem, emphasizing brand identity through immersive web experiences."
-                    data-media="[
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/mascot.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;},
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/mascot2.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/mascot.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/bear_mascot.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main 2&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/mascot2.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;}]">
                     <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
                             <canvas id="thumb-canvas-4"
                                 class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"></canvas>
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
@@ -1776,7 +1727,7 @@ scaleY(var(--tw-scale-y, 1))
                             </div>
                         </div>
                         <div
-                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-yellow-800/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-yellow-800/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
                             <span class="text-xs font-mono text-yellow-600 mb-4">PROJECT DETAILS</span>
                             <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Mascot Animation
                             </h3>
@@ -1790,18 +1741,15 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <!-- Card 5 -->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card transition-all duration-700 ease-out"
-                    data-category="interactive" onclick="openProjectModal(this)"
-                    data-title="Inforgraphic interactive brochure"
+                <div class="group cursor-pointer snap-center project-card transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-card-id="card-5" data-thumb="Img/thumb5.png" data-category="interactive"
+                    onclick="openProjectModal(this)" data-title="Inforgraphic interactive brochure"
                     data-desc="High-fidelity texturing and environment design for luxury automotive marketing campaign."
-                    data-media="[
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/interactive_anatomy.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;Main&quot;},
-                {&quot;type&quot;:&quot;rive&quot;, &quot;src&quot;:&quot;Rive file/thap_tai_san.riv&quot;, &quot;stateMachine&quot;:&quot;State Machine 1&quot;, &quot;artboard&quot;:&quot;thap tai san&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/interactive_anatomy.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/thap_tai_san.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;thap tai san&quot;},{&quot;type&quot;:&quot;rive&quot;,&quot;src&quot;:&quot;Rive file/homefood.riv&quot;,&quot;desc&quot;:&quot;&quot;,&quot;stateMachine&quot;:&quot;State Machine 1&quot;,&quot;artboard&quot;:&quot;Main&quot;}]">
                     <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
                             <img src="Img/thumb5.png"
                                 class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                 alt="Thumbnail">
@@ -1814,7 +1762,7 @@ scaleY(var(--tw-scale-y, 1))
                             </div>
                         </div>
                         <div
-                            class="backface-hidden overflow-hidden flex flex-col text-center bg-black w-full h-full border-orange-500/30 border rounded-xl pt-8 pr-8 pb-8 pl-8 absolute rotate-y-180 justify-center">
+                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
                             <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
                             <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Infographic
                                 Interactive Motion</h3>
@@ -1828,18 +1776,15 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <!-- Card 6 -->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
-                    data-category="web" onclick="openProjectModal(this)" data-title="KiotViet Project"
+                <div class="group cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-card-id="card-6" data-thumb="Img/thumb6.png" data-category="web"
+                    onclick="openProjectModal(this)" data-title="Landing Page websites design"
                     data-desc="Engaging educational content editing that boosted viewer retention significantly for KiotViet."
-                    data-media="[
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://vertzero.eco&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://kyta.fpt.com/en&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://kumessi1997.github.io/weddinginvitation/&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;website&quot;,&quot;src&quot;:&quot;https://vertzero.eco&quot;,&quot;desc&quot;:&quot;&quot;},{&quot;type&quot;:&quot;website&quot;,&quot;src&quot;:&quot;https://kyta.fpt.com/en&quot;,&quot;desc&quot;:&quot;&quot;},{&quot;type&quot;:&quot;website&quot;,&quot;src&quot;:&quot;https://kumessi1997.github.io/weddinginvitation/&quot;,&quot;desc&quot;:&quot;&quot;}]">
                     <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
                             <img src="Img/thumb6.png"
                                 class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                 alt="Thumbnail">
@@ -1867,17 +1812,15 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <!-- Card 7 -->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
-                    data-category="marketing" onclick="openProjectModal(this)" data-title="KiotViet Project"
+                <div class="group cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out w-[320px] h-[450px] perspective-1000"
+                    data-card-id="card-7" data-thumb="Img/thumb7.png" data-category="marketing"
+                    onclick="openProjectModal(this)" data-title="Slide/Report Design"
                     data-desc="Engaging educational content editing that boosted viewer retention significantly for KiotViet."
-                    data-media="[
-                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1640906152676-dace6710d24b?w=2160&amp;q=80&quot;},
-                {&quot;type&quot;:&quot;video&quot;, &quot;src&quot;:&quot;https://www.youtube.com/embed/Z7aMCp9RCbk?autoplay=1&amp;mute=0&amp;controls=0&amp;loop=1&amp;playlist=Z7aMCp9RCbk&quot;}
-             ]">
+                    data-media="[{&quot;type&quot;:&quot;image&quot;,&quot;src&quot;:&quot;https://images.unsplash.com/photo-1640906152676-dace6710d24b?w=2160&amp;q=80&quot;,&quot;desc&quot;:&quot;&quot;},{&quot;type&quot;:&quot;video&quot;,&quot;src&quot;:&quot;https://www.youtube.com/embed/Z7aMCp9RCbk?autoplay=1&amp;mute=0&amp;controls=0&amp;loop=1&amp;playlist=Z7aMCp9RCbk&quot;,&quot;desc&quot;:&quot;&quot;}]">
                     <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
+                        class="transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none w-full h-full relative">
                         <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
+                            class="backface-hidden overflow-hidden bg-neutral-900 w-full h-full z-0 border-white/10 border rounded-xl absolute">
                             <img src="Img/thumb7.png"
                                 class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                 alt="Thumbnail">
@@ -1904,85 +1847,47 @@ scaleY(var(--tw-scale-y, 1))
                     </div>
                 </div>
 
-                <!-- Card 8-->
-                <div class="group w-[320px] h-[450px] perspective-1000 cursor-pointer snap-center project-card opacity-0 translate-y-8 blur-sm transition-all duration-700 ease-out"
-                    data-category="marketing" onclick="openProjectModal(this)" data-title="VNDIRECT Campaign"
-                    data-desc="Comprehensive video introduction campaign for financial services leader VNDIRECT."
-                    data-media="[
-                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1724525647065-f948fc102e68?w=2160&amp;q=80&quot;},
-                {&quot;type&quot;:&quot;image&quot;, &quot;src&quot;:&quot;https://images.unsplash.com/photo-1629946832022-c327f74956e0?w=2160&amp;q=80&quot;}
-             ]">
-                    <div
-                        class="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-180 pointer-events-none">
-                        <div
-                            class="absolute w-full h-full backface-hidden bg-neutral-900 border border-white/10 rounded-xl overflow-hidden">
-                            <img src="Img/thumb8.png"
-                                class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
-                                alt="Thumbnail">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                            <div class="relative z-10 w-full h-full flex flex-col justify-end p-8">
-                                <h3
-                                    class="text-2xl font-semibold text-white uppercase leading-none mb-1 tracking-tight">
-                                    Slide/Report Design</h3>
-                                <p class="text-[10px] text-orange-400 font-mono mt-2">Graphic Design</p>
-                            </div>
-                        </div>
-                        <div
-                            class="absolute w-full h-full backface-hidden rotate-y-180 bg-black border border-orange-500/30 rounded-xl overflow-hidden p-8 flex flex-col justify-center text-center">
-                            <span class="text-xs font-mono text-[#f7941d] mb-4">PROJECT DETAILS</span>
-                            <h3 class="uppercase text-xl font-semibold text-white tracking-tight mb-2">Slide/Report
-                                Design
-                            </h3>
-                            <p class="text-neutral-400 text-xs mb-6 leading-relaxed">Engaging educational content
-                                editing that boosted viewer retention significantly.</p>
-                            <span
-                                class="text-[10px] text-neutral-500 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">Click
-                                to View</span>
-                        </div>
-                    </div>
 
-                </div>
 
                 <!-- Logic for Modal & Slider & Scroll Animation -->
                 <script>
                     let currentSlideIndex = 0;
                     let currentMedia = [];
                     let currentRiveInstance = null;
+                    let currentCardDesc = '';
+                    let currentCardId = '';
 
                     function openProjectModal(card) {
                         const modal = document.getElementById('project-modal');
                         const title = document.getElementById('modal-title');
-                        const desc = document.getElementById('modal-desc');
                         const category = document.getElementById('modal-category');
 
-                        // Get data from attributes
-                        const dataTitle = card.getAttribute('data-title');
-                        const dataDesc = card.getAttribute('data-desc');
-                        const dataCat = card.getAttribute('data-category');
-                        const mediaJson = card.getAttribute('data-media');
+                        const cardId = card.getAttribute('data-card-id');
+                        currentCardId = cardId || '';
+                        if (cardId) history.replaceState(null, '', '#project=' + cardId);
+                        const liveConfig = cardId && window.mmConfig && window.mmConfig[cardId];
 
-                        // Set text content
-                        title.textContent = dataTitle;
-                        desc.textContent = dataDesc;
-                        category.textContent = (dataCat || 'PROJECT').toUpperCase();
-
-                        // Parse Media
-                        try {
-                            currentMedia = JSON.parse(mediaJson);
-                        } catch (e) {
-                            console.error("Error parsing media", e);
-                            currentMedia = [];
+                        if (liveConfig) {
+                            title.textContent = liveConfig.title || card.getAttribute('data-title');
+                            currentCardDesc = liveConfig.desc || '';
+                            currentMedia = liveConfig.media || [];
+                            category.textContent = (liveConfig.category || card.getAttribute('data-category') || 'PROJECT').toUpperCase();
+                        } else {
+                            const mediaJson = card.getAttribute('data-media');
+                            title.textContent = card.getAttribute('data-title');
+                            currentCardDesc = card.getAttribute('data-desc') || '';
+                            category.textContent = (card.getAttribute('data-category') || 'PROJECT').toUpperCase();
+                            try { currentMedia = JSON.parse(mediaJson); }
+                            catch (e) { currentMedia = []; }
                         }
 
                         currentSlideIndex = 0;
                         renderSlide();
 
-                        // Show Modal
                         modal.classList.remove('opacity-0', 'pointer-events-none');
                         modal.style.visibility = 'visible';
                         document.body.style.overflow = 'hidden';
 
-                        // Close on outside click
                         modal.onclick = function (e) {
                             if (e.target === modal || e.target.closest('#modal-close')) closeProjectModal();
                         };
@@ -2002,7 +1907,30 @@ scaleY(var(--tw-scale-y, 1))
                             modal.style.visibility = 'hidden';
                             document.getElementById('modal-media-container').innerHTML = ''; // Stop videos
                         }, 500);
+                        currentCardId = '';
+                        history.replaceState(null, '', window.location.pathname);
                         document.body.style.overflow = '';
+                    }
+
+                    function copyProjectShareUrl() {
+                        if (!currentCardId) return;
+                        const url = 'https://doubledmedia.vn/project/' + currentCardId;
+                        const label = document.getElementById('modal-share-label');
+                        const copy = (text) => {
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(text);
+                            } else {
+                                const ta = document.createElement('textarea');
+                                ta.value = text;
+                                document.body.appendChild(ta);
+                                ta.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(ta);
+                            }
+                        };
+                        copy(url);
+                        label.textContent = 'Link copied!';
+                        setTimeout(() => { label.textContent = 'Share'; }, 2200);
                     }
 
                     function changeSlide(direction) {
@@ -2023,6 +1951,7 @@ scaleY(var(--tw-scale-y, 1))
                         }
 
                         const item = currentMedia[currentSlideIndex];
+                        document.getElementById('modal-desc').textContent = item.desc || currentCardDesc;
                         let content = '';
 
                         // Handle Video vs Image vs Rive
@@ -2031,15 +1960,32 @@ scaleY(var(--tw-scale-y, 1))
                             currentRiveInstance = null;
                         }
 
-                        if (item.type === 'video') {
+                        if (item.type === 'website') {
+                            content = `<div class="w-full h-full flex items-center justify-center p-4 animate-fade-in">
+                                <div class="w-full aspect-video rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-neutral-900 flex flex-col">
+                                    <div class="flex items-center gap-2 px-3 flex-shrink-0 bg-neutral-800/90 border-b border-white/10" style="height:28px">
+                                        <div class="flex gap-1.5">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400/70"></div>
+                                            <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                                        </div>
+                                        <div class="flex-1 bg-neutral-700/40 rounded px-2 text-[10px] text-neutral-500 font-mono truncate" style="padding-top:2px;padding-bottom:2px">${item.src}</div>
+                                        <a href="${item.src}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-neutral-500 hover:text-[#f7941d] transition-colors flex-shrink-0" title="Open in new tab">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                                        </a>
+                                    </div>
+                                    <iframe class="flex-1 w-full border-0 block" src="${item.src}" title="Website Preview" frameborder="0" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" allowfullscreen></iframe>
+                                </div>
+                            </div>`;
+                        } else if (item.type === 'video') {
                             // Ensure generic iframe properties work for Youtube and Vimeo
                             content = `<div class="w-full h-full animate-fade-in rounded-lg overflow-hidden bg-black shadow-2xl relative">
-                    <iframe 
-                        class="w-full h-full object-cover" 
-                        src="${item.src}" 
-                        title="Project Video" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                    <iframe
+                        class="w-full h-full object-cover"
+                        src="${item.src}"
+                        title="Project Video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                         allowfullscreen>
                     </iframe>
                 </div>`;
@@ -2129,6 +2075,7 @@ scaleY(var(--tw-scale-y, 1))
                         const thumbCanvas4 = document.getElementById('thumb-canvas-4');
                         if (thumbCanvas4) {
                             const r = new rive.Rive({
+                                autoBind: true,
                                 src: 'Rive file/thumb.riv',
                                 canvas: thumbCanvas4,
                                 autoplay: true,
@@ -2349,22 +2296,24 @@ scaleY(var(--tw-scale-y, 1))
                 <!-- Member 1 -->
                 <div class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative"
                     onclick="window.location.href='https://www.behance.net/nguyentrungdung2'" role="button">
-                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1601576084861-5de423553c0f?w=800&amp;q=80)]"
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url('Img/DNTava.jpg')]"
                         style=""></div>
                     <div class="absolute bottom-0 left-0 p-6 wipe-content group-hover:text-white">
-                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">DNT</h3>
-                        <p class="text-[10px] font-mono text-[#f7941d] uppercase relative z-30">Founder</p>
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">Dzung Nguyen
+                        </h3>
+                        <p class="text-[10px] font-mono text-[#f7941d] uppercase relative z-30">Founder - Motion
+                            Designer</p>
                     </div>
                 </div>
 
                 <!-- Member 2 -->
                 <div
                     class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
-                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1624224971170-2f84fed5eb5e?w=800&amp;q=80)]"
+                    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url('img/Thangava.jpg')]"
                         style=""></div>
                     <div class="absolute bottom-0 left-0 p-6 wipe-content">
                         <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative">Thang Doan</h3>
-                        <p class="text-[10px] font-mono text-orange-400 uppercase relative z-30">Marketing</p>
+                        <p class="text-[10px] font-mono text-orange-400 uppercase relative z-30">UI UX Designer</p>
                     </div>
                 </div>
 
@@ -2372,12 +2321,13 @@ scaleY(var(--tw-scale-y, 1))
                 <div
                     class="diagonal-wipe group cursor-pointer overflow-hidden bg-neutral-900 h-64 border-white/5 border relative">
                     <div
-                        class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url(https://images.unsplash.com/photo-1582233479366-6d38bc390a08?w=800&amp;q=80)]">
+                        class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500 bg-[url('img/mrxava.jpg')]">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 wipe-content">
-                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative" style="">MrX
+                        <h3 class="uppercase z-30 text-lg font-bold text-white tracking-tight relative" style="">Tan
+                            Dzung
                         </h3>
-                        <p class="text-[10px] font-mono text-orange-600 uppercase relative z-30">Manager &amp; Biz Dev
+                        <p class="text-[10px] font-mono text-orange-600 uppercase relative z-30">Graphic Designer
                         </p>
                     </div>
                 </div>
@@ -2407,18 +2357,325 @@ scaleY(var(--tw-scale-y, 1))
                 </div>
 
                 <a href="contact-us.html"
-                    class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border-orange-500/20 border rounded-sm pt-5 pr-10 pb-5 pl-10" data-i18n="contact.btn">Let't
+                    class="neon-glow-btn uppercase hover:bg-[#502500] transition-colors flex items-center gap-3 font-bold text-white tracking-widest bg-[#3a1d00] border-orange-500/20 border rounded-sm pt-5 pr-10 pb-5 pl-10"
+                    data-i18n="contact.btn">Let't
                     work together</a>
             </div>
-
-            <div
-                class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest">
-                © 2024 Streax Studios. <span data-i18n="footer.status">All Systems Operational.</span>
-            </div>
+            <div id="footer-placeholder"></div>
         </div>
     </section>
 
+    <!-- ── Media Manager Panel ──────────────────────────────────────────── -->
+    <div id="media-manager-panel" class="fixed inset-0 z-[300] overflow-y-auto hidden"
+        style="background:rgba(0,0,0,0.97); backdrop-filter:blur(8px);">
+        <div class="max-w-2xl mx-auto px-4 py-10">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <p class="text-[10px] font-mono text-[#f7941d] tracking-widest mb-1">PORTFOLIO</p>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Media Manager</h1>
+                    <p class="text-xs text-neutral-500 mt-1">Add, edit, or remove media for each project card. Changes
+                        are saved in your browser.</p>
+                </div>
+                <button onclick="mmClose()"
+                    class="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-white border border-white/10 hover:border-white/30 rounded-lg transition-colors text-sm flex-shrink-0">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Cards list (populated by JS) -->
+            <div id="mm-cards-list" class="space-y-3"></div>
+
+            <!-- Footer -->
+            <div
+                class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <span class="text-xs text-neutral-600">Saved data persists across sessions via localStorage.</span>
+                <div class="flex gap-3">
+                    <button onclick="mmClose()"
+                        class="px-4 py-2 text-sm text-neutral-400 hover:text-white border border-white/10 rounded-lg transition-colors">
+                        Cancel
+                    </button>
+                    <button onclick="mmExportHTML()" title="Download index.html with all changes baked in"
+                        class="px-4 py-2 text-sm font-semibold text-[#f7941d] border border-[#f7941d]/40 hover:bg-[#f7941d]/10 rounded-lg transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Export HTML
+                    </button>
+                    <button onclick="mmSave()"
+                        class="px-6 py-2 text-sm font-bold text-black bg-[#f7941d] hover:bg-orange-400 rounded-lg transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating trigger button (admin only) -->
+    <button onclick="mmOpen()" title="Open Media Manager"
+        data-admin-only style="display:none"
+        class="fixed bottom-6 right-6 z-[100] w-10 h-10 flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-[#f7941d] border border-white/10 hover:border-[#f7941d]/40 rounded-full transition-all shadow-lg text-base">
+        ⚙
+    </button>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = 'dd-media-config';
+            let mmConfig = {};
+
+            /* ── Init: read from DOM cards, then overlay localStorage ── */
+            function mmInit() {
+                document.querySelectorAll('.project-card[data-card-id]').forEach(card => {
+                    const id = card.getAttribute('data-card-id');
+                    let media = [];
+                    try { media = JSON.parse(card.getAttribute('data-media')); } catch (e) { }
+                    mmConfig[id] = {
+                        title: card.getAttribute('data-title') || '',
+                        category: card.getAttribute('data-category') || '',
+                        desc: card.getAttribute('data-desc') || '',
+                        media
+                    };
+                });
+                try {
+                    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+                    if (saved) {
+                        Object.keys(saved).forEach(k => {
+                            if (mmConfig[k]) mmConfig[k].media = saved[k].media;
+                        });
+                    }
+                } catch (e) { }
+                window.mmConfig = mmConfig;
+            }
+
+            /* ── Open / Close ── */
+            window.mmOpen = function () {
+                renderPanel();
+                document.getElementById('media-manager-panel').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.mmClose = function () {
+                document.getElementById('media-manager-panel').classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+
+            /* ── Save: collect form → mmConfig → localStorage ── */
+            window.mmSave = function () {
+                const toSave = {};
+                document.querySelectorAll('[data-mm-card]').forEach(cardEl => {
+                    const cardId = cardEl.getAttribute('data-mm-card');
+                    const items = [];
+                    cardEl.querySelectorAll('[data-mm-item]').forEach(itemEl => {
+                        const type = itemEl.querySelector('[data-mm-type]').value;
+                        const src = itemEl.querySelector('[data-mm-src]').value.trim();
+                        const desc = itemEl.querySelector('[data-mm-desc]').value.trim();
+                        if (!src) return;
+                        const item = { type, src, desc };
+                        if (type === 'rive') {
+                            item.stateMachine = itemEl.querySelector('[data-mm-sm]').value.trim() || 'State Machine 1';
+                            item.artboard = itemEl.querySelector('[data-mm-ab]').value.trim();
+                        }
+                        items.push(item);
+                    });
+                    if (mmConfig[cardId]) mmConfig[cardId].media = items;
+                    toSave[cardId] = { media: items };
+                });
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+                window.mmConfig = mmConfig;
+                mmClose();
+                showToast('Saved!');
+            };
+
+            /* ── Collect current form data → { cardId: [items] } ── */
+            function mmCollectForm() {
+                const out = {};
+                document.querySelectorAll('[data-mm-card]').forEach(cardEl => {
+                    const cardId = cardEl.getAttribute('data-mm-card');
+                    const items = [];
+                    cardEl.querySelectorAll('[data-mm-item]').forEach(itemEl => {
+                        const type = itemEl.querySelector('[data-mm-type]').value;
+                        const src = itemEl.querySelector('[data-mm-src]').value.trim();
+                        const desc = itemEl.querySelector('[data-mm-desc]').value.trim();
+                        if (!src) return;
+                        const item = { type, src, desc };
+                        if (type === 'rive') {
+                            item.stateMachine = itemEl.querySelector('[data-mm-sm]').value.trim() || 'State Machine 1';
+                            item.artboard = itemEl.querySelector('[data-mm-ab]').value.trim();
+                        }
+                        items.push(item);
+                    });
+                    out[cardId] = items;
+                });
+                return out;
+            }
+
+            /* ── Export: fetch index.html source, patch data-media attrs, download ── */
+            window.mmExportHTML = async function () {
+                const formData = mmCollectForm();
+                let html;
+                try {
+                    html = await fetch(window.location.pathname || 'index.html').then(r => r.text());
+                } catch (e) {
+                    showToast('Error: could not fetch source file');
+                    return;
+                }
+
+                for (const [cardId, items] of Object.entries(formData)) {
+                    const marker = `data-card-id="${cardId}"`;
+                    const markerPos = html.indexOf(marker);
+                    if (markerPos === -1) continue;
+
+                    const mediaAttr = 'data-media="';
+                    const mediaPos = html.indexOf(mediaAttr, markerPos);
+                    if (mediaPos === -1) continue;
+
+                    const valueStart = mediaPos + mediaAttr.length;
+                    // data-media value uses HTML entities so no raw " inside — first " ends it
+                    const valueEnd = html.indexOf('"', valueStart);
+                    if (valueEnd === -1) continue;
+
+                    const encoded = JSON.stringify(items)
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;');
+
+                    html = html.slice(0, valueStart) + encoded + html.slice(valueEnd);
+                }
+
+                const blob = new Blob([html], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.html';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Downloaded updated index.html');
+            };
+
+            /* ── Toast notification ── */
+            function showToast(msg) {
+                const t = document.createElement('div');
+                t.className = 'fixed bottom-20 right-6 z-[400] bg-[#f7941d] text-black text-xs font-bold px-4 py-2 rounded-lg shadow-xl';
+                t.textContent = msg;
+                document.body.appendChild(t);
+                setTimeout(() => t.remove(), 2200);
+            }
+
+            /* ── HTML helpers ── */
+            function esc(s) {
+                return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            function itemHtml(item, idx) {
+                const isRive = item.type === 'rive';
+                return `
+          <div class="border border-white/5 rounded-lg p-3 space-y-2" style="background:#111" data-mm-item>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono text-neutral-600 w-5">${idx + 1}</span>
+              <select data-mm-type onchange="mmTypeChange(this)"
+                      class="bg-neutral-800 text-white text-xs border border-white/10 rounded px-2 py-1.5 cursor-pointer">
+                <option value="video"${item.type === 'video' ? ' selected' : ''}>Video (YouTube / Vimeo)</option>
+                <option value="image"${item.type === 'image' ? ' selected' : ''}>Image</option>
+                <option value="rive"${item.type === 'rive' ? ' selected' : ''}>Rive Animation</option>
+              </select>
+              <button onclick="mmRemoveItem(this)"
+                      class="ml-auto text-xs text-red-500/70 hover:text-red-400 border border-red-500/20 hover:border-red-400/50 px-2 py-1 rounded transition-colors">
+                Remove
+              </button>
+            </div>
+            <input data-mm-src type="text" value="${esc(item.src)}"
+                   placeholder="Embed URL or file path — e.g. Rive file/mascot.riv"
+                   class="w-full bg-neutral-800 text-white text-xs border border-white/10 rounded px-3 py-2 placeholder-neutral-600 outline-none focus:border-[#f7941d] transition-colors">
+            <textarea data-mm-desc rows="2"
+                      placeholder="Description shown in modal when this media is active…"
+                      class="w-full bg-neutral-800 text-white text-xs border border-white/10 rounded px-3 py-2 resize-none placeholder-neutral-600 outline-none focus:border-[#f7941d] transition-colors">${esc(item.desc)}</textarea>
+            <div class="${isRive ? '' : 'hidden'} grid grid-cols-2 gap-2" data-mm-rive-fields>
+              <input data-mm-sm type="text" value="${esc(item.stateMachine || 'State Machine 1')}"
+                     placeholder="State Machine name"
+                     class="bg-neutral-800 text-white text-xs border border-white/10 rounded px-3 py-2 placeholder-neutral-600 outline-none focus:border-[#f7941d] transition-colors">
+              <input data-mm-ab type="text" value="${esc(item.artboard || '')}"
+                     placeholder="Artboard name"
+                     class="bg-neutral-800 text-white text-xs border border-white/10 rounded px-3 py-2 placeholder-neutral-600 outline-none focus:border-[#f7941d] transition-colors">
+            </div>
+          </div>`;
+            }
+
+            /* ── Render accordion panel ── */
+            function renderPanel() {
+                const list = document.getElementById('mm-cards-list');
+                list.innerHTML = '';
+                let n = 0;
+                Object.entries(mmConfig).forEach(([cardId, cfg]) => {
+                    n++;
+                    const wrap = document.createElement('div');
+                    wrap.className = 'border border-white/10 rounded-xl overflow-hidden';
+                    wrap.innerHTML = `
+            <button class="w-full flex items-center gap-3 px-4 py-3 bg-neutral-900 hover:bg-neutral-800 text-left transition-colors"
+                    onclick="mmToggleCard('${cardId}')">
+              <span class="text-[10px] font-mono text-neutral-600 w-5">0${n}</span>
+              <span class="text-sm font-semibold text-white flex-1">${esc(cfg.title)}</span>
+              <span class="text-[10px] font-mono text-[#f7941d] bg-[#f7941d]/10 px-2 py-0.5 rounded-full">${cfg.media.length} media</span>
+              <span class="text-neutral-600 text-xs">▾</span>
+            </button>
+            <div id="mm-body-${cardId}" class="hidden p-4 space-y-2" style="background:#0a0a0a" data-mm-card="${cardId}">
+              ${cfg.media.map((item, i) => itemHtml(item, i)).join('')}
+              <button onclick="mmAddItem('${cardId}')"
+                      class="w-full py-2.5 mt-1 border border-dashed border-white/10 rounded-lg text-xs text-neutral-500 hover:border-[#f7941d] hover:text-[#f7941d] transition-colors">
+                + Add Media
+              </button>
+            </div>`;
+                    list.appendChild(wrap);
+                });
+            }
+
+            /* ── Accordion toggle ── */
+            window.mmToggleCard = function (cardId) {
+                document.getElementById('mm-body-' + cardId).classList.toggle('hidden');
+            };
+
+            /* ── Show/hide Rive fields based on type ── */
+            window.mmTypeChange = function (sel) {
+                sel.closest('[data-mm-item]').querySelector('[data-mm-rive-fields]')
+                    .classList.toggle('hidden', sel.value !== 'rive');
+            };
+
+            /* ── Add blank media item ── */
+            window.mmAddItem = function (cardId) {
+                const body = document.getElementById('mm-body-' + cardId);
+                const addBtn = body.querySelector('button[onclick^="mmAddItem"]');
+                const idx = body.querySelectorAll('[data-mm-item]').length;
+                const div = document.createElement('div');
+                div.innerHTML = itemHtml({ type: 'video', src: '', desc: '' }, idx);
+                body.insertBefore(div.firstElementChild, addBtn);
+                body.querySelector('[data-mm-item]:last-of-type [data-mm-src]').focus();
+            };
+
+            /* ── Remove a media item ── */
+            window.mmRemoveItem = function (btn) {
+                btn.closest('[data-mm-item]').remove();
+            };
+
+            function openFromHash() {
+                const m = window.location.hash.match(/^#project=(card-\d+)$/);
+                if (!m) return;
+                const card = document.querySelector('[data-card-id="' + m[1] + '"]');
+                if (card) openProjectModal(card);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                mmInit();
+                setTimeout(openFromHash, 700);
+            });
+            window.addEventListener('hashchange', openFromHash);
+        })();
+    </script>
+
+    <script src="components.js"></script>
     <script src="lang.js"></script>
+    <script src="admin-auth.js"></script>
     <script>
         // Loading Screen Logic
         window.addEventListener('load', () => {
@@ -2457,6 +2714,82 @@ scaleY(var(--tw-scale-y, 1))
 
         if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
         if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+    </script>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
     </script>
 </body>
 

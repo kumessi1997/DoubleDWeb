@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://doubledmedia.vn/rive-wiki.html">
+    <meta name="description" content="Double D Media's Rive animation knowledge base — editor interface, state machines, data binding, and runtime integration guides in Vietnamese.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Rive Wiki — Double D Media">
     <meta property="og:description" content="Tài liệu nội bộ về Rive — thiết kế, hoạt hình, và tích hợp runtime.">
@@ -154,7 +156,7 @@
                 <a href="showcase.html" class="hover:text-white transition-colors">Showcase</a>
                 <a href="blog.html" class="hover:text-white transition-colors">Blog</a>
                 <a href="rive-wiki.html" class="text-[#f7941d]">Wiki</a>
-                <a href="wiki-admin.html" class="hover:text-white transition-colors opacity-30 hover:opacity-80" title="Wiki CMS Admin">CMS ✎</a>
+                <a href="wiki-admin.html" data-admin-only style="display:none" class="hover:text-white transition-colors opacity-60 hover:opacity-100 text-[#f7941d]" title="Wiki CMS Admin">CMS ✎</a>
             </div>
             <a href="contact-us.html"
                 class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
@@ -1151,5 +1153,9 @@ Giải pháp Enum:     giá trị luôn hợp lệ và rõ nghĩa</code></pre>
 
     </script>
 
+    <div id="footer-placeholder"></div>
+    <script src="components.js"></script>
+    <script src="lang.js"></script>
+    <script src="admin-auth.js"></script>
 </body>
 </html>

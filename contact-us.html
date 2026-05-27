@@ -4,21 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://doubledmedia.vn/contact-us.html">
+    <meta name="description" content="Start your project with Double D Media. Submit a brief for video production, interactive motion design, or UI/UX — we reply within 24 hours.">
 
     <!-- Social Sharing Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="DOUBLE D | Contact & Order">
     <meta property="og:description"
         content="Let's Build Your Next Project. From concept to deployment, we bring industrial-grade motion, design, and technology to your brand.">
-    <meta property="og:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
-    <meta property="og:url" content="https://doubleddmedia.vn/contact-us.html">
+    <meta property="og:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
+    <meta property="og:url" content="https://doubledmedia.vn/contact-us.html">
     <meta property="og:site_name" content="Double D Media">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DOUBLE D | Contact & Order">
     <meta name="twitter:description"
         content="Let's Build Your Next Project. From concept to deployment, we bring industrial-grade motion, design, and technology to your brand.">
-    <meta name="twitter:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
+    <meta name="twitter:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
 
     <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
     <title>DOUBLE D | Contact &amp; Order</title>
@@ -258,46 +260,7 @@
 <body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
-        <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 group">
-                <img src="logo/logo doubled.svg" alt="Double D Media"
-                    class="h-8 w-auto transition-opacity hover:opacity-80" />
-            </a>
-            <div
-                class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-                <a href="our-services.html" class="hover:text-white transition-colors" data-i18n="nav.services">OUR
-                    SERVICES</a>
-                <a href="showcase.html" class="hover:text-white transition-colors" data-i18n="nav.showcase">SHOWCASE</a>
-                <a href="blog.html" class="hover:text-white transition-colors" data-i18n="nav.blog">BLOG</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors" data-i18n="nav.wiki">WIKI</a>
-
-                <!-- Language Toggle -->
-                <div class="flex items-center gap-2 border-l border-white/10 pl-6 ml-2 uppercase">
-                    <button onclick="setLanguage('en')"
-                        class="lang-toggle-btn transition-colors hover:text-white cursor-pointer"
-                        data-lang="en">EN</button>
-                    <span class="text-white/10">|</span>
-                    <button onclick="setLanguage('vi')"
-                        class="lang-toggle-btn transition-colors hover:text-white cursor-pointer"
-                        data-lang="vi">VI</button>
-                </div>
-
-            </div>
-            <a href="#order-form"
-                class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
-                <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button"
-                    data-i18n="nav.contact">CONTACT
-                    US</span>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14"
-                    viewBox="0 0 24 24" class="iconify iconify--lucide">
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"></path>
-                </svg>
-            </a>
-        </div>
-    </nav>
-
+    <div id="nav-placeholder"></div>
     <!-- Hero Section -->
     <header
         class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black">
@@ -919,26 +882,9 @@
         </section>
 
     </main>
-
-    <!-- FOOTER -->
-    <section class="border-t border-white/5 bg-black py-16">
-        <div
-            class="max-w-7xl mx-auto px-6 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center">
-            <div class="flex flex-col gap-1">
-                <span class="text-white font-bold">Double D Media</span>
-                <span>doubledlab1002@gmail.com</span>
-                <span>+ 84 337 735 004</span>
-            </div>
-            <div class="mt-6 md:mt-0 flex gap-6">
-                <a href="coming-soon.html" class="hover:text-white transition-colors"
-                    data-i18n="footer.privacy">Privacy</a>
-                <a href="coming-soon.html" class="hover:text-white transition-colors" data-i18n="footer.terms">Terms</a>
-                <span>© 2024 <span data-i18n="footer.status">All Systems Operational.</span></span>
-            </div>
-        </div>
-    </section>
-
+    <div id="footer-placeholder"></div>
     <!-- Logic Script -->
+    <script src="components.js"></script>
     <script src="lang.js"></script>
     <script>
         // ─── Supabase ────────────────────────────────────────────────────────────

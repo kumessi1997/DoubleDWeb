@@ -4,21 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://doubledmedia.vn/our-services.html">
+  <meta name="description" content="Explore Double D Media's services: B2B motion graphic videos, interactive Rive animations, UI/UX design, and marketing visuals for brands and startups.">
 
   <!-- Social Sharing Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="DOUBLE D | Services">
   <meta property="og:description"
     content="We craft digital experiences that merge technical precision with narrative depth. Explore our specialized divisions in video, interactive motion, and UI/UX.">
-  <meta property="og:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
-  <meta property="og:url" content="https://doubleddmedia.vn/our-services.html">
+  <meta property="og:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
+  <meta property="og:url" content="https://doubledmedia.vn/our-services.html">
   <meta property="og:site_name" content="Double D Media">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DOUBLE D | Services">
   <meta name="twitter:description"
     content="We craft digital experiences that merge technical precision with narrative depth. Explore our specialized divisions in video, interactive motion, and UI/UX.">
-  <meta name="twitter:image" content="https://doubleddmedia.vn/Img/thumb-web-2.png">
+  <meta name="twitter:image" content="https://doubledmedia.vn/Img/thumb-web-2.png">
 
   <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
   <title>DOUBLE D | Services</title>
@@ -412,31 +414,7 @@ scaleY(var(--tw-scale-y, 1))
 
 <body class="antialiased selection:bg-[#f7941d]/30 selection:text-white">
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/5">
-    <div class="flex h-16 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 group">
-        <img src="logo/logo doubled.svg" alt="Double D Media" class="h-8 w-auto transition-opacity hover:opacity-80" />
-      </a>
-      <div
-        class="hidden md:flex items-center space-x-8 text-[11px] font-medium tracking-widest text-neutral-400 uppercase">
-        <a href="our-services.html" class="hover:text-white transition-colors">OUR SERVICES</a>
-        <a href="showcase.html" class="transition-colors text-white">SHOWCASE</a>
-
-        <a href="blog.html" class="hover:text-white transition-colors">BLOG</a>
-                <a href="rive-wiki.html" class="hover:text-white transition-colors">WIKI</a>
-      </div>
-      <a href="#contact"
-        class="hidden md:flex items-center gap-2 text-[11px] uppercase hover:bg-neutral-200 transition-colors font-bold text-black tracking-tight bg-white rounded-sm pt-1.5 pr-4 pb-1.5 pl-4">
-        <span class="cursor-pointer" onclick="window.location.href='contact-us.html'" role="button">contact us</span>
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="14" height="14" viewBox="0 0 24 24"
-          data-icon="lucide:arrow-up-right" class="iconify iconify--lucide">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M7 7h10v10M7 17L17 7"></path>
-        </svg>
-      </a>
-    </div>
-  </nav>
-
+    <div id="nav-placeholder"></div>
   <!-- Page Header -->
   <header
     class="pt-32 pb-16 px-6 border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black">
@@ -803,7 +781,7 @@ scaleY(var(--tw-scale-y, 1))
             </div>
             <!-- Content -->
             <div class="relative h-full w-full overflow-hidden bg-neutral-800">
-              <img src="Img/thumb-web-2.png" alt="UI Project 2"
+              <img src="Img/thumb web 2.png" alt="UI Project 2"
                 class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-1">
               <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
             </div>
@@ -1013,18 +991,14 @@ scaleY(var(--tw-scale-y, 1))
           Contact Us
         </a>
       </div>
-
-      <div
-        class="border-t border-white/5 mt-16 pt-8 text-center md:text-left text-[10px] text-neutral-600 uppercase tracking-widest flex flex-col md:flex-row justify-between">
-        <span>© 2024 Double D Media.</span>
-        <span class="mt-2 md:mt-0">All Systems Operational.</span>
-      </div>
+    <div id="footer-placeholder"></div>
     </div>
   </section>
 
   <script>
     // Initialize Rive Animation
     const r = new rive.Rive({
+      autoBind: true,
       src: 'Rive file/mascot2.riv',
       canvas: document.getElementById('rive-mascot'),
       autoplay: true,
@@ -1060,6 +1034,7 @@ scaleY(var(--tw-scale-y, 1))
 
     // Initialize Third Rive Animation (Rating)
     const r3 = new rive.Rive({
+      autoBind: true,
       src: 'Rive file/rating.riv',
       canvas: document.getElementById('rive-rating'),
       autoplay: true,
@@ -1072,6 +1047,7 @@ scaleY(var(--tw-scale-y, 1))
 
     // Initialize Fourth Rive Animation (Mixing)
     const r4 = new rive.Rive({
+      autoBind: true,
       src: 'Rive file/mixing_animations.riv',
       canvas: document.getElementById('rive-mixing'),
       autoplay: true,
@@ -1084,6 +1060,7 @@ scaleY(var(--tw-scale-y, 1))
 
     // Initialize Fifth Rive Animation (Homefood)
     const r5 = new rive.Rive({
+      autoBind: true,
       src: 'Rive file/homefood.riv',
       canvas: document.getElementById('rive-homefood'),
       autoplay: true,
@@ -1096,6 +1073,7 @@ scaleY(var(--tw-scale-y, 1))
 
     // Initialize Sixth Rive Animation (Leaf)
     const r6 = new rive.Rive({
+      autoBind: true,
       src: 'Rive file/leaf.riv',
       canvas: document.getElementById('rive-leaf'),
       autoplay: true,
@@ -1106,6 +1084,8 @@ scaleY(var(--tw-scale-y, 1))
       },
     });
   </script>
+    <script src="components.js"></script>
+    <script src="lang.js"></script>
 </body>
 
 </html>

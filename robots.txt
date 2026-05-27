@@ -1,0 +1,15 @@
+User-agent: *
+
+# Cho phép crawl toàn bộ site
+Allow: /
+
+# Loại trừ file nháp / draft
+Disallow: /blog%201%20copy.html
+Disallow: /blog%201%20copy%202.html
+Disallow: /article%20copy.html
+
+# Loại trừ trang placeholder chưa có nội dung
+Disallow: /coming-soon.html
+
+# Sitemap
+Sitemap: https://doubledmedia.vn/sitemap.xml
